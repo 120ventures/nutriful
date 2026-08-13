@@ -1,0 +1,9 @@
+project_id = "your-project-id"
+
+# ---------- Edge Functions ----------
+# Every edge function MUST be listed here for auto-deploy.
+# verify_jwt = false  →  auth is handled inside the function via _shared/auth.ts,
+#                         not by the Supabase gateway (legacy anon-JWT check).
+
+[functions.hello-world]
+verify_jwt = false

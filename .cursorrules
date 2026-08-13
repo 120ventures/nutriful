@@ -1,0 +1,55 @@
+# 120 Ventures – Cursor Rules
+
+## Project Guidelines
+- Use only English for naming routes, files, functions, writing comments etc.
+- Use responsive design — one component for desktop and mobile, no duplicates
+- Always place images in `src/assets/` not in `public/` — compiler optimization
+- Commits: short, clear, imperative mood ("fix:", "add:", "refine:")
+- Small, focused commits — 5 small ones over 1 large one
+
+## Business Logic
+- All operations with business logic require an API (Edge Function)
+- All API endpoints should be atomic and implemented as Supabase Edge Functions
+- All APIs must be authenticated and authorized — unless explicitly public
+- **Do not reach directly to Supabase DB from the frontend** — always go through API
+- RLS on every table, policies as simple and minimal as possible
+
+## Package manager
+- Use **pnpm** for all package operations (`pnpm install`, `pnpm run`, `pnpm add`, `pnpm exec`, etc.)
+- Do not use `npm` or `yarn` for this repo unless the user explicitly requests it
+
+## Development Standards
+- Follow TypeScript best practices and maintain type safety
+- Use Tailwind CSS for styling — avoid custom CSS when possible
+- Leverage shadcn/ui components before creating custom ones
+- Keep components small and focused on single responsibilities
+- Use React hooks appropriately and avoid unnecessary re-renders
+- Implement proper error boundaries for better user experience
+- Validate all user input with Zod at least on the backend (frontend is optional)
+
+## Supabase Edge Functions
+- Every edge function **must** be registered in `supabase/config.toml` with `verify_jwt = false`
+- Do **not** rely on the legacy gateway anon-JWT check — auth is handled inside the function
+- Always use `createHandler` from `_shared/handler.ts` (provides CORS + error handling)
+- Always authenticate with `getAuthenticatedUser` from `_shared/auth.ts` (unless explicitly public)
+- Use `createUserClient` for RLS-scoped DB access, `createAdminClient` only when necessary
+- CORS is managed by `_shared/cors.ts` via `CORS_ALLOWED_ORIGINS` env var — never hardcode origins
+- Deploy/serve with `--no-verify-jwt` flag
+- One function = one atomic operation
+
+## Security
+- Before any commit or deploy, read and follow `docs/SECURITY_RULES.md`
+- When in doubt, apply the principle of least privilege
+
+## Adding Dependencies or Integrations (ALWAYS follow)
+- **Ask for explicit approval** before adding any npm package, git submodule/remote, or skill/plugin
+- Verify source, maintenance status, permissions, and lifecycle scripts before installing
+- Run `pnpm audit` after adding any new package
+- See `docs/SECURITY_RULES.md` § 7 for full supply-chain rules
+
+## Dont's
+- No new packages without discussion
+- No unnecessary abstractions or over-engineering
+- No auto-generated doc files without discussion
+- No changes to Supabase migrations without context
+- No generic stock photos or random placeholder images
