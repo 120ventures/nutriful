@@ -101,15 +101,16 @@ const docs: Record<string, Doc> = {
         list: [
           "Supabase (Supabase Inc.) - Datenbank und Backend zur Speicherung deiner Kontaktanfrage.",
           "Netlify - Hosting der Website.",
+          "PostHog (PostHog Inc., EU-Hosting in Frankfurt am Main) - anonyme Produkt- und Nutzungsanalyse (Reichweite, Klickverhalten), um die Website zu verbessern. Wird nur nach deiner ausdrücklichen Einwilligung geladen; ohne Einwilligung werden keine Analyse-Cookies gesetzt. Die Daten werden innerhalb der EU verarbeitet.",
         ],
         p: [
           "Mit allen Dienstleistern bestehen bzw. werden Auftragsverarbeitungsverträge gemäß Art. 28 DSGVO geschlossen. Bei Übermittlung in Drittländer werden geeignete Garantien (z. B. EU-Standardvertragsklauseln) eingesetzt.",
         ],
       },
       {
-        h: "5. Cookies",
+        h: "5. Cookies & Einwilligung",
         p: [
-          "Diese Website setzt keine Marketing- oder Analyse-Cookies ein. Es wird nur technisch notwendige Speicherung verwendet.",
+          "Technisch notwendige Speicherung (z. B. deine Cookie-Entscheidung) nutzen wir immer. Analyse-Cookies von PostHog setzen wir ausschließlich mit deiner ausdrücklichen Einwilligung, die du über den Cookie-Hinweis erteilst oder ablehnst und jederzeit widerrufen kannst (lokalen Speicher leeren). Marketing-Cookies setzen wir keine.",
         ],
       },
       {

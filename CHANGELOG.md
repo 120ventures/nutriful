@@ -4,6 +4,13 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-08-14
+
+### PostHog analytics, consent-gated
+- PostHog (EU Cloud) integrated for product analytics: pageviews, autocapture and a "partner_signup" event on form submission
+- Loads only after explicit consent via a new cookie banner (Ablehnen/Akzeptieren); without a configured PostHog key neither analytics nor the banner appear
+- Datenschutzerklärung updated: PostHog listed as processor, cookie section adjusted
+
 ## 2026-08-13
 
 ### Initial launch: Nutriful B2B landing page

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { insertSignup } from "@/lib/signups";
+import { phCapture } from "@/lib/posthog";
 import {
   MessageCircle,
   ClipboardList,
@@ -315,6 +316,7 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
       toast.error("Da ist etwas schiefgelaufen. Bitte versuchen Sie es gleich nochmal.");
       return;
     }
+    phCapture("partner_signup", { source: "partner-page" });
     setDone(true);
   };
 
