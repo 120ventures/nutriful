@@ -696,8 +696,10 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
 /* ------------------------------------------------------------------- Profil */
 
 const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <div className="flex gap-3 border-b border-border/50 py-2 last:border-0">
-    <span className="w-32 shrink-0 text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
+  // "Unverträglichkeiten" is wider than a fixed label column, so the two columns
+  // only kick in once there is room for the longest label.
+  <div className="flex flex-col gap-0.5 border-b border-border/50 py-2 last:border-0 sm:flex-row sm:gap-3">
+    <span className="text-[10px] font-medium uppercase leading-normal tracking-[0.08em] text-muted-foreground sm:w-40 sm:shrink-0">
       {label}
     </span>
     <span className="min-w-0 flex-1 text-xs font-light">{children}</span>
