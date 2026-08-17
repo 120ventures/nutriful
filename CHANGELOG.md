@@ -4,6 +4,13 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-08-17
+
+### Analytics live, consent can be withdrawn
+- PostHog is now configured on nutriful.at, so the cookie banner is live and analytics run after consent
+- New "Cookie-Einstellungen" entry in the footer of every page brings the banner back, so a given consent can be withdrawn as easily as it was granted
+- Datenschutzerklärung points to that footer entry instead of asking visitors to clear their browser storage
+
 ## 2026-08-14
 
 ### PostHog analytics, consent-gated

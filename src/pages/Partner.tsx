@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "@/components/landing/Logo";
+import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -641,6 +642,7 @@ const Partner = () => {
             <Link to="/datenschutz" className="hover:text-foreground">
               Datenschutz
             </Link>
+            <ConsentSettingsLink />
           </div>
         </div>
       </footer>

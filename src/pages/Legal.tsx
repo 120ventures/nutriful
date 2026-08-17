@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "@/components/landing/Logo";
+import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink";
 import { ArrowLeft } from "lucide-react";
 
 type Section = { h: string; p?: string[]; list?: string[] };
@@ -110,7 +111,7 @@ const docs: Record<string, Doc> = {
       {
         h: "5. Cookies & Einwilligung",
         p: [
-          "Technisch notwendige Speicherung (z. B. deine Cookie-Entscheidung) nutzen wir immer. Analyse-Cookies von PostHog setzen wir ausschließlich mit deiner ausdrücklichen Einwilligung, die du über den Cookie-Hinweis erteilst oder ablehnst und jederzeit widerrufen kannst (lokalen Speicher leeren). Marketing-Cookies setzen wir keine.",
+          "Technisch notwendige Speicherung (z. B. deine Cookie-Entscheidung) nutzen wir immer. Analyse-Cookies von PostHog setzen wir ausschließlich mit deiner ausdrücklichen Einwilligung, die du über den Cookie-Hinweis erteilst oder ablehnst und jederzeit über „Cookie-Einstellungen“ im Seitenfuß widerrufen kannst. Marketing-Cookies setzen wir keine.",
         ],
       },
       {
@@ -248,6 +249,7 @@ const Legal = ({ doc }: { doc: "impressum" | "datenschutz" | "agb" }) => {
           <Link to="/agb" className="font-medium hover:text-primary">
             AGB
           </Link>
+          <ConsentSettingsLink className="font-medium hover:text-primary" />
         </div>
       </main>
     </div>

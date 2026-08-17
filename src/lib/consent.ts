@@ -17,3 +17,20 @@ export function storeConsent(choice: "granted" | "denied") {
     /* ignore */
   }
 }
+
+/** Event the banner listens to so a stored choice can be revised at any time. */
+export const CONSENT_REOPEN_EVENT = "nutriful:consent-reopen";
+
+/**
+ * Drop the stored choice and show the banner again. Withdrawing consent has to
+ * be as easy as granting it (Art. 7 Abs. 3 DSGVO), so this is linked from the
+ * footer on every page.
+ */
+export function reopenConsent() {
+  try {
+    localStorage.removeItem(CONSENT_KEY);
+  } catch {
+    /* ignore */
+  }
+  window.dispatchEvent(new Event(CONSENT_REOPEN_EVENT));
+}

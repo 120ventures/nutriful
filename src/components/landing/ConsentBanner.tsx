@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { getStoredConsent, storeConsent } from "@/lib/consent";
+import { CONSENT_REOPEN_EVENT, getStoredConsent, storeConsent } from "@/lib/consent";
 import { phOptIn, phOptOut, POSTHOG_KEY } from "@/lib/posthog";
 
 /**
@@ -39,6 +39,15 @@ const ConsentBanner = () => {
     } else if (choice === null) {
       setVisible(true);
     }
+  }, []);
+
+  useEffect(() => {
+    // "Cookie-Einstellungen" in the footer brings the banner back so a choice
+    // can be revised - including withdrawing a consent that was given earlier.
+    if (!POSTHOG_KEY) return;
+    const reopen = () => setVisible(true);
+    window.addEventListener(CONSENT_REOPEN_EVENT, reopen);
+    return () => window.removeEventListener(CONSENT_REOPEN_EVENT, reopen);
   }, []);
 
   if (!visible) return null;
