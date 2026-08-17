@@ -17,6 +17,7 @@ import {
   ShieldCheck,
   Sprout,
   ArrowRight,
+  PlayCircle,
   Check,
 } from "lucide-react";
 
@@ -59,6 +60,13 @@ const features = [
     title: "Sichere Daten",
     text: "Verschlüsselte Übertragung, sichere Speicherung, Löschung jederzeit - Vertrauen ist die Basis Ihrer Klientenbeziehung, auch digital.",
   },
+];
+
+const demoHighlights = [
+  "Termin-Briefing",
+  "Verlauf pro Tag",
+  "Chat mit Klient:innen",
+  "Plan-Baukasten",
 ];
 
 const steps = [
@@ -312,12 +320,13 @@ const Partner = () => {
           >
             Pilot-Partner:in werden <ArrowRight className="h-4 w-4" />
           </a>
-          <a
-            href="#so-funktionierts"
-            className="rounded-full px-6 py-3.5 text-sm font-medium tracking-wide text-foreground ring-1 ring-border transition-colors hover:bg-muted"
+          <Link
+            to="/demo"
+            onClick={() => phCapture("cta_click", { location: "hero_demo" })}
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium tracking-wide text-foreground ring-1 ring-border transition-colors hover:bg-muted"
           >
-            So funktioniert's
-          </a>
+            <PlayCircle className="h-4 w-4" /> Demo ausprobieren
+          </Link>
         </div>
       </section>
 
@@ -347,11 +356,7 @@ const Partner = () => {
       </section>
 
       {/* How it works */}
-      <section
-        id="so-funktionierts"
-        ref={demoRef}
-        className="mx-auto max-w-5xl scroll-mt-8 px-6 py-16 sm:py-20"
-      >
+      <section id="so-funktionierts" className="mx-auto max-w-5xl scroll-mt-8 px-6 py-16 sm:py-20">
         <h2 className="font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
           So funktioniert Nutriful in Ihrer Praxis
         </h2>
@@ -368,7 +373,32 @@ const Partner = () => {
             </div>
           ))}
         </div>
-        <DemoDashboard />
+      </section>
+
+      {/* Demo */}
+      <section ref={demoRef} className="border-y border-border/70 bg-secondary/5 py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-6 text-center">
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-secondary">
+            Interaktive Demo
+          </p>
+          <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
+            Klicken Sie sich durch, bevor Sie sich entscheiden
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl font-light leading-relaxed text-muted-foreground text-pretty">
+            Drei Beispiel-Klient:innen, echte Bedienung - ohne Login, ohne Anmeldung.
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            {demoHighlights.map((h) => (
+              <span
+                key={h}
+                className="rounded-full bg-card px-4 py-1.5 text-xs font-medium text-muted-foreground ring-1 ring-border"
+              >
+                {h}
+              </span>
+            ))}
+          </div>
+          <DemoDashboard />
+        </div>
       </section>
 
       {/* Features */}

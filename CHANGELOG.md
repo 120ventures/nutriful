@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Demo prominenter auf der Startseite
+- Die Demo hat jetzt einen eigenen, farblich abgesetzten Abschnitt mit Überschrift statt als Anhängsel unter "So funktioniert's" zu stehen
+- Der zweite Button im Hero führt direkt zur Demo ("Demo ausprobieren") statt nur weiter nach unten zu scrollen
+- Chips über dem Dashboard zeigen vorab, was in der vollen Demo steckt: Termin-Briefing, Verlauf pro Tag, Chat, Plan-Baukasten
+
 ### Klient:innen-Liste zählt Tage
 - In der Seitenleiste steht jetzt bei allen der Programmtag statt einer Mischung aus Wochen und Tagen: "Ernährungsumstellung · Tag 9 von 30"
 - Der Tag wird aus dem Verlauf abgeleitet, kann also nicht mehr von der Detailansicht abweichen
