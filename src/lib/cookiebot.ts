@@ -68,6 +68,9 @@ export function loadCookiebot() {
   script.setAttribute("data-cbid", COOKIEBOT_ID);
   // "auto" lets Cookiebot block third-party scripts we did not gate ourselves.
   script.setAttribute("data-blockingmode", "auto");
+  // The domain group's default language is English; the site is German-only, so
+  // pin the dialog to German instead of showing "Allow all" to Austrian visitors.
+  script.setAttribute("data-culture", "DE");
   document.head.appendChild(script);
 }
 
