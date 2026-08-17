@@ -15,12 +15,12 @@ import { demoClients, type DemoClient } from "@/components/landing/demoData";
 
 type TabId = "briefing" | "profil" | "verlauf" | "chat" | "plan";
 
-const tabs: { id: TabId; label: string }[] = [
-  { id: "briefing", label: "Termin-Briefing" },
+const tabs: { id: TabId; label: string; short?: string }[] = [
+  { id: "briefing", label: "Termin-Briefing", short: "Briefing" },
   { id: "profil", label: "Profil" },
   { id: "verlauf", label: "Verlauf" },
   { id: "chat", label: "Chat" },
-  { id: "plan", label: "Plan erstellen" },
+  { id: "plan", label: "Plan erstellen", short: "Plan" },
 ];
 
 const Demo = () => {
@@ -50,7 +50,7 @@ const Demo = () => {
           </Link>
           <Link
             to="/"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+            className="inline-flex items-center gap-1.5 py-1.5 text-sm text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" /> Startseite
           </Link>
@@ -144,7 +144,8 @@ const Demo = () => {
                         : "border-transparent text-muted-foreground hover:text-foreground"
                     }`}
                   >
-                    {t.label}
+                    <span className="sm:hidden">{t.short ?? t.label}</span>
+                    <span className="hidden sm:inline">{t.label}</span>
                   </button>
                 ))}
               </div>
