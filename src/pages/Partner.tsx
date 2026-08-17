@@ -327,18 +327,19 @@ const Partner = () => {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto max-w-3xl px-6 py-20 text-center sm:py-28">
+      <section className="mx-auto grid max-w-5xl items-center gap-10 px-6 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
+        <div>
         <p className="text-xs font-medium uppercase tracking-[0.22em] text-secondary">
           Für Diätolog:innen & Ernährungsberater:innen
         </p>
         <h1 className="mt-5 font-display text-4xl font-normal leading-[1.1] tracking-tight text-balance sm:text-5xl">
           Ihre Klient:innen. Ein Ort. Alles im Blick.
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground text-pretty">
+        <p className="mt-6 text-lg font-light leading-relaxed text-muted-foreground text-pretty">
           Kommunikation, Ernährungspläne und der Fortschritt Ihrer Klient:innen - alles an einem
           Ort.
         </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-10 flex flex-wrap items-center gap-4">
           <a
             href="#pilot"
             onClick={() => phCapture("cta_click", { location: "hero" })}
@@ -354,7 +355,7 @@ const Partner = () => {
             <PlayCircle className="h-4 w-4" /> Demo ausprobieren
           </Link>
         </div>
-        <ul className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-light text-muted-foreground">
+        <ul className="mt-8 space-y-2 text-sm font-light text-muted-foreground">
           {heroProof.map((item) => (
             <li key={item} className="flex items-center gap-2">
               <Check className="h-4 w-4 shrink-0 text-secondary" strokeWidth={2.4} />
@@ -362,6 +363,17 @@ const Partner = () => {
             </li>
           ))}
         </ul>
+        </div>
+
+        <div className="overflow-hidden rounded-3xl">
+          <img
+            src="/hero-header.jpg"
+            alt="Frau sitzt auf dem Sofa und isst eine Schale Porridge"
+            width={1600}
+            height={1067}
+            className="aspect-[4/3] w-full object-cover"
+          />
+        </div>
       </section>
 
       {/* Value proposition */}

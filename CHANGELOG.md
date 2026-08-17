@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Bild im Kopfbereich
+- Der Hero ist zweispaltig: Text links, Foto rechts - auf dem Handy stapelt es, Text zuerst
+- Bildnachweis im Impressum ergänzt (iStock.com/djiledesign)
+
 ### Tagesübersicht als Einstieg in die Demo
 - Die Demo öffnet jetzt mit "Heute" statt mit einer einzelnen Klient:in: Termine des Tages mit Uhrzeit, offene Fragen aus dem Chat und die letzten Auffälligkeiten
 - Jeder Eintrag springt dorthin, wo man weiterarbeitet - der Termin ins Briefing, die offene Frage in den Chat

@@ -67,7 +67,7 @@ const docs: Record<string, Doc> = {
         h: "Urheberrecht",
         p: [
           "Sämtliche Inhalte dieser Website (Texte, Grafiken, Logo) sind urheberrechtlich geschützt.",
-          "Fotografie: iStock.com/Dimensions (Stock-Foto-ID 2206546844), lizenziert.",
+          "Fotografie: iStock.com/djiledesign (Stock-Foto-ID 1465949774) und iStock.com/Dimensions (Stock-Foto-ID 2206546844), lizenziert.",
         ],
       },
     ],
