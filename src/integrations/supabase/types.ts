@@ -22,6 +22,7 @@ export type Database = {
           id: string
           created_at: string
           email: string
+          name: string | null
           source: string | null
           onboarding: Json | null
           consent: boolean
@@ -32,6 +33,7 @@ export type Database = {
           id?: string
           created_at?: string
           email: string
+          name?: string | null
           source?: string | null
           onboarding?: Json | null
           consent?: boolean
@@ -42,6 +44,7 @@ export type Database = {
           id?: string
           created_at?: string
           email?: string
+          name?: string | null
           source?: string | null
           onboarding?: Json | null
           consent?: boolean

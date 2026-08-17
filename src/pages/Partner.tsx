@@ -215,9 +215,10 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
     setSubmitting(true);
     const { error } = await insertSignup({
       email: email.trim().toLowerCase(),
+      name: name.trim() || null,
       source: "partner-page",
       consent: true,
-      onboarding: { type: "partner", name: name.trim() },
+      onboarding: { type: "partner" },
       user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
     });
     setSubmitting(false);
@@ -334,9 +335,8 @@ const Partner = () => {
           Ihre Klient:innen. Ein Ort. Alles im Blick.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground text-pretty">
-          Kommunikation, Ernährungspläne und der Fortschritt Ihrer Klient:innen an einem Ort -
-          statt in WhatsApp, E-Mails und auf Zetteln. Sie sparen die Vorbereitung vor jedem Termin
-          und sehen den Verlauf, ohne ihm hinterherzulaufen.
+          Kommunikation, Ernährungspläne und der Fortschritt Ihrer Klient:innen - alles an einem
+          Ort.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a

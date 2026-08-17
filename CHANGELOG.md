@@ -6,6 +6,15 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Eigene Datenbank für Nutriful vorbereitet
+- Nutriful bekommt ein eigenes Supabase-Projekt statt der geteilten Gutiful-Datenbank
+- Der Name der Anfragenden steht jetzt in einer eigenen Spalte statt in einem JSON-Feld
+- E-Mail-Adressen sind jetzt eindeutig (unabhängig von Groß- und Kleinschreibung); eine doppelte Anfrage legt keine zweite Zeile mehr an
+- Das Formular bleibt während der Umstellung funktionsfähig: unbekannte Spalten werden verworfen statt die Anfrage scheitern zu lassen
+
+### Hero: kürzer auf den Punkt
+- Der Einstiegssatz nennt nur noch das Versprechen ("alles an einem Ort"); die Probleme kommen weiter unten im Text
+
 ### Bild zwischen den Terminen
 - Neuer Abschnitt über die volle Breite zwischen Problem und Ablauf: "Zwischen zwei Terminen lebt Ihre Klient:in weiter"
 - Bildnachweis im Impressum ergänzt (iStock.com/Dimensions)
