@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { track } from "@/lib/demoTracking";
 import {
+  DEMO_TODAY,
+  demoClients,
   dietFilters,
   mealSlots,
   planGoals,
@@ -692,6 +694,155 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
   );
 };
 
+
+
+/* -------------------------------------------------------------------- Heute */
+
+/** Everything on this screen is derived from the clients, not written twice. */
+const useToday = () =>
+  useMemo(() => {
+    const schedule = demoClients
+      .flatMap((c) => c.appointments.filter((a) => a.time).map((a) => ({ client: c, appointment: a })))
+      .sort((a, b) => (a.appointment.time ?? "").localeCompare(b.appointment.time ?? ""));
+
+    const waiting = demoClients.filter((c) => c.chat[c.chat.length - 1]?.from === "client");
+
+    const flagged = demoClients
+      .map((c) => {
+        const flags = Object.entries(c.days)
+          .map(([day, entries]) => ({ day: Number(day), entries }))
+          .filter((d) => d.day <= c.currentDay)
+          .flatMap((d) => d.entries.filter((e) => e.tone === "warn").map((e) => ({ day: d.day, entry: e })));
+        return { client: c, latest: flags[flags.length - 1] };
+      })
+      .filter((x) => x.latest);
+
+    return { schedule, waiting, flagged };
+  }, []);
+
+export const TodayView = ({
+  onOpenClient,
+}: {
+  onOpenClient: (clientId: string, tab: "briefing" | "chat") => void;
+}) => {
+  const { schedule, waiting, flagged } = useToday();
+
+  const stats = [
+    { label: "Termine heute", value: String(schedule.length) },
+    { label: "Aktive Klient:innen", value: String(demoClients.length) },
+    { label: "Offene Fragen", value: String(waiting.length) },
+  ];
+
+  return (
+    <div className="p-5">
+      <div>
+        <p className="font-medium">Heute</p>
+        <p className="text-xs font-light text-muted-foreground">{DEMO_TODAY}</p>
+      </div>
+
+      <div className="mt-4 grid grid-cols-3 gap-2">
+        {stats.map((s) => (
+          <div key={s.label} className="rounded-xl bg-muted/60 px-3 py-3 text-center">
+            <p className="font-display text-2xl font-normal">{s.value}</p>
+            <p className="mt-0.5 text-[10px] font-light text-muted-foreground">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+        Ihre Termine
+      </p>
+      <div className="mt-2 space-y-2">
+        {schedule.map(({ client, appointment }) => (
+          <button
+            key={client.id}
+            type="button"
+            onClick={() => {
+              onOpenClient(client.id, "briefing");
+              track("today_appointment", client.id);
+            }}
+            className="flex w-full items-start gap-3 rounded-xl border border-border/60 px-3 py-2.5 text-left transition-colors hover:border-secondary/50 hover:bg-secondary/5"
+          >
+            <span className="w-12 shrink-0 text-xs font-medium text-secondary">
+              {appointment.time}
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-medium">
+                {client.name}
+                <span className="ml-2 font-light text-muted-foreground">{appointment.title}</span>
+              </span>
+              <span className="block text-[11px] font-light text-muted-foreground">
+                {appointment.note}
+              </span>
+            </span>
+            <span className="shrink-0 text-[10px] text-muted-foreground">Briefing öffnen</span>
+          </button>
+        ))}
+      </div>
+
+      {waiting.length > 0 && (
+        <>
+          <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            Wartet auf Antwort
+          </p>
+          <div className="mt-2 space-y-2">
+            {waiting.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => {
+                  onOpenClient(c.id, "chat");
+                  track("today_open_chat", c.id);
+                }}
+                className="flex w-full items-start gap-2.5 rounded-xl border border-secondary/30 bg-secondary/5 px-3 py-2.5 text-left transition-colors hover:bg-secondary/10"
+              >
+                <MessageCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-secondary" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-xs font-medium">{c.name}</span>
+                  <span className="block text-[11px] font-light text-muted-foreground">
+                    {c.chat[c.chat.length - 1].text}
+                  </span>
+                </span>
+                <span className="shrink-0 text-[10px] text-muted-foreground">Antworten</span>
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+
+      <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+        Zuletzt aufgefallen
+      </p>
+      <div className="mt-2 space-y-2">
+        {flagged.map(({ client, latest }) => (
+          <button
+            key={client.id}
+            type="button"
+            onClick={() => {
+              onOpenClient(client.id, "briefing");
+              track("today_flag", client.id);
+            }}
+            className="flex w-full items-start gap-2.5 rounded-xl border border-primary/25 bg-primary/5 px-3 py-2.5 text-left transition-colors hover:bg-primary/10"
+          >
+            <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-medium">{client.name}</span>
+              <span className="block text-[11px] font-light text-muted-foreground">
+                {latest!.entry.text}
+              </span>
+            </span>
+            <span className="shrink-0 text-[10px] text-muted-foreground">Tag {latest!.day}</span>
+          </button>
+        ))}
+      </div>
+
+      <p className="mt-5 text-xs font-light text-muted-foreground text-pretty">
+        Der Tag auf einen Blick: wer kommt, wer wartet auf eine Antwort und wo etwas aufgefallen
+        ist - bevor die erste Beratung beginnt.
+      </p>
+    </div>
+  );
+};
 
 /* ------------------------------------------------------------------- Profil */
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays } from "lucide-react";
 import Logo from "@/components/landing/Logo";
 import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink";
 import {
@@ -9,6 +9,7 @@ import {
   HistoryView,
   PlanView,
   ProfileView,
+  TodayView,
 } from "@/components/landing/DemoPanels";
 import { track } from "@/lib/demoTracking";
 import { demoClients, type DemoClient } from "@/components/landing/demoData";
@@ -26,6 +27,8 @@ const tabs: { id: TabId; label: string; short?: string }[] = [
 const Demo = () => {
   const [clientId, setClientId] = useState(demoClients[0].id);
   const [tab, setTab] = useState<TabId>("briefing");
+  // The demo opens on the practice-level view, not on a single client.
+  const [view, setView] = useState<"heute" | "client">("heute");
 
   const client = demoClients.find((c) => c.id === clientId) ?? demoClients[0];
   const [selectedDay, setSelectedDay] = useState(client.currentDay);
@@ -33,7 +36,17 @@ const Demo = () => {
   const selectClient = (c: DemoClient) => {
     setClientId(c.id);
     setSelectedDay(c.currentDay);
+    setView("client");
     track("client", c.id);
+  };
+
+  const openClient = (id: string, target: "briefing" | "chat") => {
+    const c = demoClients.find((x) => x.id === id);
+    if (!c) return;
+    setClientId(id);
+    setSelectedDay(c.currentDay);
+    setTab(target);
+    setView("client");
   };
 
   const openDay = (day: number) => {
@@ -83,6 +96,21 @@ const Demo = () => {
 
           {/* client picker on small screens */}
           <div className="flex gap-2 overflow-x-auto border-b border-border/70 px-4 py-3 lg:hidden">
+            <button
+              type="button"
+              onClick={() => {
+                setView("heute");
+                track("tab", "heute");
+              }}
+              aria-pressed={view === "heute"}
+              className={`shrink-0 rounded-full px-4 py-2.5 text-xs font-medium transition-colors ${
+                view === "heute"
+                  ? "bg-secondary/15 text-secondary ring-1 ring-secondary/30"
+                  : "text-muted-foreground ring-1 ring-border"
+              }`}
+            >
+              Heute
+            </button>
             {demoClients.map((c) => (
               <button
                 key={c.id}
@@ -102,6 +130,21 @@ const Demo = () => {
 
           <div className="grid lg:grid-cols-[16rem_1fr]">
             <div className="hidden border-r border-border/70 p-5 lg:block">
+              <button
+                type="button"
+                onClick={() => {
+                  setView("heute");
+                  track("tab", "heute");
+                }}
+                aria-pressed={view === "heute"}
+                className={`mb-4 flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-medium transition-colors ${
+                  view === "heute"
+                    ? "bg-secondary/10 ring-1 ring-secondary/30"
+                    : "hover:bg-muted/60"
+                }`}
+              >
+                <CalendarDays className="h-4 w-4 text-secondary" /> Heute
+              </button>
               <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
                 Ihre Klient:innen
               </p>
@@ -111,9 +154,9 @@ const Demo = () => {
                     key={c.id}
                     type="button"
                     onClick={() => selectClient(c)}
-                    aria-pressed={c.id === client.id}
+                    aria-pressed={view === "client" && c.id === client.id}
                     className={`w-full rounded-xl px-3 py-2.5 text-left transition-colors ${
-                      c.id === client.id
+                      view === "client" && c.id === client.id
                         ? "bg-secondary/10 ring-1 ring-secondary/30"
                         : "hover:bg-muted/60"
                     }`}
@@ -128,6 +171,10 @@ const Demo = () => {
             </div>
 
             <div className="flex min-h-[34rem] min-w-0 flex-col">
+              {view === "heute" ? (
+                <TodayView onOpenClient={openClient} />
+              ) : (
+                <>
               <div className="flex gap-1 overflow-x-auto border-b border-border/70 px-5 pt-4">
                 {tabs.map((t) => (
                   <button
@@ -164,6 +211,8 @@ const Demo = () => {
                 {tab === "chat" && <ChatView key={client.id} client={client} />}
                 {tab === "plan" && <PlanView key={client.id} client={client} />}
               </div>
+                </>
+              )}
             </div>
           </div>
         </div>

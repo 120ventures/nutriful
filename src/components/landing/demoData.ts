@@ -48,9 +48,14 @@ export type DemoProfile = {
   medication: string[];
 };
 
+/** The demo is anchored to one fixed day so dates and program days line up. */
+export const DEMO_TODAY = "Montag, 17. August";
+
 export type DemoAppointment = {
   /** Program day the appointment falls on, so it can sit in the timeline. */
   day: number;
+  /** Set when the appointment is on the current day - drives the Heute view. */
+  time?: string;
   date: string;
   title: string;
   note: string;
@@ -297,10 +302,11 @@ export const demoClients: DemoClient[] = [
     },
     appointments: [
       {
-        day: 16,
-        date: "24.08.2026",
+        day: 9,
+        time: "09:30",
+        date: "17.08.2026",
         title: "Zwischentermin",
-        note: "Auswertung der Umstellungsphase",
+        note: "Auswertung der Analysephase, Umstellung planen",
         planned: true,
       },
       {
@@ -405,8 +411,9 @@ export const demoClients: DemoClient[] = [
     },
     appointments: [
       {
-        day: 15,
-        date: "27.08.2026",
+        day: 5,
+        time: "11:00",
+        date: "17.08.2026",
         title: "Zwischentermin",
         note: "Timing rund um die Einheiten festlegen",
         planned: true,
@@ -480,6 +487,7 @@ export const demoClients: DemoClient[] = [
         from: "you",
         text: "Nicht kaputt. Wir notieren es und schauen, ob heute Abend Beschwerden kommen.",
       },
+      { from: "client", text: "Darf ich in der Karenz eigentlich Sojajoghurt essen?" },
     ],
     chatReplies: [
       "Beschwerden sind zum Glück keine gekommen.",
@@ -501,8 +509,9 @@ export const demoClients: DemoClient[] = [
     },
     appointments: [
       {
-        day: 8,
-        date: "20.08.2026",
+        day: 5,
+        time: "14:30",
+        date: "17.08.2026",
         title: "Zwischenkontrolle",
         note: "Symptomtagebuch besprechen, Provokation planen",
         planned: true,

@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Tagesübersicht als Einstieg in die Demo
+- Die Demo öffnet jetzt mit "Heute" statt mit einer einzelnen Klient:in: Termine des Tages mit Uhrzeit, offene Fragen aus dem Chat und die letzten Auffälligkeiten
+- Jeder Eintrag springt dorthin, wo man weiterarbeitet - der Termin ins Briefing, die offene Frage in den Chat
+- Alles daraus ist aus den Klient:innen-Daten abgeleitet, nicht doppelt gepflegt
+
 ### Eigene Datenbank für Nutriful vorbereitet
 - Nutriful bekommt ein eigenes Supabase-Projekt statt der geteilten Gutiful-Datenbank
 - Der Name der Anfragenden steht jetzt in einer eigenen Spalte statt in einem JSON-Feld
