@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "@/components/landing/Logo";
 import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink";
 import DemoDashboard from "@/components/landing/DemoDashboard";
@@ -253,10 +253,18 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
 };
 
 const Partner = () => {
+  const { hash } = useLocation();
   const demoRef = useSectionView<HTMLElement>("demo");
   const pricingRef = useSectionView<HTMLElement>("pricing");
   const pilotRef = useSectionView<HTMLElement>("pilot");
   const faqRef = useSectionView<HTMLElement>("faq");
+
+  useEffect(() => {
+    // React renders after the browser would have handled the anchor, so arriving
+    // at /#pilot from another route needs the scroll done by hand.
+    if (!hash) return;
+    document.querySelector(hash)?.scrollIntoView({ behavior: "smooth" });
+  }, [hash]);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground antialiased">
@@ -265,6 +273,13 @@ const Partner = () => {
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
           <Link to="/">
             <Logo />
+          </Link>
+          <Link
+            to="/demo"
+            onClick={() => phCapture("cta_click", { location: "header_demo" })}
+            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
+          >
+            Demo ansehen
           </Link>
           <a
             href="#pilot"

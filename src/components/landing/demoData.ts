@@ -25,8 +25,19 @@ export type DemoClient = {
   phases: DemoPhase[];
   /** Entries per tracked day, keyed by day number. */
   days: Record<number, DemoEntry[]>;
-  chat: { from: "client" | "you"; text: string }[];
+  chat: ChatMessage[];
+  /** Canned answers the demo client sends back, used in order. */
+  chatReplies: string[];
 };
+
+export type ChatMessage = { from: "client" | "you"; text: string };
+
+/** One-tap messages a practitioner sends often - shortcuts in the demo chat. */
+export const quickReplies = [
+  "Wie ist es Ihnen am Wochenende gegangen?",
+  "Schicken Sie mir bitte ein Foto vom Abendessen.",
+  "Passt der Termin nächste Woche noch?",
+];
 
 export type MealSlot = "Frühstück" | "Mittag" | "Abend" | "Snack";
 
@@ -176,6 +187,12 @@ export const demoClients: DemoClient[] = [
       { from: "client", text: "Zählt der Cappuccino am Nachmittag als Zwischenmahlzeit? 🤔" },
       { from: "you", text: "Ja, trag ihn am besten als Snack ein - dann sehen wir das Muster. 👍" },
     ],
+    chatReplies: [
+      "Alles klar, mache ich ab heute so.",
+      "Das Nachmittagstief war gestern wieder ziemlich stark.",
+      "Frühstück habe ich diese Woche jeden Tag geschafft 🙂",
+      "Passt, ich melde mich, wenn etwas dazwischenkommt.",
+    ],
   },
   {
     id: "markus",
@@ -235,6 +252,12 @@ export const demoClients: DemoClient[] = [
         text: "Bei 90 Minuten reicht der Shake - ab zwei Stunden gehen wir auf feste Kohlenhydrate.",
       },
     ],
+    chatReplies: [
+      "Gut zu wissen, morgen ist eine lange Einheit geplant.",
+      "Nach dem späten Essen habe ich wieder schlecht geschlafen.",
+      "Kann ich den Shake auch durch Topfen ersetzen?",
+      "Danke, probiere ich diese Woche aus.",
+    ],
   },
   {
     id: "anna",
@@ -292,6 +315,12 @@ export const demoClients: DemoClient[] = [
         from: "you",
         text: "Nicht kaputt. Wir notieren es und schauen, ob heute Abend Beschwerden kommen.",
       },
+    ],
+    chatReplies: [
+      "Beschwerden sind zum Glück keine gekommen.",
+      "Beim Einkaufen bin ich unsicher, was ich nehmen darf.",
+      "Reisbrei jeden Morgen wird langsam fad 😅",
+      "Okay, ich trage es gleich ein.",
     ],
   },
 ];

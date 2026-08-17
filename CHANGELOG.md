@@ -6,6 +6,12 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Own demo page at /demo
+- Full interactive demo on its own page: switch between three fictional clients and work through four tabs
+- Termin-Briefing opens on arrival: tracked days, number of entries, flagged moments and the open question from the chat - everything computed from that client's actual tracked days, and each flag jumps straight into the day it came from
+- Chat with the demo clients really works: type or use a quick reply, they answer
+- The landing page keeps the interactive teaser and now links to the full demo; "Demo ansehen" was added to the header
+
 ### Clickable demo on the landing page
 - The dashboard illustration is now interactive: visitors switch between three example clients, tap any day of the programme and see that day's entries, warnings and chat
 - New "Plan erstellen" tab: pick a counselling goal, click meal blocks into a day plan and assign it to the client - the core practitioner workflow, playable before signing up
