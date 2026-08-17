@@ -6,6 +6,12 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Plan-Baukasten nach Mahlzeit und Zutat
+- Die Auswahl beginnt jetzt bei der Mahlzeit: Frühstück, Mittag, Abend und Snack als Umschalter, darunter nur die Rezepte dieser Mahlzeit
+- Suchfeld über den Rezepten findet nach Zutat statt nach Rezeptnamen - "Linsen" führt zum Linsensalat, auch wenn das Wort im Titel nicht auffällt
+- Jedes Rezept zeigt seine Zutaten direkt unter dem Namen
+- Trifft die Suche eine andere Mahlzeit, steht das darunter ("Auch gefunden bei: Abend (1)") und ist anklickbar, statt eine leere Liste zu zeigen
+
 ### Ernährungsformen im Plan-Baukasten
 - Neue Filterzeile über den Bausteinen: vegetarisch, vegan, laktosefrei und halal, beliebig kombinierbar
 - Der Katalog wurde um pflanzliche Bausteine ergänzt, damit jede Kombination in jedem Beratungsziel noch Frühstück, Mittag, Abend und Snack anbietet

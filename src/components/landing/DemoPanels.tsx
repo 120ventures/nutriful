@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AlertTriangle, Check, MessageCircle, Plus, Send, X } from "lucide-react";
+import { AlertTriangle, Check, MessageCircle, Plus, Search, Send, X } from "lucide-react";
 import { track } from "@/lib/demoTracking";
 import {
   dietFilters,
@@ -156,14 +156,29 @@ export const HistoryView = ({
 export const PlanView = ({ client }: { client: DemoClient }) => {
   const [goalId, setGoalId] = useState(planGoals[0].id);
   const [diets, setDiets] = useState<Diet[]>([]);
+  const [slot, setSlot] = useState<MealSlot>(mealSlots[0]);
+  const [query, setQuery] = useState("");
   const [plan, setPlan] = useState<PlanBlock[]>([]);
   const [assigned, setAssigned] = useState(false);
 
   const goal = planGoals.find((g) => g.id === goalId) ?? planGoals[0];
 
-  // A block has to satisfy every active filter, so combinations like
+  // A recipe has to satisfy every active filter, so combinations like
   // vegetarisch + laktosefrei narrow the list instead of widening it.
-  const blocks = goal.blocks.filter((b) => diets.every((d) => b.diets.includes(d)));
+  const needle = query.trim().toLowerCase();
+  const matches = (b: PlanBlock) =>
+    diets.every((d) => b.diets.includes(d)) &&
+    (!needle ||
+      b.text.toLowerCase().includes(needle) ||
+      b.ingredients.some((i) => i.toLowerCase().includes(needle)));
+
+  const blocks = goal.blocks.filter((b) => b.slot === slot && matches(b));
+  // A search often hits a different meal than the one that is open - say so
+  // instead of showing an empty list.
+  const elsewhere = mealSlots
+    .filter((s) => s !== slot)
+    .map((s) => ({ slot: s, count: goal.blocks.filter((b) => b.slot === s && matches(b)).length }))
+    .filter((s) => s.count > 0);
 
   const toggleDiet = (diet: Diet) => {
     setDiets((prev) =>
@@ -190,7 +205,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
       <div>
         <p className="font-medium">Tagesplan für {client.name}</p>
         <p className="text-xs font-light text-muted-foreground">
-          Ziel wählen, Bausteine antippen - der Plan entsteht rechts.
+          Ziel und Mahlzeit wählen, Rezept antippen - der Plan entsteht rechts.
         </p>
       </div>
 
@@ -202,6 +217,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
             onClick={() => {
               setGoalId(g.id);
               setDiets([]);
+              setQuery("");
               setPlan([]);
               setAssigned(false);
               track("plan_goal", g.id);
@@ -259,14 +275,52 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
 
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
-          <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Bausteine
-          </p>
+          <div className="flex gap-1 rounded-xl bg-muted/60 p-1">
+            {mealSlots.map((m) => (
+              <button
+                key={m}
+                type="button"
+                onClick={() => {
+                  setSlot(m);
+                  track("plan_slot", m);
+                }}
+                aria-pressed={m === slot}
+                className={`flex-1 rounded-lg px-2 py-1.5 text-[11px] font-medium transition-colors ${
+                  m === slot ? "bg-card shadow-sm" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {m}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative mt-2">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Nach Zutat suchen, z. B. Linsen"
+              aria-label="Nach Zutat suchen"
+              className="h-9 w-full rounded-xl border border-border bg-card pl-9 pr-8 text-xs font-light outline-none focus:border-secondary/60"
+            />
+            {query && (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                aria-label="Suche leeren"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
+          </div>
+
           <div className="mt-2 space-y-1.5">
             {blocks.length === 0 && (
               <p className="rounded-xl border border-dashed border-border px-3 py-4 text-center text-xs font-light text-muted-foreground">
-                Für diese Kombination haben wir hier noch keinen Baustein - im Pilot legen Sie
-                eigene an.
+                {needle
+                  ? `Kein ${slot}-Rezept mit „${query.trim()}“.`
+                  : "Für diese Kombination haben wir hier noch kein Rezept - im Pilot legen Sie eigene an."}
               </p>
             )}
             {blocks.map((b) => {
@@ -284,8 +338,12 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                   }`}
                 >
                   <span className="text-base">{b.icon}</span>
-                  <span className="flex-1 text-xs font-light">{b.text}</span>
-                  <span className="shrink-0 text-[10px] text-muted-foreground">{b.slot}</span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-xs font-light">{b.text}</span>
+                    <span className="block truncate text-[10px] text-muted-foreground">
+                      {b.ingredients.join(", ")}
+                    </span>
+                  </span>
                   {used ? (
                     <Check className="h-3.5 w-3.5 shrink-0 text-secondary" strokeWidth={2.4} />
                   ) : (
@@ -295,6 +353,22 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
               );
             })}
           </div>
+
+          {needle && elsewhere.length > 0 && (
+            <p className="mt-2 flex flex-wrap items-center gap-1.5 text-[11px] font-light text-muted-foreground">
+              Auch gefunden bei:
+              {elsewhere.map((e) => (
+                <button
+                  key={e.slot}
+                  type="button"
+                  onClick={() => setSlot(e.slot)}
+                  className="font-medium text-foreground underline"
+                >
+                  {e.slot} ({e.count})
+                </button>
+              ))}
+            </p>
+          )}
         </div>
 
         <div>
