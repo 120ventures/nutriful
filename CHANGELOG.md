@@ -15,9 +15,12 @@ Overview of user-facing changes.
 - Named events in addition to the existing signup event: cta_click (which button), section_view (demo, pricing, pilot, FAQ), demo_interaction (what visitors try in the demo) and form_start
 - Analytics no longer fire on localhost, so development traffic stays out of the project
 
+### Cookiebot is now the only consent dialog
+- The built-in cookie banner has been removed; Cookiebot alone asks for consent and PostHog follows its "statistics" category
+- "Cookie-Einstellungen" in the footer reopens the Cookiebot dialog, and only appears once Cookiebot is actually there
+
 ### Cookiebot ready as consent platform
 - When a Cookiebot domain group is configured, Cookiebot runs the consent dialog and PostHog follows its "statistics" category; the built-in banner steps aside
-- If Cookiebot loads but shows no dialog - which is what happens on a domain that is not registered in its domain group - the built-in banner takes over after a few seconds, so the page is never left without a consent dialog
 - The Datenschutz page gets Cookiebot's auto-generated cookie table and lists Usercentrics as a processor
 - The Cookiebot dialog is pinned to German, so it does not greet Austrian visitors in English once a German text variant exists in the domain group
 
