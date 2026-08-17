@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CONSENT_REOPEN_EVENT, getStoredConsent, storeConsent } from "@/lib/consent";
-import { cookiebotEnabled } from "@/lib/cookiebot";
+import { cookiebotEnabled, cookiebotIsWorking } from "@/lib/cookiebot";
 import { phOptIn, phOptOut, POSTHOG_KEY } from "@/lib/posthog";
 
 /**
@@ -34,20 +34,49 @@ const ConsentBanner = () => {
   useEffect(() => {
     // Without a PostHog key there is nothing to consent to - no banner.
     if (!POSTHOG_KEY) return;
-    // Cookiebot runs the dialog and drives PostHog when it is configured.
-    if (cookiebotEnabled) return;
-    const choice = getStoredConsent();
-    if (choice === "granted") {
-      phOptIn();
-    } else if (choice === null) {
-      setVisible(true);
+
+    const ownBanner = () => {
+      const choice = getStoredConsent();
+      if (choice === "granted") {
+        phOptIn();
+      } else if (choice === null) {
+        setVisible(true);
+      }
+    };
+
+    if (!cookiebotEnabled) {
+      ownBanner();
+      return;
     }
+
+    // Cookiebot normally runs the dialog and drives PostHog. On a domain that is
+    // not registered in its domain group it loads but shows nothing at all, so
+    // give it a moment and take over if no dialog materialised - better our own
+    // banner than a page collecting consent through no dialog whatsoever.
+    let settled = false;
+    const settle = () => {
+      settled = true;
+    };
+    window.addEventListener("CookiebotOnDialogDisplay", settle);
+    window.addEventListener("CookiebotOnConsentReady", settle);
+
+    const timer = window.setTimeout(() => {
+      if (!settled && !cookiebotIsWorking()) ownBanner();
+    }, 6000);
+
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("CookiebotOnDialogDisplay", settle);
+      window.removeEventListener("CookiebotOnConsentReady", settle);
+    };
   }, []);
 
   useEffect(() => {
     // "Cookie-Einstellungen" in the footer brings the banner back so a choice
     // can be revised - including withdrawing a consent that was given earlier.
-    if (!POSTHOG_KEY || cookiebotEnabled) return;
+    // Stays wired up even with Cookiebot configured, because the footer falls
+    // back to this banner whenever Cookiebot is not actually running.
+    if (!POSTHOG_KEY) return;
     const reopen = () => setVisible(true);
     window.addEventListener(CONSENT_REOPEN_EVENT, reopen);
     return () => window.removeEventListener(CONSENT_REOPEN_EVENT, reopen);

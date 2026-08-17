@@ -7,9 +7,22 @@ import { phOptIn, phOptOut, POSTHOG_KEY } from "./posthog";
 
 type CookiebotApi = {
   consent?: { statistics?: boolean; marketing?: boolean; preferences?: boolean };
+  /** True once the visitor has answered the dialog. */
+  hasResponse?: boolean;
   renew?: () => void;
   show?: () => void;
 };
+
+/** Cookiebot's dialog element, present once it actually renders. */
+const DIALOG_ID = "CybotCookiebotDialog";
+
+/**
+ * Whether Cookiebot is doing its job on this page. The script loads happily on
+ * domains that are not registered in the domain group but then shows nothing at
+ * all, so "the object exists" is not enough to go on.
+ */
+export const cookiebotIsWorking = () =>
+  Boolean(window.Cookiebot?.hasResponse) || Boolean(document.getElementById(DIALOG_ID));
 
 declare global {
   interface Window {

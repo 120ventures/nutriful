@@ -17,6 +17,7 @@ Overview of user-facing changes.
 
 ### Cookiebot ready as consent platform
 - When a Cookiebot domain group is configured, Cookiebot runs the consent dialog and PostHog follows its "statistics" category; the built-in banner steps aside
+- If Cookiebot loads but shows no dialog - which is what happens on a domain that is not registered in its domain group - the built-in banner takes over after a few seconds, so the page is never left without a consent dialog
 - The Datenschutz page gets Cookiebot's auto-generated cookie table and lists Usercentrics as a processor
 
 ### Analytics live, consent can be withdrawn

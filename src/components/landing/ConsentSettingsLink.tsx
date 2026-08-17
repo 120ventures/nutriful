@@ -1,5 +1,5 @@
 import { reopenConsent } from "@/lib/consent";
-import { cookiebotEnabled, renewCookiebotConsent } from "@/lib/cookiebot";
+import { cookiebotEnabled, cookiebotIsWorking, renewCookiebotConsent } from "@/lib/cookiebot";
 import { POSTHOG_KEY } from "@/lib/posthog";
 
 /**
@@ -13,7 +13,7 @@ const ConsentSettingsLink = ({ className = "hover:text-foreground" }: { classNam
   return (
     <button
       type="button"
-      onClick={cookiebotEnabled ? renewCookiebotConsent : reopenConsent}
+      onClick={() => (cookiebotEnabled && cookiebotIsWorking() ? renewCookiebotConsent() : reopenConsent())}
       className={className}
     >
       Cookie-Einstellungen
