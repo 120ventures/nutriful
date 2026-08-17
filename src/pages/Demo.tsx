@@ -169,8 +169,8 @@ const Demo = () => {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl font-light leading-relaxed text-muted-foreground text-pretty">
             Nutriful entsteht gerade mit einer kleinen Gruppe von Diätolog:innen und
-            Ernährungsberater:innen in Österreich. Im Pilot arbeiten Sie kostenlos mit echten
-            Klient:innen - und was Ihnen dabei fehlt, bauen wir als Nächstes.
+            Ernährungsberater:innen in Österreich. Im Pilot arbeiten Sie mit echten Klient:innen -
+            und was Ihnen dabei fehlt, bauen wir als Nächstes.
           </p>
           <Link
             to="/#pilot"

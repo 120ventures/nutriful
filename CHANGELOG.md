@@ -6,6 +6,15 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Value Proposition deutlicher
+- Der Hero nennt jetzt konkret, worum es geht - Kommunikation, Ernährungspläne und Fortschritt an einem Ort statt in WhatsApp, E-Mails und auf Zetteln - und darunter stehen drei Belege: spart Vorbereitung, keine Zettelwirtschaft, alles einheitlich dokumentiert
+- Neuer Abschnitt direkt unter dem Hero: "Drei Dinge, die Nutriful für Sie übernimmt" mit Kommunikation, Ernährungsplänen und Fortschritt
+- Der Funktionsabschnitt heißt jetzt "Was das in Ihrem Alltag bedeutet" und beschreibt den Nutzen statt der Funktion: Schluss mit Zettelwirtschaft, Vorbereitung schon erledigt, jede Klient:in gleich dokumentiert
+
+### Preise vorerst von der Seite genommen
+- Der komplette Preisabschnitt (Pilot, Praxis, Praxis Plus) ist entfernt, ebenso alle Erwähnungen von "kostenlos" und Beträgen
+- Die FAQ-Frage nach den Kosten heißt jetzt "Wie läuft die Pilot-Partnerschaft ab?" und verweist auf das persönliche Erstgespräch
+
 ### Mobil bedienbar
 - Der Kopfbereich zeigt auf dem Handy jetzt einen sichtbaren "Demo"-Button; der lange Pilot-Button, der dort mit dem Logo kollidierte, erscheint erst ab Tablet-Breite
 - Die Tage der Programmleiste waren auf dem Handy 8x24 Pixel groß und damit kaum zu treffen - sie sind jetzt deutlich höher

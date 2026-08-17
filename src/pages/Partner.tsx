@@ -39,21 +39,45 @@ const pains = [
   },
 ];
 
-const features = [
+const heroProof = [
+  "Spart die Vorbereitung vor jedem Termin",
+  "Keine Zettelwirtschaft",
+  "Alles einheitlich dokumentiert",
+];
+
+const pillars = [
+  {
+    icon: MessageCircle,
+    title: "Kommunikation",
+    text: "Rückfragen zwischen den Terminen laufen über Nutriful statt über Ihre private Nummer - mit dem Verlauf der Klient:in direkt daneben, statt aus dem Gedächtnis.",
+  },
   {
     icon: ClipboardList,
-    title: "Ihre Programme, strukturiert",
-    text: "Wochenpläne und Aufgaben für jedes Beratungsziel - Ernährungsumstellung, Gewichtsmanagement, Sport oder Intoleranzen. Sie definieren die Inhalte, Nutriful führt Ihre Klient:innen durch.",
+    title: "Ernährungspläne",
+    text: "Pläne aus Bausteinen zusammenstellen - nach Mahlzeit, Zutat und Ernährungsform. Einmal gebaut, bei der nächsten Klient:in wiederverwendbar.",
   },
   {
     icon: LineChart,
-    title: "Einheitliches Tracking",
-    text: "Mahlzeiten, Fotos und Notizen landen an einem Ort statt in fünf Kanälen. Vor dem Termin sehen Sie den Verlauf auf einen Blick - ohne Zusammensuchen.",
+    title: "Fortschritt",
+    text: "Mahlzeiten, Fotos und Notizen laufen automatisch in einen Verlauf. Vor dem Termin sehen Sie Auffälligkeiten und offene Fragen auf einen Blick.",
+  },
+];
+
+const features = [
+  {
+    icon: ClipboardList,
+    title: "Schluss mit Zettelwirtschaft",
+    text: "Ernährungstagebuch auf Papier, Fotos per WhatsApp, Notizen im Kalender - in Nutriful läuft alles in einem Verlauf zusammen. Einheitlich erfasst, ohne Abtippen und ohne dass unterwegs etwas verloren geht.",
   },
   {
-    icon: MessageCircle,
-    title: "Chat & Check-ins",
-    text: "Kurze Fragen zwischen den Terminen laufen über Nutriful statt über Ihre private WhatsApp-Nummer - mit dem Verlauf der Klient:in direkt daneben.",
+    icon: CalendarCheck,
+    title: "Vorbereitung, die schon erledigt ist",
+    text: "Was Ihre Klient:innen im Alltag erfassen, ist beim nächsten Termin bereits aufbereitet. Sie starten mit Verlauf und Auffälligkeiten vor sich, statt vorher Nachrichten zu durchsuchen.",
+  },
+  {
+    icon: LineChart,
+    title: "Jede Klient:in gleich dokumentiert",
+    text: "Alle Programme folgen derselben Struktur - Sie vergleichen Verläufe, ohne sich in jede Klient:in neu hineinzudenken, und die Dokumentation ist ohne Nacharbeit vollständig.",
   },
   {
     icon: ShieldCheck,
@@ -93,8 +117,8 @@ const faqs = [
     a: "Nein - Nutriful ist Ihr Werkzeug, kein Ersatz. Die fachliche Führung, die Interpretation und die Beziehung zur Klient:in bleiben bei Ihnen. Nutriful übernimmt die Strecke zwischen den Terminen.",
   },
   {
-    q: "Was kostet die Pilot-Partnerschaft?",
-    a: "Der Pilot ist kostenlos. Sie testen Nutriful mit echten Klient:innen, wir bauen das Tool nach Ihrem Feedback. Danach kostet Nutriful 49 EUR pro Monat für bis zu 10 aktive Klient:innen - monatlich kündbar. Für größere Praxen und Teams erstellen wir ein individuelles Angebot.",
+    q: "Wie läuft die Pilot-Partnerschaft ab?",
+    a: "Im Pilot testen Sie Nutriful mit echten Klient:innen und wir bauen das Tool nach Ihrem Feedback. Was danach kommt, besprechen wir persönlich - im Erstgespräch klären wir Umfang und Konditionen gemeinsam.",
   },
   {
     q: "Was müssen meine Klient:innen tun?",
@@ -263,7 +287,6 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
 const Partner = () => {
   const { hash } = useLocation();
   const demoRef = useSectionView<HTMLElement>("demo");
-  const pricingRef = useSectionView<HTMLElement>("pricing");
   const pilotRef = useSectionView<HTMLElement>("pilot");
   const faqRef = useSectionView<HTMLElement>("faq");
 
@@ -311,9 +334,9 @@ const Partner = () => {
           Ihre Klient:innen. Ein Ort. Alles im Blick.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground text-pretty">
-          Die Kommunikationsplattform für Ihre Ernährungsberatung - Ihre Programme, einheitliches
-          Tracking und Chat mit Ihren Klient:innen an einem Ort. Sie sehen den Verlauf, ohne ihm
-          hinterherzulaufen.
+          Kommunikation, Ernährungspläne und der Fortschritt Ihrer Klient:innen an einem Ort -
+          statt in WhatsApp, E-Mails und auf Zetteln. Sie sparen die Vorbereitung vor jedem Termin
+          und sehen den Verlauf, ohne ihm hinterherzulaufen.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
@@ -330,6 +353,34 @@ const Partner = () => {
           >
             <PlayCircle className="h-4 w-4" /> Demo ausprobieren
           </Link>
+        </div>
+        <ul className="mx-auto mt-8 flex max-w-2xl flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-light text-muted-foreground">
+          {heroProof.map((item) => (
+            <li key={item} className="flex items-center gap-2">
+              <Check className="h-4 w-4 shrink-0 text-secondary" strokeWidth={2.4} />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Value proposition */}
+      <section className="border-y border-border/70 bg-card py-16 sm:py-20">
+        <div className="mx-auto max-w-5xl px-6">
+          <h2 className="mx-auto max-w-3xl text-center font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
+            Drei Dinge, die Nutriful für Sie übernimmt
+          </h2>
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {pillars.map((p) => (
+              <div key={p.title} className="rounded-3xl bg-muted/40 p-8">
+                <p.icon className="h-6 w-6 text-secondary" strokeWidth={1.8} />
+                <p className="mt-4 font-display text-xl font-medium">{p.title}</p>
+                <p className="mt-3 font-light leading-relaxed text-muted-foreground text-pretty">
+                  {p.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -408,7 +459,7 @@ const Partner = () => {
       <section className="bg-muted/40 py-16 sm:py-20">
         <div className="mx-auto max-w-5xl px-6">
           <h2 className="font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
-            Was Nutriful für Sie übernimmt
+            Was das in Ihrem Alltag bedeutet
           </h2>
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {features.map((f) => (
@@ -420,118 +471,6 @@ const Partner = () => {
                 </p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section ref={pricingRef} className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
-        <h2 className="text-center font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
-          Faire Preise für jede Praxisgröße
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center font-light text-muted-foreground text-pretty">
-          Starten Sie kostenlos im Pilot - danach wächst Nutriful mit Ihrer Praxis. Immer kostenlos
-          für Ihre Klient:innen.
-        </p>
-        <div className="mx-auto mt-10 grid gap-6 lg:grid-cols-3">
-          <div className="rounded-3xl border-2 border-secondary/50 bg-card p-8">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-secondary">
-              Pilot-Partnerschaft
-            </p>
-            <p className="mt-4 font-display text-4xl font-normal">
-              0 EUR
-              <span className="ml-2 text-base font-light text-muted-foreground">
-                während des Pilots
-              </span>
-            </p>
-            <ul className="mt-6 space-y-3 text-sm font-light text-muted-foreground">
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Voller Funktionsumfang mit echten Klient:innen
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Persönliches Onboarding und direkter Draht zu uns
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Sie gestalten mit, was gebaut wird
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Begrenzte Plätze
-              </li>
-            </ul>
-            <a
-              href="#pilot"
-              onClick={() => phCapture("cta_click", { location: "pricing_pilot" })}
-              className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-            >
-              Pilot-Partner:in werden
-            </a>
-          </div>
-          <div className="rounded-3xl border border-border/70 bg-card p-8">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-              Praxis
-            </p>
-            <p className="mt-4 font-display text-4xl font-normal">
-              49 EUR
-              <span className="ml-2 text-base font-light text-muted-foreground">/ Monat</span>
-            </p>
-            <ul className="mt-6 space-y-3 text-sm font-light text-muted-foreground">
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Bis zu 10 aktive Klient:innen
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Programm, Tracking und Chat in einem
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Monatlich kündbar, keine Setup-Kosten
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Kostenlos für Ihre Klient:innen
-              </li>
-            </ul>
-          </div>
-          <div className="rounded-3xl border border-border/70 bg-card p-8">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-              Praxis Plus
-            </p>
-            <p className="mt-4 font-display text-4xl font-normal">
-              Individuell
-              <span className="ml-2 text-base font-light text-muted-foreground">
-                nach Gespräch
-              </span>
-            </p>
-            <ul className="mt-6 space-y-3 text-sm font-light text-muted-foreground">
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Mehr als 10 aktive Klient:innen
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Für Teams und Gruppenpraxen
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Persönliche Betreuung
-              </li>
-              <li className="flex gap-2.5">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.2} />
-                Angebot in einem kurzen Gespräch
-              </li>
-            </ul>
-            <a
-              href="#pilot"
-              onClick={() => phCapture("cta_click", { location: "pricing_plus" })}
-              className="mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium text-foreground ring-1 ring-border transition-colors hover:bg-muted"
-            >
-              Gespräch vereinbaren
-            </a>
           </div>
         </div>
       </section>
@@ -549,7 +488,7 @@ const Partner = () => {
         <p className="mx-auto mt-6 max-w-2xl text-lg font-light leading-relaxed text-muted-foreground text-pretty">
           Nutriful entsteht gerade in Österreich - gemeinsam mit einer kleinen Gruppe von
           Diätolog:innen und Ernährungsberater:innen, die das Tool mit echten Klient:innen testen
-          und mitgestalten. Kostenlos im Pilot, ehrlich im Austausch.
+          und mitgestalten - ehrlich im Austausch, mit direktem Draht zu uns.
         </p>
         <div className="mx-auto mt-10 max-w-xl">
           <PartnerForm />
