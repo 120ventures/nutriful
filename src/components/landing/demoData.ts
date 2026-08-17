@@ -60,6 +60,10 @@ export type PlanBlock = {
   text: string;
   /** Searchable - a practitioner looks for "Linsen", not for a recipe title. */
   ingredients: string[];
+  /** Rough energy per portion. Demo values, rounded on purpose. */
+  kcal: number;
+  /** What this recipe delivers a lot of - also searchable, e.g. "Eisen". */
+  highlights: string[];
   /** Every diet this block is suitable for - a block matches all active filters. */
   diets: Diet[];
 };
@@ -70,6 +74,7 @@ const ALL: Diet[] = ["vegetarisch", "vegan", "laktosefrei", "halal"];
 const VEGGIE_LF: Diet[] = ["vegetarisch", "laktosefrei", "halal"];
 const VEGGIE_DAIRY: Diet[] = ["vegetarisch", "halal"];
 const MEAT: Diet[] = ["laktosefrei", "halal"];
+const NONE: Diet[] = [];
 
 /** Recipes a practitioner picks from when assembling a plan. */
 export const planGoals: PlanGoal[] = [
@@ -78,17 +83,22 @@ export const planGoals: PlanGoal[] = [
     label: "Ernährungsumstellung",
     hint: "Ausgewogen, alltagstauglich, ohne Verbote",
     blocks: [
-      { id: "u1", slot: "Frühstück", icon: "🥣", text: "Porridge mit Beeren", ingredients: ["Haferflocken", "Milch", "Beeren", "Zimt"], diets: VEGGIE_DAIRY },
-      { id: "u10", slot: "Frühstück", icon: "🌾", text: "Haferdrink-Porridge mit Apfel", ingredients: ["Haferflocken", "Haferdrink", "Apfel", "Zimt"], diets: ALL },
-      { id: "u2", slot: "Frühstück", icon: "🍳", text: "Rührei mit Tomaten", ingredients: ["Eier", "Tomaten", "Olivenöl", "Schnittlauch"], diets: VEGGIE_LF },
-      { id: "u9", slot: "Frühstück", icon: "🥓", text: "Vollkornbrot mit Schinken", ingredients: ["Vollkornbrot", "Schinken", "Butter", "Gurke"], diets: [] },
-      { id: "u3", slot: "Mittag", icon: "🍚", text: "Reis mit Hühnchen und Gemüse", ingredients: ["Reis", "Hühnerbrust", "Karotten", "Brokkoli"], diets: MEAT },
-      { id: "u4", slot: "Mittag", icon: "🥗", text: "Großer Salat mit Ei", ingredients: ["Blattsalat", "Eier", "Tomaten", "Olivenöl"], diets: VEGGIE_LF },
-      { id: "u11", slot: "Mittag", icon: "🫘", text: "Linsensalat mit Ofengemüse", ingredients: ["Linsen", "Zucchini", "Paprika", "Olivenöl"], diets: ALL },
-      { id: "u5", slot: "Abend", icon: "🐟", text: "Fisch mit Kartoffeln", ingredients: ["Kabeljau", "Kartoffeln", "Zitrone", "Petersilie"], diets: MEAT },
-      { id: "u6", slot: "Abend", icon: "🍲", text: "Gemüseeintopf", ingredients: ["Karotten", "Sellerie", "Kartoffeln", "Lauch"], diets: ALL },
-      { id: "u7", slot: "Snack", icon: "🍎", text: "Apfel mit Nüssen", ingredients: ["Apfel", "Walnüsse"], diets: ALL },
-      { id: "u8", slot: "Snack", icon: "🥕", text: "Gemüsesticks mit Hummus", ingredients: ["Karotten", "Paprika", "Kichererbsen", "Tahin"], diets: ALL },
+      { id: "u1", slot: "Frühstück", icon: "🥣", text: "Porridge mit Beeren", ingredients: ["Haferflocken", "Milch", "Beeren", "Zimt"], kcal: 380, highlights: ["Ballaststoffe", "Calcium"], diets: VEGGIE_DAIRY },
+      { id: "u10", slot: "Frühstück", icon: "🌾", text: "Haferdrink-Porridge mit Apfel", ingredients: ["Haferflocken", "Haferdrink", "Apfel", "Zimt"], kcal: 350, highlights: ["Ballaststoffe", "Magnesium"], diets: ALL },
+      { id: "u2", slot: "Frühstück", icon: "🍳", text: "Rührei mit Tomaten", ingredients: ["Eier", "Tomaten", "Olivenöl", "Schnittlauch"], kcal: 320, highlights: ["Eiweiß", "Vitamin B12"], diets: VEGGIE_LF },
+      { id: "u9", slot: "Frühstück", icon: "🥓", text: "Vollkornbrot mit Schinken", ingredients: ["Vollkornbrot", "Schinken", "Butter", "Gurke"], kcal: 340, highlights: ["Eiweiß", "Ballaststoffe"], diets: NONE },
+      { id: "u3", slot: "Mittag", icon: "🍚", text: "Reis mit Hühnchen und Gemüse", ingredients: ["Reis", "Hühnerbrust", "Karotten", "Brokkoli"], kcal: 560, highlights: ["Eiweiß", "Vitamin C"], diets: MEAT },
+      { id: "u4", slot: "Mittag", icon: "🥗", text: "Großer Salat mit Ei", ingredients: ["Blattsalat", "Eier", "Tomaten", "Olivenöl"], kcal: 420, highlights: ["Eiweiß", "Folsäure"], diets: VEGGIE_LF },
+      { id: "u11", slot: "Mittag", icon: "🫘", text: "Linsensalat mit Ofengemüse", ingredients: ["Linsen", "Zucchini", "Paprika", "Olivenöl"], kcal: 480, highlights: ["Ballaststoffe", "Eisen"], diets: ALL },
+      { id: "u12", slot: "Mittag", icon: "🥙", text: "Falafel-Bowl mit Hummus", ingredients: ["Kichererbsen", "Bulgur", "Gurke", "Tahin"], kcal: 540, highlights: ["Ballaststoffe", "Eisen"], diets: ALL },
+      { id: "u5", slot: "Abend", icon: "🐟", text: "Fisch mit Kartoffeln", ingredients: ["Kabeljau", "Kartoffeln", "Zitrone", "Petersilie"], kcal: 460, highlights: ["Eiweiß", "Jod"], diets: MEAT },
+      { id: "u6", slot: "Abend", icon: "🍲", text: "Gemüseeintopf", ingredients: ["Karotten", "Sellerie", "Kartoffeln", "Lauch"], kcal: 320, highlights: ["Beta-Carotin", "Kalium"], diets: ALL },
+      { id: "u13", slot: "Abend", icon: "🎃", text: "Ofenkürbis mit Feta", ingredients: ["Kürbis", "Feta", "Kürbiskerne", "Olivenöl"], kcal: 430, highlights: ["Calcium", "Beta-Carotin"], diets: VEGGIE_DAIRY },
+      { id: "u14", slot: "Abend", icon: "🍜", text: "Gemüsecurry mit Reis", ingredients: ["Reis", "Kokosmilch", "Brokkoli", "Karotten"], kcal: 520, highlights: ["Vitamin C", "Ballaststoffe"], diets: ALL },
+      { id: "u7", slot: "Snack", icon: "🍎", text: "Apfel mit Nüssen", ingredients: ["Apfel", "Walnüsse"], kcal: 210, highlights: ["Ballaststoffe", "Magnesium"], diets: ALL },
+      { id: "u8", slot: "Snack", icon: "🥕", text: "Gemüsesticks mit Hummus", ingredients: ["Karotten", "Paprika", "Kichererbsen", "Tahin"], kcal: 180, highlights: ["Ballaststoffe", "Vitamin C"], diets: ALL },
+      { id: "u15", slot: "Snack", icon: "🥛", text: "Naturjoghurt mit Beeren", ingredients: ["Joghurt", "Beeren", "Leinsamen"], kcal: 160, highlights: ["Calcium", "Eiweiß"], diets: VEGGIE_DAIRY },
+      { id: "u16", slot: "Snack", icon: "🍐", text: "Birne mit Mandeln", ingredients: ["Birne", "Mandeln"], kcal: 190, highlights: ["Ballaststoffe", "Vitamin E"], diets: ALL },
     ],
   },
   {
@@ -96,16 +106,22 @@ export const planGoals: PlanGoal[] = [
     label: "Gewichtsmanagement",
     hint: "Sättigend bei moderater Energiedichte",
     blocks: [
-      { id: "g1", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkornbrot", ingredients: ["Eier", "Vollkornbrot", "Tomaten"], diets: VEGGIE_LF },
-      { id: "g2", slot: "Frühstück", icon: "🥛", text: "Topfen mit Beeren", ingredients: ["Topfen", "Beeren", "Leinsamen"], diets: VEGGIE_DAIRY },
-      { id: "g9", slot: "Frühstück", icon: "🥣", text: "Haferbrei mit Zimt", ingredients: ["Haferflocken", "Wasser", "Zimt", "Apfel"], diets: ALL },
-      { id: "g3", slot: "Mittag", icon: "🥗", text: "Salat mit Hühnerbrust", ingredients: ["Blattsalat", "Hühnerbrust", "Gurke", "Essig-Öl-Dressing"], diets: MEAT },
-      { id: "g4", slot: "Mittag", icon: "🍲", text: "Gemüsesuppe mit Linsen", ingredients: ["Linsen", "Karotten", "Sellerie", "Zwiebel"], diets: ALL },
-      { id: "g5", slot: "Abend", icon: "🐟", text: "Lachs mit Brokkoli", ingredients: ["Lachs", "Brokkoli", "Zitrone"], diets: MEAT },
-      { id: "g6", slot: "Abend", icon: "🥒", text: "Bunter Teller mit Ei", ingredients: ["Eier", "Paprika", "Gurke", "Vollkornbrot"], diets: VEGGIE_LF },
-      { id: "g10", slot: "Abend", icon: "🍠", text: "Ofengemüse mit Kichererbsen", ingredients: ["Kichererbsen", "Karotten", "Zucchini", "Olivenöl"], diets: ALL },
-      { id: "g7", slot: "Snack", icon: "🥜", text: "Handvoll Mandeln", ingredients: ["Mandeln"], diets: ALL },
-      { id: "g8", slot: "Snack", icon: "🍓", text: "Beeren", ingredients: ["Heidelbeeren", "Himbeeren"], diets: ALL },
+      { id: "g1", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkornbrot", ingredients: ["Eier", "Vollkornbrot", "Tomaten"], kcal: 330, highlights: ["Eiweiß", "Vitamin B12"], diets: VEGGIE_LF },
+      { id: "g2", slot: "Frühstück", icon: "🥛", text: "Topfen mit Beeren", ingredients: ["Topfen", "Beeren", "Leinsamen"], kcal: 260, highlights: ["Eiweiß", "Calcium"], diets: VEGGIE_DAIRY },
+      { id: "g9", slot: "Frühstück", icon: "🥣", text: "Haferbrei mit Zimt", ingredients: ["Haferflocken", "Wasser", "Zimt", "Apfel"], kcal: 300, highlights: ["Ballaststoffe", "Magnesium"], diets: ALL },
+      { id: "g11", slot: "Frühstück", icon: "🌱", text: "Sojajoghurt mit Chiasamen", ingredients: ["Sojajoghurt", "Chiasamen", "Heidelbeeren"], kcal: 280, highlights: ["Eiweiß", "Ballaststoffe"], diets: ALL },
+      { id: "g3", slot: "Mittag", icon: "🥗", text: "Salat mit Hühnerbrust", ingredients: ["Blattsalat", "Hühnerbrust", "Gurke", "Essig-Öl-Dressing"], kcal: 420, highlights: ["Eiweiß", "Folsäure"], diets: MEAT },
+      { id: "g4", slot: "Mittag", icon: "🍲", text: "Gemüsesuppe mit Linsen", ingredients: ["Linsen", "Karotten", "Sellerie", "Zwiebel"], kcal: 380, highlights: ["Ballaststoffe", "Eisen"], diets: ALL },
+      { id: "g12", slot: "Mittag", icon: "🐟", text: "Thunfischsalat mit Bohnen", ingredients: ["Thunfisch", "Weiße Bohnen", "Zwiebel", "Petersilie"], kcal: 440, highlights: ["Eiweiß", "Eisen"], diets: MEAT },
+      { id: "g13", slot: "Mittag", icon: "🥦", text: "Brokkoli-Quinoa-Bowl", ingredients: ["Quinoa", "Brokkoli", "Kichererbsen", "Zitrone"], kcal: 460, highlights: ["Eiweiß", "Vitamin C"], diets: ALL },
+      { id: "g5", slot: "Abend", icon: "🐟", text: "Lachs mit Brokkoli", ingredients: ["Lachs", "Brokkoli", "Zitrone"], kcal: 480, highlights: ["Omega-3", "Vitamin D"], diets: MEAT },
+      { id: "g6", slot: "Abend", icon: "🥒", text: "Bunter Teller mit Ei", ingredients: ["Eier", "Paprika", "Gurke", "Vollkornbrot"], kcal: 390, highlights: ["Eiweiß", "Vitamin C"], diets: VEGGIE_LF },
+      { id: "g10", slot: "Abend", icon: "🍠", text: "Ofengemüse mit Kichererbsen", ingredients: ["Kichererbsen", "Karotten", "Zucchini", "Olivenöl"], kcal: 420, highlights: ["Ballaststoffe", "Beta-Carotin"], diets: ALL },
+      { id: "g14", slot: "Abend", icon: "🍜", text: "Zucchininudeln mit Tofu", ingredients: ["Zucchini", "Tofu", "Tomaten", "Basilikum"], kcal: 350, highlights: ["Eiweiß", "Calcium"], diets: ALL },
+      { id: "g7", slot: "Snack", icon: "🥜", text: "Handvoll Mandeln", ingredients: ["Mandeln"], kcal: 170, highlights: ["Magnesium", "Vitamin E"], diets: ALL },
+      { id: "g8", slot: "Snack", icon: "🍓", text: "Beeren", ingredients: ["Heidelbeeren", "Himbeeren"], kcal: 60, highlights: ["Vitamin C", "Ballaststoffe"], diets: ALL },
+      { id: "g15", slot: "Snack", icon: "🥚", text: "Gekochtes Ei", ingredients: ["Ei", "Salz", "Pfeffer"], kcal: 80, highlights: ["Eiweiß", "Vitamin B12"], diets: VEGGIE_LF },
+      { id: "g16", slot: "Snack", icon: "🥕", text: "Karotten mit Skyr-Dip", ingredients: ["Karotten", "Skyr", "Kräuter"], kcal: 130, highlights: ["Eiweiß", "Beta-Carotin"], diets: VEGGIE_DAIRY },
     ],
   },
   {
@@ -113,18 +129,22 @@ export const planGoals: PlanGoal[] = [
     label: "Sporternährung",
     hint: "Kohlenhydrate und Eiweiß um die Einheit herum",
     blocks: [
-      { id: "s1", slot: "Frühstück", icon: "🥣", text: "Haferflocken mit Whey", ingredients: ["Haferflocken", "Whey-Protein", "Milch", "Banane"], diets: VEGGIE_DAIRY },
-      { id: "s2", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkorntoast", ingredients: ["Eier", "Vollkorntoast", "Avocado"], diets: VEGGIE_LF },
-      { id: "s9", slot: "Frühstück", icon: "🌱", text: "Sojajoghurt mit Haferflocken", ingredients: ["Sojajoghurt", "Haferflocken", "Beeren"], diets: ALL },
-      { id: "s3", slot: "Mittag", icon: "🍗", text: "Hühnchen, Reis, Brokkoli", ingredients: ["Hühnerbrust", "Reis", "Brokkoli"], diets: MEAT },
-      { id: "s4", slot: "Mittag", icon: "🍝", text: "Pasta mit Putenragout", ingredients: ["Vollkornpasta", "Putenfleisch", "Tomaten", "Zwiebel"], diets: MEAT },
-      { id: "s10", slot: "Mittag", icon: "🫘", text: "Linsen-Bolognese mit Vollkornpasta", ingredients: ["Rote Linsen", "Vollkornpasta", "Tomaten", "Karotten"], diets: ALL },
-      { id: "s5", slot: "Abend", icon: "🐟", text: "Lachs mit Süßkartoffel", ingredients: ["Lachs", "Süßkartoffel", "Spinat"], diets: MEAT },
-      { id: "s6", slot: "Abend", icon: "🍚", text: "Reis mit Rindfleisch", ingredients: ["Reis", "Rindfleisch", "Paprika"], diets: MEAT },
-      { id: "s11", slot: "Abend", icon: "🍜", text: "Tofu-Pfanne mit Reis", ingredients: ["Tofu", "Reis", "Brokkoli", "Sojasauce"], diets: ALL },
-      { id: "s7", slot: "Snack", icon: "🥤", text: "Shake nach der Einheit", ingredients: ["Whey-Protein", "Milch", "Banane"], diets: VEGGIE_DAIRY },
-      { id: "s8", slot: "Snack", icon: "🍌", text: "Banane mit Topfen", ingredients: ["Banane", "Topfen", "Honig"], diets: VEGGIE_DAIRY },
-      { id: "s12", slot: "Snack", icon: "🥜", text: "Erdnussbutter-Brot", ingredients: ["Vollkornbrot", "Erdnussbutter", "Banane"], diets: ALL },
+      { id: "s1", slot: "Frühstück", icon: "🥣", text: "Haferflocken mit Whey", ingredients: ["Haferflocken", "Whey-Protein", "Milch", "Banane"], kcal: 520, highlights: ["Eiweiß", "Kalium"], diets: VEGGIE_DAIRY },
+      { id: "s2", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkorntoast", ingredients: ["Eier", "Vollkorntoast", "Avocado"], kcal: 480, highlights: ["Eiweiß", "Kalium"], diets: VEGGIE_LF },
+      { id: "s9", slot: "Frühstück", icon: "🌱", text: "Sojajoghurt mit Haferflocken", ingredients: ["Sojajoghurt", "Haferflocken", "Beeren"], kcal: 400, highlights: ["Eiweiß", "Ballaststoffe"], diets: ALL },
+      { id: "s13", slot: "Frühstück", icon: "🥞", text: "Haferpfannkuchen mit Topfen", ingredients: ["Haferflocken", "Eier", "Topfen", "Honig"], kcal: 540, highlights: ["Eiweiß", "Calcium"], diets: VEGGIE_DAIRY },
+      { id: "s3", slot: "Mittag", icon: "🍗", text: "Hühnchen, Reis, Brokkoli", ingredients: ["Hühnerbrust", "Reis", "Brokkoli"], kcal: 620, highlights: ["Eiweiß", "Vitamin C"], diets: MEAT },
+      { id: "s4", slot: "Mittag", icon: "🍝", text: "Pasta mit Putenragout", ingredients: ["Vollkornpasta", "Putenfleisch", "Tomaten", "Zwiebel"], kcal: 650, highlights: ["Eiweiß", "Ballaststoffe"], diets: MEAT },
+      { id: "s10", slot: "Mittag", icon: "🫘", text: "Linsen-Bolognese mit Vollkornpasta", ingredients: ["Rote Linsen", "Vollkornpasta", "Tomaten", "Karotten"], kcal: 600, highlights: ["Ballaststoffe", "Eisen"], diets: ALL },
+      { id: "s14", slot: "Mittag", icon: "🌯", text: "Hühnchen-Wrap mit Gemüse", ingredients: ["Vollkornwrap", "Hühnerbrust", "Paprika", "Hummus"], kcal: 580, highlights: ["Eiweiß", "Vitamin C"], diets: MEAT },
+      { id: "s5", slot: "Abend", icon: "🐟", text: "Lachs mit Süßkartoffel", ingredients: ["Lachs", "Süßkartoffel", "Spinat"], kcal: 610, highlights: ["Omega-3", "Beta-Carotin"], diets: MEAT },
+      { id: "s6", slot: "Abend", icon: "🍚", text: "Reis mit Rindfleisch", ingredients: ["Reis", "Rindfleisch", "Paprika"], kcal: 640, highlights: ["Eiweiß", "Eisen"], diets: MEAT },
+      { id: "s11", slot: "Abend", icon: "🍜", text: "Tofu-Pfanne mit Reis", ingredients: ["Tofu", "Reis", "Brokkoli", "Sojasauce"], kcal: 550, highlights: ["Eiweiß", "Calcium"], diets: ALL },
+      { id: "s15", slot: "Abend", icon: "🥘", text: "Kichererbsen-Curry mit Reis", ingredients: ["Kichererbsen", "Reis", "Kokosmilch", "Spinat"], kcal: 590, highlights: ["Ballaststoffe", "Eisen"], diets: ALL },
+      { id: "s7", slot: "Snack", icon: "🥤", text: "Shake nach der Einheit", ingredients: ["Whey-Protein", "Milch", "Banane"], kcal: 280, highlights: ["Eiweiß", "Kalium"], diets: VEGGIE_DAIRY },
+      { id: "s8", slot: "Snack", icon: "🍌", text: "Banane mit Topfen", ingredients: ["Banane", "Topfen", "Honig"], kcal: 250, highlights: ["Eiweiß", "Kalium"], diets: VEGGIE_DAIRY },
+      { id: "s12", slot: "Snack", icon: "🥜", text: "Erdnussbutter-Brot", ingredients: ["Vollkornbrot", "Erdnussbutter", "Banane"], kcal: 320, highlights: ["Eiweiß", "Magnesium"], diets: ALL },
+      { id: "s16", slot: "Snack", icon: "🍘", text: "Reiswaffeln mit Hummus", ingredients: ["Reiswaffeln", "Hummus", "Paprika"], kcal: 220, highlights: ["Ballaststoffe", "Eisen"], diets: ALL },
     ],
   },
   {
@@ -132,15 +152,22 @@ export const planGoals: PlanGoal[] = [
     label: "Intoleranz-Karenz",
     hint: "Verträglich in der Karenzphase, gut dokumentierbar",
     blocks: [
-      { id: "i1", slot: "Frühstück", icon: "🍚", text: "Reisbrei mit Banane", ingredients: ["Reis", "Wasser", "Banane"], diets: ALL },
-      { id: "i2", slot: "Frühstück", icon: "🥣", text: "Hirsebrei", ingredients: ["Hirse", "Wasser", "Zimt"], diets: ALL },
-      { id: "i3", slot: "Mittag", icon: "🍗", text: "Hühnchen mit Reis", ingredients: ["Hühnerbrust", "Reis", "Karotten"], diets: MEAT },
-      { id: "i9", slot: "Mittag", icon: "🥔", text: "Kartoffel-Gemüse-Pfanne", ingredients: ["Kartoffeln", "Karotten", "Zucchini", "Olivenöl"], diets: ALL },
-      { id: "i4", slot: "Abend", icon: "🐟", text: "Fisch mit Kartoffeln", ingredients: ["Kabeljau", "Kartoffeln", "Petersilie"], diets: MEAT },
-      { id: "i5", slot: "Abend", icon: "🍲", text: "Gemüseeintopf", ingredients: ["Karotten", "Kartoffeln", "Sellerie"], diets: ALL },
-      { id: "i6", slot: "Abend", icon: "🥕", text: "Gemüsepfanne", ingredients: ["Zucchini", "Karotten", "Paprika", "Olivenöl"], diets: ALL },
-      { id: "i7", slot: "Snack", icon: "🍌", text: "Banane", ingredients: ["Banane"], diets: ALL },
-      { id: "i8", slot: "Snack", icon: "🍐", text: "Birne", ingredients: ["Birne"], diets: ALL },
+      { id: "i1", slot: "Frühstück", icon: "🍚", text: "Reisbrei mit Banane", ingredients: ["Reis", "Wasser", "Banane"], kcal: 340, highlights: ["Kalium", "leicht verdaulich"], diets: ALL },
+      { id: "i2", slot: "Frühstück", icon: "🥣", text: "Hirsebrei", ingredients: ["Hirse", "Wasser", "Zimt"], kcal: 320, highlights: ["Magnesium", "Eisen"], diets: ALL },
+      { id: "i10", slot: "Frühstück", icon: "🍐", text: "Buchweizenbrei mit Birne", ingredients: ["Buchweizen", "Wasser", "Birne"], kcal: 330, highlights: ["Ballaststoffe", "Magnesium"], diets: ALL },
+      { id: "i11", slot: "Frühstück", icon: "🥔", text: "Kartoffelpuffer mit Apfelmus", ingredients: ["Kartoffeln", "Apfelmus", "Olivenöl"], kcal: 360, highlights: ["Kalium", "Vitamin C"], diets: ALL },
+      { id: "i3", slot: "Mittag", icon: "🍗", text: "Hühnchen mit Reis", ingredients: ["Hühnerbrust", "Reis", "Karotten"], kcal: 520, highlights: ["Eiweiß", "Beta-Carotin"], diets: MEAT },
+      { id: "i9", slot: "Mittag", icon: "🥔", text: "Kartoffel-Gemüse-Pfanne", ingredients: ["Kartoffeln", "Karotten", "Zucchini", "Olivenöl"], kcal: 430, highlights: ["Kalium", "Beta-Carotin"], diets: ALL },
+      { id: "i12", slot: "Mittag", icon: "🍜", text: "Reisnudeln mit Gemüse", ingredients: ["Reisnudeln", "Zucchini", "Karotten", "Sesamöl"], kcal: 470, highlights: ["Beta-Carotin", "leicht verdaulich"], diets: ALL },
+      { id: "i13", slot: "Mittag", icon: "🍗", text: "Pute mit Kartoffelpüree", ingredients: ["Putenfleisch", "Kartoffeln", "Haferdrink", "Petersilie"], kcal: 500, highlights: ["Eiweiß", "Kalium"], diets: MEAT },
+      { id: "i4", slot: "Abend", icon: "🐟", text: "Fisch mit Kartoffeln", ingredients: ["Kabeljau", "Kartoffeln", "Petersilie"], kcal: 440, highlights: ["Eiweiß", "Jod"], diets: MEAT },
+      { id: "i5", slot: "Abend", icon: "🍲", text: "Gemüseeintopf", ingredients: ["Karotten", "Kartoffeln", "Sellerie"], kcal: 310, highlights: ["Beta-Carotin", "Kalium"], diets: ALL },
+      { id: "i6", slot: "Abend", icon: "🥕", text: "Gemüsepfanne", ingredients: ["Zucchini", "Karotten", "Paprika", "Olivenöl"], kcal: 290, highlights: ["Vitamin C", "Beta-Carotin"], diets: ALL },
+      { id: "i14", slot: "Abend", icon: "🎃", text: "Kürbissuppe mit Reis", ingredients: ["Kürbis", "Reis", "Ingwer", "Olivenöl"], kcal: 360, highlights: ["Beta-Carotin", "Kalium"], diets: ALL },
+      { id: "i7", slot: "Snack", icon: "🍌", text: "Banane", ingredients: ["Banane"], kcal: 90, highlights: ["Kalium"], diets: ALL },
+      { id: "i8", slot: "Snack", icon: "🍐", text: "Birne", ingredients: ["Birne"], kcal: 60, highlights: ["Ballaststoffe"], diets: ALL },
+      { id: "i15", slot: "Snack", icon: "🍘", text: "Reiswaffeln mit Banane", ingredients: ["Reiswaffeln", "Banane"], kcal: 150, highlights: ["Kalium", "leicht verdaulich"], diets: ALL },
+      { id: "i16", slot: "Snack", icon: "🥒", text: "Gurkensticks mit Olivenöl", ingredients: ["Gurke", "Olivenöl", "Kräuter"], kcal: 90, highlights: ["Vitamin K"], diets: ALL },
     ],
   },
 ];

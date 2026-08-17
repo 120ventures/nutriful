@@ -32,6 +32,13 @@ Overview of user-facing changes.
 - In der Seitenleiste steht jetzt bei allen der Programmtag statt einer Mischung aus Wochen und Tagen: "Ernährungsumstellung · Tag 9 von 30"
 - Der Tag wird aus dem Verlauf abgeleitet, kann also nicht mehr von der Detailansicht abweichen
 
+### Nährwerte und ein viel größerer Rezeptkatalog
+- Der Katalog ist von 41 auf 64 Rezepte gewachsen: vier je Mahlzeit und Beratungsziel, jedes mit seinen Zutaten
+- Jedes Rezept zeigt Kalorien je Portion und wovon es besonders viel liefert (z. B. Eiweiß, Eisen, Omega-3, Beta-Carotin)
+- Die Suche findet jetzt auch Nährstoffe: "Eisen" führt zu den eisenreichen Rezepten, nicht nur zu Zutaten
+- Der zusammengestellte Tag zeigt seine Gesamtkalorien und die häufigsten Nährstoff-Schwerpunkte
+- Alle Werte sind als Richtwerte je Portion gekennzeichnet
+
 ### Plan-Baukasten nach Mahlzeit und Zutat
 - Die Auswahl beginnt jetzt bei der Mahlzeit: Frühstück, Mittag, Abend und Snack als Umschalter, darunter nur die Rezepte dieser Mahlzeit
 - Suchfeld über den Rezepten findet nach Zutat statt nach Rezeptnamen - "Linsen" führt zum Linsensalat, auch wenn das Wort im Titel nicht auffällt

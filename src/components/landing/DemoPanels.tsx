@@ -170,7 +170,8 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
     diets.every((d) => b.diets.includes(d)) &&
     (!needle ||
       b.text.toLowerCase().includes(needle) ||
-      b.ingredients.some((i) => i.toLowerCase().includes(needle)));
+      b.ingredients.some((i) => i.toLowerCase().includes(needle)) ||
+      b.highlights.some((h) => h.toLowerCase().includes(needle)));
 
   const blocks = goal.blocks.filter((b) => b.slot === slot && matches(b));
   // A search often hits a different meal than the one that is open - say so
@@ -198,7 +199,14 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
     setPlan((prev) => prev.filter((b) => b.id !== id));
   };
 
-  const inPlan = (slot: MealSlot) => plan.filter((b) => b.slot === slot);
+  const inPlan = (s: MealSlot) => plan.filter((b) => b.slot === s);
+  const dayKcal = plan.reduce((sum, b) => sum + b.kcal, 0);
+  // What the assembled day delivers a lot of, most frequent first.
+  const dayFocus = [...new Set(plan.flatMap((b) => b.highlights))]
+    .map((h) => ({ h, n: plan.filter((b) => b.highlights.includes(h)).length }))
+    .sort((a, b) => b.n - a.n)
+    .slice(0, 5)
+    .map((x) => x.h);
 
   return (
     <div className="p-5">
@@ -299,8 +307,8 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Nach Zutat suchen, z. B. Linsen"
-              aria-label="Nach Zutat suchen"
+              placeholder="Zutat oder Nährstoff, z. B. Eisen"
+              aria-label="Nach Zutat oder Nährstoff suchen"
               className="h-9 w-full rounded-xl border border-border bg-card pl-9 pr-8 text-xs font-light outline-none focus:border-secondary/60"
             />
             {query && (
@@ -343,6 +351,19 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                     <span className="block truncate text-[10px] text-muted-foreground">
                       {b.ingredients.join(", ")}
                     </span>
+                    <span className="mt-1 flex flex-wrap items-center gap-1">
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground">
+                        ~{b.kcal} kcal
+                      </span>
+                      {b.highlights.map((h) => (
+                        <span
+                          key={h}
+                          className="rounded bg-secondary/10 px-1.5 py-0.5 text-[10px] text-secondary"
+                        >
+                          {h}
+                        </span>
+                      ))}
+                    </span>
                   </span>
                   {used ? (
                     <Check className="h-3.5 w-3.5 shrink-0 text-secondary" strokeWidth={2.4} />
@@ -372,9 +393,14 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
         </div>
 
         <div>
-          <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Plan · Tag 1
-          </p>
+          <div className="flex items-baseline justify-between gap-2">
+            <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+              Plan · Tag 1
+            </p>
+            {plan.length > 0 && (
+              <p className="text-[10px] font-medium text-foreground">~{dayKcal} kcal</p>
+            )}
+          </div>
           <div className="mt-2 space-y-2">
             {mealSlots.map((slot) => (
               <div key={slot} className="rounded-xl bg-muted/50 p-2.5">
@@ -409,6 +435,28 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
               </div>
             ))}
           </div>
+
+          {dayFocus.length > 0 && (
+            <div className="mt-2">
+              <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                Schwerpunkte des Tages
+              </p>
+              <div className="mt-1.5 flex flex-wrap gap-1">
+                {dayFocus.map((h) => (
+                  <span
+                    key={h}
+                    className="rounded bg-secondary/10 px-1.5 py-0.5 text-[10px] text-secondary"
+                  >
+                    {h}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <p className="mt-2 text-[10px] font-light text-muted-foreground">
+            Richtwerte je Portion - im Pilot hinterlegen Sie Ihre eigenen Werte.
+          </p>
 
           {assigned ? (
             <div className="mt-3 flex items-start gap-2 rounded-xl border border-secondary/30 bg-secondary/10 px-3 py-2.5">
