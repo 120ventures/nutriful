@@ -32,6 +32,11 @@ Overview of user-facing changes.
 - In der Seitenleiste steht jetzt bei allen der Programmtag statt einer Mischung aus Wochen und Tagen: "Ernährungsumstellung · Tag 9 von 30"
 - Der Tag wird aus dem Verlauf abgeleitet, kann also nicht mehr von der Detailansicht abweichen
 
+### Klient:innen-Profil und Termin-Historie
+- Neuer Tab "Profil": Alter, Geschlecht, Größe, Gewicht und Anliegen, dazu Energiebedarf mit Rechenbasis, Vorerkrankungen, Unverträglichkeiten und Medikation
+- Darunter die Termine - vergangene und der geplante nächste, jeweils mit Notiz
+- Der Plan-Baukasten rechnet jetzt gegen den Bedarf: "~380 von 2.000 kcal" statt einer nackten Summe
+
 ### Nährwerte und ein viel größerer Rezeptkatalog
 - Der Katalog ist von 41 auf 64 Rezepte gewachsen: vier je Mahlzeit und Beratungsziel, jedes mit seinen Zutaten
 - Jedes Rezept zeigt Kalorien je Portion und wovon es besonders viel liefert (z. B. Eiweiß, Eisen, Omega-3, Beta-Carotin)

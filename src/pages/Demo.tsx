@@ -8,14 +8,16 @@ import {
   ChatView,
   HistoryView,
   PlanView,
+  ProfileView,
 } from "@/components/landing/DemoPanels";
 import { track } from "@/lib/demoTracking";
 import { demoClients, type DemoClient } from "@/components/landing/demoData";
 
-type TabId = "briefing" | "verlauf" | "chat" | "plan";
+type TabId = "briefing" | "profil" | "verlauf" | "chat" | "plan";
 
 const tabs: { id: TabId; label: string }[] = [
   { id: "briefing", label: "Termin-Briefing" },
+  { id: "profil", label: "Profil" },
   { id: "verlauf", label: "Verlauf" },
   { id: "chat", label: "Chat" },
   { id: "plan", label: "Plan erstellen" },
@@ -149,6 +151,7 @@ const Demo = () => {
 
               <div className="min-h-0 flex-1">
                 {tab === "briefing" && <BriefingView client={client} onOpenDay={openDay} />}
+                {tab === "profil" && <ProfileView client={client} />}
                 {tab === "verlauf" && (
                   <HistoryView
                     client={client}

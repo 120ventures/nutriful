@@ -1,5 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AlertTriangle, Check, MessageCircle, Plus, Search, Send, X } from "lucide-react";
+import {
+  AlertTriangle,
+  CalendarDays,
+  Check,
+  MessageCircle,
+  Plus,
+  Search,
+  Send,
+  X,
+} from "lucide-react";
 import { track } from "@/lib/demoTracking";
 import {
   dietFilters,
@@ -152,6 +161,10 @@ export const HistoryView = ({
 };
 
 /* --------------------------------------------------------------- Planbuilder */
+
+/** 2000 -> "2.000". Intl's de-AT uses a thin space, which clashes with the
+ *  hand-written figures next to it. */
+const kcal = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 export const PlanView = ({ client }: { client: DemoClient }) => {
   const [goalId, setGoalId] = useState(planGoals[0].id);
@@ -398,7 +411,9 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
               Plan · Tag 1
             </p>
             {plan.length > 0 && (
-              <p className="text-[10px] font-medium text-foreground">~{dayKcal} kcal</p>
+              <p className="text-[10px] font-medium text-foreground">
+                ~{kcal(dayKcal)} von {kcal(client.profile.energyKcal)} kcal
+              </p>
             )}
           </div>
           <div className="mt-2 space-y-2">
@@ -595,6 +610,95 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
           <Send className="h-4 w-4" />
         </button>
       </form>
+    </div>
+  );
+};
+
+
+/* ------------------------------------------------------------------- Profil */
+
+const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
+  <div className="flex gap-3 border-b border-border/50 py-2 last:border-0">
+    <span className="w-32 shrink-0 text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
+      {label}
+    </span>
+    <span className="min-w-0 flex-1 text-xs font-light">{children}</span>
+  </div>
+);
+
+export const ProfileView = ({ client }: { client: DemoClient }) => {
+  const p = client.profile;
+
+  return (
+    <div className="p-5">
+      <div>
+        <p className="font-medium">Profil · {client.name}</p>
+        <p className="text-xs font-light text-muted-foreground">
+          Was Sie im Erstgespräch aufgenommen haben - beim Termin sofort zur Hand.
+        </p>
+      </div>
+
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <div className="rounded-xl border border-border/60 p-4">
+          <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            Stammdaten
+          </p>
+          <div className="mt-2">
+            <Row label="Alter">{p.age} Jahre</Row>
+            <Row label="Geschlecht">{p.sex}</Row>
+            <Row label="Größe">{p.height}</Row>
+            <Row label="Gewicht">{p.weight}</Row>
+            <Row label="Anliegen">{p.goal}</Row>
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-border/60 p-4">
+          <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            Ernährungsrelevantes
+          </p>
+          <div className="mt-2">
+            <Row label="Energiebedarf">
+              ca. {kcal(p.energyKcal)} kcal / Tag
+              <span className="mt-0.5 block text-[10px] text-muted-foreground">{p.energyBasis}</span>
+            </Row>
+            <Row label="Vorerkrankungen">{p.conditions.join(", ")}</Row>
+            <Row label="Unverträglichkeiten">{p.intolerances.join(", ")}</Row>
+            <Row label="Medikation">{p.medication.join(", ")}</Row>
+          </div>
+        </div>
+      </div>
+
+      <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+        Termine
+      </p>
+      <div className="mt-2 space-y-2">
+        {client.appointments.map((a) => (
+          <div
+            key={a.date}
+            className={`flex items-start gap-3 rounded-xl border px-3 py-2.5 ${
+              a.planned ? "border-secondary/30 bg-secondary/5" : "border-border/60"
+            }`}
+          >
+            <CalendarDays
+              className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${
+                a.planned ? "text-secondary" : "text-muted-foreground"
+              }`}
+            />
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-medium">
+                {a.title}
+                {a.planned && (
+                  <span className="ml-2 rounded bg-secondary/15 px-1.5 py-0.5 text-[10px] font-medium text-secondary">
+                    geplant
+                  </span>
+                )}
+              </span>
+              <span className="block text-[11px] font-light text-muted-foreground">{a.note}</span>
+            </span>
+            <span className="shrink-0 text-[10px] text-muted-foreground">{a.date}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

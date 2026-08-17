@@ -28,6 +28,31 @@ export type DemoClient = {
   chat: ChatMessage[];
   /** Canned answers the demo client sends back, used in order. */
   chatReplies: string[];
+  profile: DemoProfile;
+  /** Newest first. "geplant" marks an appointment that has not happened yet. */
+  appointments: DemoAppointment[];
+};
+
+export type DemoProfile = {
+  age: number;
+  sex: string;
+  height: string;
+  weight: string;
+  goal: string;
+  /** Daily energy requirement in kcal - the plan builder compares against it. */
+  energyKcal: number;
+  /** How that number was arrived at, so it is not a magic figure. */
+  energyBasis: string;
+  conditions: string[];
+  intolerances: string[];
+  medication: string[];
+};
+
+export type DemoAppointment = {
+  date: string;
+  title: string;
+  note: string;
+  planned?: boolean;
 };
 
 export type ChatMessage = { from: "client" | "you"; text: string };
@@ -254,6 +279,22 @@ export const demoClients: DemoClient[] = [
       "Frühstück habe ich diese Woche jeden Tag geschafft 🙂",
       "Passt, ich melde mich, wenn etwas dazwischenkommt.",
     ],
+    profile: {
+      age: 34,
+      sex: "weiblich",
+      height: "168 cm",
+      weight: "74 kg",
+      goal: "Ernährung umstellen, mehr Energie im Alltag",
+      energyKcal: 2000,
+      energyBasis: "Grundumsatz 1.430 kcal, PAL 1,4 (überwiegend sitzend)",
+      conditions: ["Hashimoto-Thyreoiditis, gut eingestellt"],
+      intolerances: ["keine bekannt"],
+      medication: ["L-Thyroxin 50 µg"],
+    },
+    appointments: [
+      { date: "24.08.2026", title: "Zwischentermin", note: "Auswertung der Analysephase", planned: true },
+      { date: "09.08.2026", title: "Erstgespräch", note: "Anamnese, Ziele, Start 30-Tage-Programm" },
+    ],
   },
   {
     id: "markus",
@@ -319,6 +360,22 @@ export const demoClients: DemoClient[] = [
       "Kann ich den Shake auch durch Topfen ersetzen?",
       "Danke, probiere ich diese Woche aus.",
     ],
+    profile: {
+      age: 29,
+      sex: "männlich",
+      height: "182 cm",
+      weight: "78 kg",
+      goal: "Leistungsaufbau, Ernährung rund um vier Einheiten pro Woche",
+      energyKcal: 2900,
+      energyBasis: "Grundumsatz 1.820 kcal, PAL 1,6 (Training an vier Tagen)",
+      conditions: ["keine"],
+      intolerances: ["keine bekannt"],
+      medication: ["keine"],
+    },
+    appointments: [
+      { date: "27.08.2026", title: "Zwischentermin", note: "Timing rund um die Einheiten", planned: true },
+      { date: "13.08.2026", title: "Erstgespräch", note: "Trainingsplan gesichtet, Programm gestartet" },
+    ],
   },
   {
     id: "anna",
@@ -382,6 +439,22 @@ export const demoClients: DemoClient[] = [
       "Beim Einkaufen bin ich unsicher, was ich nehmen darf.",
       "Reisbrei jeden Morgen wird langsam fad 😅",
       "Okay, ich trage es gleich ein.",
+    ],
+    profile: {
+      age: 41,
+      sex: "weiblich",
+      height: "165 cm",
+      weight: "62 kg",
+      goal: "Beschwerden nach dem Essen abklären",
+      energyKcal: 1900,
+      energyBasis: "Grundumsatz 1.360 kcal, PAL 1,4 (überwiegend sitzend)",
+      conditions: ["Verdacht auf Reizdarmsyndrom", "Eisenmangel 2025, behandelt"],
+      intolerances: ["Laktose (H2-Atemtest positiv)", "Weizen in Abklärung"],
+      medication: ["keine"],
+    },
+    appointments: [
+      { date: "20.08.2026", title: "Zwischenkontrolle", note: "Symptomtagebuch besprechen", planned: true },
+      { date: "13.08.2026", title: "Erstgespräch", note: "Anamnese, Start der Karenzphase" },
     ],
   },
 ];
