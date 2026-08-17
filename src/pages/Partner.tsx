@@ -278,24 +278,27 @@ const Partner = () => {
     <div className="min-h-screen bg-background font-sans text-foreground antialiased">
       {/* Nav */}
       <header className="border-b border-border/70">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
-          <Link to="/">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-6 py-5">
+          <Link to="/" className="shrink-0">
             <Logo />
           </Link>
-          <Link
-            to="/demo"
-            onClick={() => phCapture("cta_click", { location: "header_demo" })}
-            className="hidden text-sm font-medium text-muted-foreground transition-colors hover:text-foreground sm:block"
-          >
-            Demo ansehen
-          </Link>
-          <a
-            href="#pilot"
-            onClick={() => phCapture("cta_click", { location: "header" })}
-            className="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Pilot-Partner:in werden
-          </a>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Link
+              to="/demo"
+              onClick={() => phCapture("cta_click", { location: "header_demo" })}
+              className="inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-medium text-foreground ring-1 ring-border transition-colors hover:bg-muted"
+            >
+              <PlayCircle className="h-4 w-4" /> Demo
+              <span className="hidden sm:inline">ansehen</span>
+            </Link>
+            <a
+              href="#pilot"
+              onClick={() => phCapture("cta_click", { location: "header" })}
+              className="hidden rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90 sm:block"
+            >
+              Pilot-Partner:in werden
+            </a>
+          </div>
         </div>
       </header>
 
@@ -580,7 +583,7 @@ const Partner = () => {
             Nutriful ist ein Werkzeug zur Begleitung von Ernährungsberatung und ersetzt keine
             medizinische Diagnose oder Behandlung.
           </p>
-          <div className="mt-4 flex gap-5 text-sm font-light text-muted-foreground">
+          <div className="mt-4 flex gap-x-5 gap-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5 [&_button]:py-1.5 font-light text-muted-foreground">
             <Link to="/impressum" className="hover:text-foreground">
               Impressum
             </Link>

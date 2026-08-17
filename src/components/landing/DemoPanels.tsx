@@ -60,7 +60,7 @@ const DayStrip = ({
                     aria-label={`Tag ${day}`}
                     aria-pressed={selected}
                     title={`Tag ${day}`}
-                    className={`h-6 flex-1 rounded transition-colors ${tone}`}
+                    className={`h-9 flex-1 rounded transition-colors sm:h-6 ${tone}`}
                   />
                 );
               })}
@@ -223,7 +223,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
               track("plan_goal", g.id);
             }}
             aria-pressed={g.id === goalId}
-            className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-full px-4 py-2 text-xs font-medium transition-colors ${
               g.id === goalId
                 ? "bg-secondary text-white"
                 : "text-muted-foreground ring-1 ring-border hover:bg-muted"
@@ -247,7 +247,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
               type="button"
               onClick={() => toggleDiet(f.id)}
               aria-pressed={active}
-              className={`rounded-full px-3 py-1 text-[11px] font-medium transition-colors ${
+              className={`rounded-full px-3 py-1.5 text-[11px] font-medium transition-colors ${
                 active
                   ? "bg-foreground text-background"
                   : "text-muted-foreground ring-1 ring-border hover:bg-muted"
@@ -285,7 +285,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                   track("plan_slot", m);
                 }}
                 aria-pressed={m === slot}
-                className={`flex-1 rounded-lg px-2 py-1.5 text-[11px] font-medium transition-colors ${
+                className={`flex-1 rounded-lg px-2 py-2 text-[11px] font-medium transition-colors ${
                   m === slot ? "bg-card shadow-sm" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
@@ -517,7 +517,7 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
             key={q}
             type="button"
             onClick={() => send(q)}
-            className="rounded-full px-3 py-1.5 text-[11px] font-medium text-muted-foreground ring-1 ring-border transition-colors hover:bg-muted"
+            className="rounded-full px-3 py-2 text-[11px] font-medium text-muted-foreground ring-1 ring-border transition-colors hover:bg-muted"
           >
             {q}
           </button>

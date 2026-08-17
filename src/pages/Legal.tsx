@@ -243,7 +243,7 @@ const Legal = ({ doc }: { doc: "impressum" | "datenschutz" | "agb" }) => {
 
         {doc === "datenschutz" && <CookieDeclaration />}
 
-        <div className="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-border/70 pt-8 text-sm">
+        <div className="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-border/70 pt-8 text-sm [&_a]:inline-block [&_a]:py-1.5 [&_button]:py-1.5">
           <Link to="/impressum" className="font-medium hover:text-primary">
             Impressum
           </Link>

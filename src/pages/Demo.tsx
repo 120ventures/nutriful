@@ -60,12 +60,12 @@ const Demo = () => {
           Interaktive Demo
         </p>
         <h1 className="mt-4 max-w-3xl font-display text-3xl font-normal leading-[1.15] tracking-tight text-balance sm:text-4xl">
-          Öffnen Sie eine Klient:in, als stünde der Termin in fünf Minuten an
+          Alle Klient:innen im Überblick
         </h1>
         <p className="mt-4 max-w-2xl font-light leading-relaxed text-muted-foreground text-pretty">
-          Lisa, Markus und Anna sind erfunden - alles andere können Sie wirklich bedienen: das
-          Briefing lesen, in einen einzelnen Tag springen, kurz nachfragen, einen Tagesplan
-          zusammenstellen. Ohne Login, ohne Anmeldung.
+          Nutriful unterstützt Sie bei der Kommunikation zwischen den Terminen, beim Erstellen der
+          Ernährungspläne und beim Verfolgen des Fortschritts Ihrer Klient:innen. Hier können Sie
+          alles ausprobieren - mit drei Beispiel-Klient:innen, ohne Login, ohne Anmeldung.
         </p>
 
         <div className="mt-10 overflow-hidden rounded-3xl border border-border/70 bg-card shadow-sm">
@@ -86,7 +86,7 @@ const Demo = () => {
                 type="button"
                 onClick={() => selectClient(c)}
                 aria-pressed={c.id === client.id}
-                className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`shrink-0 rounded-full px-4 py-2.5 text-xs font-medium transition-colors ${
                   c.id === client.id
                     ? "bg-secondary/15 text-secondary ring-1 ring-secondary/30"
                     : "text-muted-foreground ring-1 ring-border"
@@ -135,7 +135,7 @@ const Demo = () => {
                       track("tab", t.id);
                     }}
                     aria-pressed={tab === t.id}
-                    className={`-mb-px shrink-0 border-b-2 px-3 pb-2.5 text-xs font-medium transition-colors ${
+                    className={`-mb-px shrink-0 border-b-2 px-3 pb-3 pt-1 text-xs font-medium transition-colors ${
                       tab === t.id
                         ? "border-secondary text-foreground"
                         : "border-transparent text-muted-foreground hover:text-foreground"
@@ -184,7 +184,7 @@ const Demo = () => {
 
       <footer className="border-t border-border/70">
         <div className="mx-auto max-w-6xl px-6 py-10">
-          <div className="flex flex-wrap gap-5 text-sm font-light text-muted-foreground">
+          <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5 [&_button]:py-1.5 font-light text-muted-foreground">
             <Link to="/impressum" className="hover:text-foreground">
               Impressum
             </Link>

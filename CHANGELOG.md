@@ -6,6 +6,14 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Mobil bedienbar
+- Der Kopfbereich zeigt auf dem Handy jetzt einen sichtbaren "Demo"-Button; der lange Pilot-Button, der dort mit dem Logo kollidierte, erscheint erst ab Tablet-Breite
+- Die Tage der Programmleiste waren auf dem Handy 8x24 Pixel groß und damit kaum zu treffen - sie sind jetzt deutlich höher
+- Klient:innen-Umschalter, Tabs, Mahlzeiten- und Filter-Chips sowie die Links im Seitenfuß haben komfortable Berührungsflächen bekommen
+
+### Demo-Seite: klarerer Einstiegstext
+- Überschrift und Text sagen jetzt, was Nutriful tut - Kommunikation, Planerstellung, Fortschritt - statt eine Terminsituation zu beschreiben
+
 ### Demo prominenter auf der Startseite
 - Die Demo hat jetzt einen eigenen, farblich abgesetzten Abschnitt mit Überschrift statt als Anhängsel unter "So funktioniert's" zu stehen
 - Der zweite Button im Hero führt direkt zur Demo ("Demo ausprobieren") statt nur weiter nach unten zu scrollen

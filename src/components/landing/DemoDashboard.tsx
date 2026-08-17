@@ -52,7 +52,7 @@ const DemoDashboard = () => {
               type="button"
               onClick={() => selectClient(c)}
               aria-pressed={c.id === client.id}
-              className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+              className={`shrink-0 rounded-full px-4 py-2.5 text-xs font-medium transition-colors ${
                 c.id === client.id
                   ? "bg-secondary/15 text-secondary ring-1 ring-secondary/30"
                   : "text-muted-foreground ring-1 ring-border"
@@ -101,7 +101,7 @@ const DemoDashboard = () => {
                     track("tab", t.id);
                   }}
                   aria-pressed={tab === t.id}
-                  className={`-mb-px border-b-2 px-3 pb-2.5 text-xs font-medium transition-colors ${
+                  className={`-mb-px border-b-2 px-3 pb-3 pt-1 text-xs font-medium transition-colors ${
                     tab === t.id
                       ? "border-secondary text-foreground"
                       : "border-transparent text-muted-foreground hover:text-foreground"
