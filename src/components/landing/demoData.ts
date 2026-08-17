@@ -17,8 +17,8 @@ export type DemoClient = {
   id: string;
   name: string;
   program: string;
-  /** Sidebar subtitle, e.g. "Ernährungsumstellung · Woche 2". */
-  subtitle: string;
+  /** Counselling focus, e.g. "Ernährungsumstellung" - the day count is derived. */
+  focus: string;
   totalDays: number;
   /** Today in the program - days beyond this are not tracked yet. */
   currentDay: number;
@@ -150,7 +150,7 @@ export const demoClients: DemoClient[] = [
     id: "lisa",
     name: "Lisa M.",
     program: "30-Tage-Programm",
-    subtitle: "Ernährungsumstellung · Woche 2",
+    focus: "Ernährungsumstellung",
     totalDays: 30,
     currentDay: 9,
     phases: [
@@ -232,7 +232,7 @@ export const demoClients: DemoClient[] = [
     id: "markus",
     name: "Markus T.",
     program: "30-Tage-Programm",
-    subtitle: "Sporternährung · Woche 1",
+    focus: "Sporternährung",
     totalDays: 30,
     currentDay: 5,
     phases: [
@@ -297,7 +297,7 @@ export const demoClients: DemoClient[] = [
     id: "anna",
     name: "Anna K.",
     program: "21-Tage-Programm",
-    subtitle: "Intoleranz-Abklärung · Tag 5",
+    focus: "Intoleranz-Abklärung",
     totalDays: 21,
     currentDay: 5,
     phases: [

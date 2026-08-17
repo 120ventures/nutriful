@@ -82,7 +82,9 @@ const DemoDashboard = () => {
                   }`}
                 >
                   <p className="text-sm font-medium">{c.name}</p>
-                  <p className="text-xs font-light text-muted-foreground">{c.subtitle}</p>
+                  <p className="text-xs font-light text-muted-foreground">
+                    {c.focus} · Tag {c.currentDay} von {c.totalDays}
+                  </p>
                 </button>
               ))}
             </div>

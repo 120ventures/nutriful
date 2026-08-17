@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Klient:innen-Liste zählt Tage
+- In der Seitenleiste steht jetzt bei allen der Programmtag statt einer Mischung aus Wochen und Tagen: "Ernährungsumstellung · Tag 9 von 30"
+- Der Tag wird aus dem Verlauf abgeleitet, kann also nicht mehr von der Detailansicht abweichen
+
 ### Plan-Baukasten nach Mahlzeit und Zutat
 - Die Auswahl beginnt jetzt bei der Mahlzeit: Frühstück, Mittag, Abend und Snack als Umschalter, darunter nur die Rezepte dieser Mahlzeit
 - Suchfeld über den Rezepten findet nach Zutat statt nach Rezeptnamen - "Linsen" führt zum Linsensalat, auch wenn das Wort im Titel nicht auffällt
