@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Bild zwischen den Terminen
+- Neuer Abschnitt über die volle Breite zwischen Problem und Ablauf: "Zwischen zwei Terminen lebt Ihre Klient:in weiter"
+- Bildnachweis im Impressum ergänzt (iStock.com/Dimensions)
+
 ### Value Proposition deutlicher
 - Der Hero nennt jetzt konkret, worum es geht - Kommunikation, Ernährungspläne und Fortschritt an einem Ort statt in WhatsApp, E-Mails und auf Zetteln - und darunter stehen drei Belege: spart Vorbereitung, keine Zettelwirtschaft, alles einheitlich dokumentiert
 - Neuer Abschnitt direkt unter dem Hero: "Drei Dinge, die Nutriful für Sie übernimmt" mit Kommunikation, Ernährungsplänen und Fortschritt

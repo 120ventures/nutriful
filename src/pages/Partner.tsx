@@ -409,6 +409,26 @@ const Partner = () => {
         </div>
       </section>
 
+      {/* Full-bleed image */}
+      <section className="relative h-[52svh] min-h-[340px] w-full overflow-hidden">
+        <img
+          src="/hero-alltag.jpg"
+          alt="Junge Frau isst lachend eine Mandarinenspalte"
+          className="absolute inset-0 h-full w-full object-cover object-[68%_center]"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent" />
+        <div className="relative z-10 mx-auto flex h-full max-w-5xl flex-col justify-center px-6">
+          <h2 className="max-w-xl font-display text-3xl font-normal leading-[1.1] tracking-tight text-white text-balance sm:text-4xl">
+            Zwischen zwei Terminen lebt Ihre Klient:in weiter
+          </h2>
+          <p className="mt-5 max-w-md text-base font-light leading-relaxed text-white/90 text-pretty">
+            Jede Mahlzeit, jede Frage, jeder Ausrutscher passiert im Alltag - nicht in Ihrer Praxis.
+            Nutriful holt genau das zu Ihnen, ohne dass Sie hinterhertelefonieren müssen.
+          </p>
+        </div>
+      </section>
+
       {/* How it works */}
       <section id="so-funktionierts" className="mx-auto max-w-5xl scroll-mt-8 px-6 py-16 sm:py-20">
         <h2 className="font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
