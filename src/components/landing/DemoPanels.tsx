@@ -2,11 +2,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { AlertTriangle, Check, MessageCircle, Plus, Send, X } from "lucide-react";
 import { track } from "@/lib/demoTracking";
 import {
+  dietFilters,
   mealSlots,
   planGoals,
   quickReplies,
   type ChatMessage,
   type DemoClient,
+  type Diet,
   type MealSlot,
   type PlanBlock,
 } from "./demoData";
@@ -153,10 +155,22 @@ export const HistoryView = ({
 
 export const PlanView = ({ client }: { client: DemoClient }) => {
   const [goalId, setGoalId] = useState(planGoals[0].id);
+  const [diets, setDiets] = useState<Diet[]>([]);
   const [plan, setPlan] = useState<PlanBlock[]>([]);
   const [assigned, setAssigned] = useState(false);
 
   const goal = planGoals.find((g) => g.id === goalId) ?? planGoals[0];
+
+  // A block has to satisfy every active filter, so combinations like
+  // vegetarisch + laktosefrei narrow the list instead of widening it.
+  const blocks = goal.blocks.filter((b) => diets.every((d) => b.diets.includes(d)));
+
+  const toggleDiet = (diet: Diet) => {
+    setDiets((prev) =>
+      prev.includes(diet) ? prev.filter((d) => d !== diet) : [...prev, diet],
+    );
+    track("plan_diet", diet);
+  };
 
   const addBlock = (block: PlanBlock) => {
     setAssigned(false);
@@ -187,6 +201,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
             type="button"
             onClick={() => {
               setGoalId(g.id);
+              setDiets([]);
               setPlan([]);
               setAssigned(false);
               track("plan_goal", g.id);
@@ -204,13 +219,57 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
       </div>
       <p className="mt-2 text-xs font-light text-muted-foreground">{goal.hint}</p>
 
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+          Ernährungsform
+        </span>
+        {dietFilters.map((f) => {
+          const active = diets.includes(f.id);
+          return (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => toggleDiet(f.id)}
+              aria-pressed={active}
+              className={`rounded-full px-3 py-1 text-[11px] font-medium transition-colors ${
+                active
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground ring-1 ring-border hover:bg-muted"
+              }`}
+            >
+              {f.label}
+            </button>
+          );
+        })}
+        {diets.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setDiets([])}
+            className="text-[11px] font-medium text-muted-foreground underline hover:text-foreground"
+          >
+            zurücksetzen
+          </button>
+        )}
+      </div>
+      {diets.includes("halal") && (
+        <p className="mt-2 text-[11px] font-light text-muted-foreground">
+          Fleisch- und Geflügelbausteine setzen halal-zertifizierte Ware voraus.
+        </p>
+      )}
+
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
           <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
             Bausteine
           </p>
           <div className="mt-2 space-y-1.5">
-            {goal.blocks.map((b) => {
+            {blocks.length === 0 && (
+              <p className="rounded-xl border border-dashed border-border px-3 py-4 text-center text-xs font-light text-muted-foreground">
+                Für diese Kombination haben wir hier noch keinen Baustein - im Pilot legen Sie
+                eigene an.
+              </p>
+            )}
+            {blocks.map((b) => {
               const used = plan.some((p) => p.id === b.id);
               return (
                 <button

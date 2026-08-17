@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Ernährungsformen im Plan-Baukasten
+- Neue Filterzeile über den Bausteinen: vegetarisch, vegan, laktosefrei und halal, beliebig kombinierbar
+- Der Katalog wurde um pflanzliche Bausteine ergänzt, damit jede Kombination in jedem Beratungsziel noch Frühstück, Mittag, Abend und Snack anbietet
+- Bei aktivem Halal-Filter steht dabei, dass Fleisch- und Geflügelbausteine halal-zertifizierte Ware voraussetzen
+
 ### Own demo page at /demo
 - Full interactive demo on its own page: switch between three fictional clients and work through four tabs
 - Termin-Briefing opens on arrival: tracked days, number of entries, flagged moments and the open question from the chat - everything computed from that client's actual tracked days, and each flag jumps straight into the day it came from

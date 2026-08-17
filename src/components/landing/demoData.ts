@@ -43,9 +43,31 @@ export type MealSlot = "Frühstück" | "Mittag" | "Abend" | "Snack";
 
 export const mealSlots: MealSlot[] = ["Frühstück", "Mittag", "Abend", "Snack"];
 
-export type PlanBlock = { id: string; slot: MealSlot; icon: string; text: string };
+export type Diet = "vegetarisch" | "vegan" | "halal" | "laktosefrei";
+
+/** Filters offered above the building blocks. Vegan implies vegetarisch. */
+export const dietFilters: { id: Diet; label: string }[] = [
+  { id: "vegetarisch", label: "Vegetarisch" },
+  { id: "vegan", label: "Vegan" },
+  { id: "laktosefrei", label: "Laktosefrei" },
+  { id: "halal", label: "Halal" },
+];
+
+export type PlanBlock = {
+  id: string;
+  slot: MealSlot;
+  icon: string;
+  text: string;
+  /** Every diet this block is suitable for - a block matches all active filters. */
+  diets: Diet[];
+};
 
 export type PlanGoal = { id: string; label: string; hint: string; blocks: PlanBlock[] };
+
+const ALL: Diet[] = ["vegetarisch", "vegan", "laktosefrei", "halal"];
+const VEGGIE_LF: Diet[] = ["vegetarisch", "laktosefrei", "halal"];
+const VEGGIE_DAIRY: Diet[] = ["vegetarisch", "halal"];
+const MEAT: Diet[] = ["laktosefrei", "halal"];
 
 /** Building blocks a practitioner picks from when assembling a plan. */
 export const planGoals: PlanGoal[] = [
@@ -54,14 +76,17 @@ export const planGoals: PlanGoal[] = [
     label: "Ernährungsumstellung",
     hint: "Ausgewogen, alltagstauglich, ohne Verbote",
     blocks: [
-      { id: "u1", slot: "Frühstück", icon: "🥣", text: "Porridge mit Beeren" },
-      { id: "u2", slot: "Frühstück", icon: "🍳", text: "Rührei mit Tomaten" },
-      { id: "u3", slot: "Mittag", icon: "🍚", text: "Reis mit Hühnchen und Gemüse" },
-      { id: "u4", slot: "Mittag", icon: "🥗", text: "Großer Salat mit Ei" },
-      { id: "u5", slot: "Abend", icon: "🐟", text: "Fisch mit Kartoffeln" },
-      { id: "u6", slot: "Abend", icon: "🍲", text: "Gemüseeintopf" },
-      { id: "u7", slot: "Snack", icon: "🍎", text: "Apfel mit Nüssen" },
-      { id: "u8", slot: "Snack", icon: "🥕", text: "Gemüsesticks mit Hummus" },
+      { id: "u1", slot: "Frühstück", icon: "🥣", text: "Porridge mit Beeren", diets: VEGGIE_DAIRY },
+      { id: "u10", slot: "Frühstück", icon: "🌾", text: "Haferdrink-Porridge mit Apfel", diets: ALL },
+      { id: "u2", slot: "Frühstück", icon: "🍳", text: "Rührei mit Tomaten", diets: VEGGIE_LF },
+      { id: "u9", slot: "Frühstück", icon: "🥓", text: "Vollkornbrot mit Schinken", diets: [] },
+      { id: "u3", slot: "Mittag", icon: "🍚", text: "Reis mit Hühnchen und Gemüse", diets: MEAT },
+      { id: "u4", slot: "Mittag", icon: "🥗", text: "Großer Salat mit Ei", diets: VEGGIE_LF },
+      { id: "u11", slot: "Mittag", icon: "🫘", text: "Linsensalat mit Ofengemüse", diets: ALL },
+      { id: "u5", slot: "Abend", icon: "🐟", text: "Fisch mit Kartoffeln", diets: MEAT },
+      { id: "u6", slot: "Abend", icon: "🍲", text: "Gemüseeintopf", diets: ALL },
+      { id: "u7", slot: "Snack", icon: "🍎", text: "Apfel mit Nüssen", diets: ALL },
+      { id: "u8", slot: "Snack", icon: "🥕", text: "Gemüsesticks mit Hummus", diets: ALL },
     ],
   },
   {
@@ -69,14 +94,16 @@ export const planGoals: PlanGoal[] = [
     label: "Gewichtsmanagement",
     hint: "Sättigend bei moderater Energiedichte",
     blocks: [
-      { id: "g1", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkornbrot" },
-      { id: "g2", slot: "Frühstück", icon: "🥛", text: "Topfen mit Beeren" },
-      { id: "g3", slot: "Mittag", icon: "🥗", text: "Salat mit Hühnerbrust" },
-      { id: "g4", slot: "Mittag", icon: "🍲", text: "Gemüsesuppe mit Linsen" },
-      { id: "g5", slot: "Abend", icon: "🐟", text: "Lachs mit Brokkoli" },
-      { id: "g6", slot: "Abend", icon: "🥒", text: "Bunter Teller mit Ei" },
-      { id: "g7", slot: "Snack", icon: "🥜", text: "Handvoll Mandeln" },
-      { id: "g8", slot: "Snack", icon: "🍓", text: "Beeren" },
+      { id: "g1", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkornbrot", diets: VEGGIE_LF },
+      { id: "g2", slot: "Frühstück", icon: "🥛", text: "Topfen mit Beeren", diets: VEGGIE_DAIRY },
+      { id: "g9", slot: "Frühstück", icon: "🥣", text: "Haferbrei mit Zimt", diets: ALL },
+      { id: "g3", slot: "Mittag", icon: "🥗", text: "Salat mit Hühnerbrust", diets: MEAT },
+      { id: "g4", slot: "Mittag", icon: "🍲", text: "Gemüsesuppe mit Linsen", diets: ALL },
+      { id: "g5", slot: "Abend", icon: "🐟", text: "Lachs mit Brokkoli", diets: MEAT },
+      { id: "g6", slot: "Abend", icon: "🥒", text: "Bunter Teller mit Ei", diets: VEGGIE_LF },
+      { id: "g10", slot: "Abend", icon: "🍠", text: "Ofengemüse mit Kichererbsen", diets: ALL },
+      { id: "g7", slot: "Snack", icon: "🥜", text: "Handvoll Mandeln", diets: ALL },
+      { id: "g8", slot: "Snack", icon: "🍓", text: "Beeren", diets: ALL },
     ],
   },
   {
@@ -84,14 +111,18 @@ export const planGoals: PlanGoal[] = [
     label: "Sporternährung",
     hint: "Kohlenhydrate und Eiweiß um die Einheit herum",
     blocks: [
-      { id: "s1", slot: "Frühstück", icon: "🥣", text: "Haferflocken mit Whey" },
-      { id: "s2", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkorntoast" },
-      { id: "s3", slot: "Mittag", icon: "🍗", text: "Hühnchen, Reis, Brokkoli" },
-      { id: "s4", slot: "Mittag", icon: "🍝", text: "Pasta mit Putenragout" },
-      { id: "s5", slot: "Abend", icon: "🐟", text: "Lachs mit Süßkartoffel" },
-      { id: "s6", slot: "Abend", icon: "🍚", text: "Reis mit Rindfleisch" },
-      { id: "s7", slot: "Snack", icon: "🥤", text: "Shake nach der Einheit" },
-      { id: "s8", slot: "Snack", icon: "🍌", text: "Banane mit Topfen" },
+      { id: "s1", slot: "Frühstück", icon: "🥣", text: "Haferflocken mit Whey", diets: VEGGIE_DAIRY },
+      { id: "s2", slot: "Frühstück", icon: "🍳", text: "Eier mit Vollkorntoast", diets: VEGGIE_LF },
+      { id: "s9", slot: "Frühstück", icon: "🌱", text: "Sojajoghurt mit Haferflocken", diets: ALL },
+      { id: "s3", slot: "Mittag", icon: "🍗", text: "Hühnchen, Reis, Brokkoli", diets: MEAT },
+      { id: "s4", slot: "Mittag", icon: "🍝", text: "Pasta mit Putenragout", diets: MEAT },
+      { id: "s10", slot: "Mittag", icon: "🫘", text: "Linsen-Bolognese mit Vollkornpasta", diets: ALL },
+      { id: "s5", slot: "Abend", icon: "🐟", text: "Lachs mit Süßkartoffel", diets: MEAT },
+      { id: "s6", slot: "Abend", icon: "🍚", text: "Reis mit Rindfleisch", diets: MEAT },
+      { id: "s11", slot: "Abend", icon: "🍜", text: "Tofu-Pfanne mit Reis", diets: ALL },
+      { id: "s7", slot: "Snack", icon: "🥤", text: "Shake nach der Einheit", diets: VEGGIE_DAIRY },
+      { id: "s8", slot: "Snack", icon: "🍌", text: "Banane mit Topfen", diets: VEGGIE_DAIRY },
+      { id: "s12", slot: "Snack", icon: "🥜", text: "Erdnussbutter-Brot", diets: ALL },
     ],
   },
   {
@@ -99,14 +130,15 @@ export const planGoals: PlanGoal[] = [
     label: "Intoleranz-Karenz",
     hint: "Verträglich in der Karenzphase, gut dokumentierbar",
     blocks: [
-      { id: "i1", slot: "Frühstück", icon: "🍚", text: "Reisbrei mit Banane" },
-      { id: "i2", slot: "Frühstück", icon: "🥣", text: "Hirsebrei" },
-      { id: "i3", slot: "Mittag", icon: "🍗", text: "Hühnchen mit Reis" },
-      { id: "i4", slot: "Mittag", icon: "🐟", text: "Fisch mit Kartoffeln" },
-      { id: "i5", slot: "Abend", icon: "🍲", text: "Gemüseeintopf" },
-      { id: "i6", slot: "Abend", icon: "🥕", text: "Gemüsepfanne" },
-      { id: "i7", slot: "Snack", icon: "🍌", text: "Banane" },
-      { id: "i8", slot: "Snack", icon: "🍐", text: "Birne" },
+      { id: "i1", slot: "Frühstück", icon: "🍚", text: "Reisbrei mit Banane", diets: ALL },
+      { id: "i2", slot: "Frühstück", icon: "🥣", text: "Hirsebrei", diets: ALL },
+      { id: "i3", slot: "Mittag", icon: "🍗", text: "Hühnchen mit Reis", diets: MEAT },
+      { id: "i9", slot: "Mittag", icon: "🥔", text: "Kartoffel-Gemüse-Pfanne", diets: ALL },
+      { id: "i4", slot: "Abend", icon: "🐟", text: "Fisch mit Kartoffeln", diets: MEAT },
+      { id: "i5", slot: "Abend", icon: "🍲", text: "Gemüseeintopf", diets: ALL },
+      { id: "i6", slot: "Abend", icon: "🥕", text: "Gemüsepfanne", diets: ALL },
+      { id: "i7", slot: "Snack", icon: "🍌", text: "Banane", diets: ALL },
+      { id: "i8", slot: "Snack", icon: "🍐", text: "Birne", diets: ALL },
     ],
   },
 ];
