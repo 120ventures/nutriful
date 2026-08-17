@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "@/components/landing/Logo";
 import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink";
+import CookieDeclaration from "@/components/landing/CookieDeclaration";
 import { ArrowLeft } from "lucide-react";
 
 type Section = { h: string; p?: string[]; list?: string[] };
@@ -103,6 +104,7 @@ const docs: Record<string, Doc> = {
           "Supabase (Supabase Inc.) - Datenbank und Backend zur Speicherung deiner Kontaktanfrage.",
           "Netlify - Hosting der Website.",
           "PostHog (PostHog Inc., EU-Hosting in Frankfurt am Main) - anonyme Produkt- und Nutzungsanalyse (Reichweite, Klickverhalten), um die Website zu verbessern. Wird nur nach deiner ausdrücklichen Einwilligung geladen; ohne Einwilligung werden keine Analyse-Cookies gesetzt. Die Daten werden innerhalb der EU verarbeitet.",
+          "Cookiebot (Usercentrics A/S, Dänemark) - Einwilligungsverwaltung. Cookiebot zeigt den Cookie-Hinweis, dokumentiert deine Entscheidung und speichert dazu eine anonyme Kennung sowie deine gekürzte IP-Adresse. Diese Verarbeitung ist zur Erfüllung unserer Nachweispflicht erforderlich und findet innerhalb der EU statt.",
         ],
         p: [
           "Mit allen Dienstleistern bestehen bzw. werden Auftragsverarbeitungsverträge gemäß Art. 28 DSGVO geschlossen. Bei Übermittlung in Drittländer werden geeignete Garantien (z. B. EU-Standardvertragsklauseln) eingesetzt.",
@@ -111,7 +113,7 @@ const docs: Record<string, Doc> = {
       {
         h: "5. Cookies & Einwilligung",
         p: [
-          "Technisch notwendige Speicherung (z. B. deine Cookie-Entscheidung) nutzen wir immer. Analyse-Cookies von PostHog setzen wir ausschließlich mit deiner ausdrücklichen Einwilligung, die du über den Cookie-Hinweis erteilst oder ablehnst und jederzeit über „Cookie-Einstellungen“ im Seitenfuß widerrufen kannst. Marketing-Cookies setzen wir keine.",
+          "Technisch notwendige Speicherung (z. B. deine Cookie-Entscheidung) nutzen wir immer. Analyse-Cookies von PostHog setzen wir ausschließlich mit deiner ausdrücklichen Einwilligung. Den Cookie-Hinweis stellt Cookiebot bereit; deine Entscheidung kannst du dort jederzeit über „Cookie-Einstellungen“ im Seitenfuß ändern oder widerrufen. Marketing-Cookies setzen wir keine.",
         ],
       },
       {
@@ -238,6 +240,8 @@ const Legal = ({ doc }: { doc: "impressum" | "datenschutz" | "agb" }) => {
             </section>
           ))}
         </div>
+
+        {doc === "datenschutz" && <CookieDeclaration />}
 
         <div className="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-border/70 pt-8 text-sm">
           <Link to="/impressum" className="font-medium hover:text-primary">

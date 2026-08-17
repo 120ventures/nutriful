@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CONSENT_REOPEN_EVENT, getStoredConsent, storeConsent } from "@/lib/consent";
+import { cookiebotEnabled } from "@/lib/cookiebot";
 import { phOptIn, phOptOut, POSTHOG_KEY } from "@/lib/posthog";
 
 /**
@@ -33,6 +34,8 @@ const ConsentBanner = () => {
   useEffect(() => {
     // Without a PostHog key there is nothing to consent to - no banner.
     if (!POSTHOG_KEY) return;
+    // Cookiebot runs the dialog and drives PostHog when it is configured.
+    if (cookiebotEnabled) return;
     const choice = getStoredConsent();
     if (choice === "granted") {
       phOptIn();
@@ -44,7 +47,7 @@ const ConsentBanner = () => {
   useEffect(() => {
     // "Cookie-Einstellungen" in the footer brings the banner back so a choice
     // can be revised - including withdrawing a consent that was given earlier.
-    if (!POSTHOG_KEY) return;
+    if (!POSTHOG_KEY || cookiebotEnabled) return;
     const reopen = () => setVisible(true);
     window.addEventListener(CONSENT_REOPEN_EVENT, reopen);
     return () => window.removeEventListener(CONSENT_REOPEN_EVENT, reopen);

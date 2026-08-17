@@ -8,9 +8,14 @@ export const POSTHOG_HOST = "https://eu.i.posthog.com";
 
 let instance: PostHog | null = null;
 
+/** Local development must not show up in the production project. */
+const isLocalhost = () =>
+  typeof window !== "undefined" &&
+  ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
+
 /** Lazy-load PostHog + start capturing. Called only when consent is granted. */
 export async function phOptIn() {
-  if (typeof window === "undefined" || !POSTHOG_KEY) return;
+  if (typeof window === "undefined" || !POSTHOG_KEY || isLocalhost()) return;
   if (instance) {
     instance.opt_in_capturing();
     return;

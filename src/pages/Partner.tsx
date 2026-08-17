@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Logo from "@/components/landing/Logo";
 import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink";
+import DemoDashboard from "@/components/landing/DemoDashboard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { insertSignup } from "@/lib/signups";
 import { phCapture } from "@/lib/posthog";
+import { useSectionView } from "@/hooks/use-section-view";
 import {
   MessageCircle,
   ClipboardList,
@@ -158,144 +160,19 @@ const GapVisual = () => (
   </div>
 );
 
-const mockEntries = [
-  { time: "08:10", icon: "🥣", text: "Frühstück: Porridge mit Beeren", tag: "Foto", tone: "" },
-  {
-    time: "15:20",
-    icon: "⚠️",
-    text: "Notiz: Nachmittagstief, Heißhunger",
-    tag: "Tag 9",
-    tone: "warn",
-  },
-  { time: "19:45", icon: "🍲", text: "Abendessen: Reis mit Gemüse", tag: "Foto", tone: "" },
-];
-
-const DashboardMockup = () => (
-  <div className="mx-auto mt-12 max-w-3xl">
-    <div className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-sm">
-      {/* window bar */}
-      <div className="flex items-center gap-1.5 border-b border-border/70 bg-muted/50 px-5 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="ml-3 text-xs font-light text-muted-foreground">
-          nutriful für Praxen - Beispielansicht
-        </span>
-      </div>
-      <div className="grid sm:grid-cols-[1fr_1.6fr]">
-        {/* client list */}
-        <div className="hidden border-r border-border/70 p-5 sm:block">
-          <p className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Ihre Klient:innen
-          </p>
-          <div className="mt-3 space-y-2">
-            <div className="rounded-xl bg-secondary/10 px-3 py-2.5 ring-1 ring-secondary/30">
-              <p className="text-sm font-medium">Lisa M.</p>
-              <p className="text-xs font-light text-muted-foreground">
-                Ernährungsumstellung · Woche 2
-              </p>
-            </div>
-            <div className="rounded-xl px-3 py-2.5">
-              <p className="text-sm font-medium">Markus T.</p>
-              <p className="text-xs font-light text-muted-foreground">Sporternährung · Woche 1</p>
-            </div>
-            <div className="rounded-xl px-3 py-2.5">
-              <p className="text-sm font-medium">Anna K.</p>
-              <p className="text-xs font-light text-muted-foreground">
-                Intoleranz-Abklärung · Tag 5
-              </p>
-            </div>
-          </div>
-        </div>
-        {/* client detail */}
-        <div className="p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Lisa M.</p>
-              <p className="text-xs font-light text-muted-foreground">
-                30-Tage-Programm · Tag 9 von 30
-              </p>
-            </div>
-            <span className="rounded-full bg-secondary/15 px-3 py-1 text-xs font-medium text-secondary">
-              9/9 Tage getrackt
-            </span>
-          </div>
-          {/* 30-day strip, grouped by phase */}
-          <div className="mt-4 flex gap-2">
-            {[
-              { label: "Analyse", days: 7, offset: 0 },
-              { label: "Umstellung", days: 14, offset: 7 },
-              { label: "Alltag", days: 9, offset: 21 },
-            ].map((phase) => (
-              <div key={phase.label} style={{ flexGrow: phase.days }} className="min-w-0">
-                <div className="flex gap-[3px]">
-                  {Array.from({ length: phase.days }).map((_, i) => {
-                    const day = phase.offset + i + 1;
-                    const cls =
-                      day === 4
-                        ? "bg-primary/30"
-                        : day === 9
-                          ? "bg-secondary ring-1 ring-secondary"
-                          : day < 9
-                            ? "bg-secondary/30"
-                            : "bg-muted";
-                    return <div key={day} className={`h-6 flex-1 rounded ${cls}`} />;
-                  })}
-                </div>
-                <p className="mt-1 truncate text-center text-[10px] font-light text-muted-foreground">
-                  {phase.label}
-                </p>
-              </div>
-            ))}
-          </div>
-          {/* entries */}
-          <div className="mt-4 space-y-2">
-            {mockEntries.map((e) => (
-              <div
-                key={e.time}
-                className="flex items-center gap-3 rounded-xl border border-border/60 px-3 py-2"
-              >
-                <span className="text-base">{e.icon}</span>
-                <p className="flex-1 text-xs font-light">{e.text}</p>
-                <span
-                  className={`rounded-full px-2 py-0.5 text-[10px] ${
-                    e.tone === "warn"
-                      ? "bg-primary/15 text-primary"
-                      : "bg-muted text-muted-foreground"
-                  }`}
-                >
-                  {e.tag}
-                </span>
-              </div>
-            ))}
-          </div>
-          {/* chat */}
-          <div className="mt-4 rounded-xl bg-muted/60 p-3">
-            <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Chat
-            </p>
-            <p className="mt-1.5 rounded-lg rounded-bl-none bg-card px-3 py-2 text-xs font-light">
-              Zählt der Cappuccino am Nachmittag als Zwischenmahlzeit? 🤔
-            </p>
-            <p className="ml-8 mt-1.5 rounded-lg rounded-br-none bg-secondary/15 px-3 py-2 text-xs font-light">
-              Ja, trag ihn am besten als Snack ein - dann sehen wir das Muster. 👍
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p className="mt-3 text-center text-xs font-light text-muted-foreground">
-      Beispielansicht mit fiktiven Daten - das Interface entsteht gemeinsam mit unseren
-      Pilot-Partner:innen.
-    </p>
-  </div>
-);
-
 const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const started = useRef(false);
+
+  /** First keystroke in the form - the step between "saw it" and "sent it". */
+  const markStart = () => {
+    if (started.current) return;
+    started.current = true;
+    phCapture("form_start", { source: "partner-page" });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -340,7 +217,10 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
           type="text"
           placeholder="Ihr Name"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            markStart();
+            setName(e.target.value);
+          }}
           aria-label="Name"
           className="h-12 rounded-xl border-border bg-card text-base"
         />
@@ -349,7 +229,10 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
           inputMode="email"
           placeholder="ihre@praxis.at"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            markStart();
+            setEmail(e.target.value);
+          }}
           aria-label="Email"
           className="h-12 rounded-xl border-border bg-card text-base"
         />
@@ -370,6 +253,11 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
 };
 
 const Partner = () => {
+  const demoRef = useSectionView<HTMLElement>("demo");
+  const pricingRef = useSectionView<HTMLElement>("pricing");
+  const pilotRef = useSectionView<HTMLElement>("pilot");
+  const faqRef = useSectionView<HTMLElement>("faq");
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground antialiased">
       {/* Nav */}
@@ -380,6 +268,7 @@ const Partner = () => {
           </Link>
           <a
             href="#pilot"
+            onClick={() => phCapture("cta_click", { location: "header" })}
             className="rounded-full bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
           >
             Pilot-Partner:in werden
@@ -403,6 +292,7 @@ const Partner = () => {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#pilot"
+            onClick={() => phCapture("cta_click", { location: "hero" })}
             className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-medium tracking-wide text-primary-foreground transition-opacity hover:opacity-90"
           >
             Pilot-Partner:in werden <ArrowRight className="h-4 w-4" />
@@ -442,7 +332,11 @@ const Partner = () => {
       </section>
 
       {/* How it works */}
-      <section id="so-funktionierts" className="mx-auto max-w-5xl scroll-mt-8 px-6 py-16 sm:py-20">
+      <section
+        id="so-funktionierts"
+        ref={demoRef}
+        className="mx-auto max-w-5xl scroll-mt-8 px-6 py-16 sm:py-20"
+      >
         <h2 className="font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
           So funktioniert Nutriful in Ihrer Praxis
         </h2>
@@ -459,7 +353,7 @@ const Partner = () => {
             </div>
           ))}
         </div>
-        <DashboardMockup />
+        <DemoDashboard />
       </section>
 
       {/* Features */}
@@ -483,7 +377,7 @@ const Partner = () => {
       </section>
 
       {/* Pricing */}
-      <section className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
+      <section ref={pricingRef} className="mx-auto max-w-5xl px-6 py-16 sm:py-20">
         <h2 className="text-center font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
           Faire Preise für jede Praxisgröße
         </h2>
@@ -522,6 +416,7 @@ const Partner = () => {
             </ul>
             <a
               href="#pilot"
+              onClick={() => phCapture("cta_click", { location: "pricing_pilot" })}
               className="mt-8 inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Pilot-Partner:in werden
@@ -584,6 +479,7 @@ const Partner = () => {
             </ul>
             <a
               href="#pilot"
+              onClick={() => phCapture("cta_click", { location: "pricing_plus" })}
               className="mt-8 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-medium text-foreground ring-1 ring-border transition-colors hover:bg-muted"
             >
               Gespräch vereinbaren
@@ -593,7 +489,11 @@ const Partner = () => {
       </section>
 
       {/* Pilot CTA */}
-      <section id="pilot" className="mx-auto max-w-3xl scroll-mt-8 px-6 py-20 text-center sm:py-28">
+      <section
+        id="pilot"
+        ref={pilotRef}
+        className="mx-auto max-w-3xl scroll-mt-8 px-6 py-20 text-center sm:py-28"
+      >
         <Sprout className="mx-auto h-8 w-8 text-secondary" strokeWidth={1.8} />
         <h2 className="mt-5 font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
           Wir bauen Nutriful gemeinsam mit Ihnen
@@ -609,7 +509,7 @@ const Partner = () => {
       </section>
 
       {/* FAQ */}
-      <section className="bg-muted/40 py-16 sm:py-20">
+      <section ref={faqRef} className="bg-muted/40 py-16 sm:py-20">
         <div className="mx-auto max-w-3xl px-6">
           <h2 className="font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
             Häufige Fragen
