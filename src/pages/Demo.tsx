@@ -63,9 +63,10 @@ const Demo = () => {
           Alle Klient:innen im Überblick
         </h1>
         <p className="mt-4 max-w-2xl font-light leading-relaxed text-muted-foreground text-pretty">
-          Nutriful unterstützt Sie bei der Kommunikation zwischen den Terminen, beim Erstellen der
-          Ernährungspläne und beim Verfolgen des Fortschritts Ihrer Klient:innen. Hier können Sie
-          alles ausprobieren - mit drei Beispiel-Klient:innen, ohne Login, ohne Anmeldung.
+          Das hier ist eine Demo mit fiktiven Daten: drei Beispiel-Klient:innen zum Ausprobieren,
+          ohne Login und ohne Anmeldung. Sie sehen darin, wie Nutriful Sie bei der Kommunikation
+          zwischen den Terminen, beim Erstellen der Ernährungspläne und beim Verfolgen des
+          Fortschritts Ihrer Klient:innen unterstützt.
         </p>
 
         <div className="mt-10 overflow-hidden rounded-3xl border border-border/70 bg-card shadow-sm">
