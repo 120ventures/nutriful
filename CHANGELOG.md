@@ -32,6 +32,12 @@ Overview of user-facing changes.
 - In der Seitenleiste steht jetzt bei allen der Programmtag statt einer Mischung aus Wochen und Tagen: "Ernährungsumstellung · Tag 9 von 30"
 - Der Tag wird aus dem Verlauf abgeleitet, kann also nicht mehr von der Detailansicht abweichen
 
+### Termine und Protokolle im Verlauf
+- Die Programmleiste markiert Tage mit einem Termin mit einem Punkt
+- Liegt auf dem geöffneten Tag ein Termin, steht das Protokoll darüber: was besprochen und was vereinbart wurde
+- Unter den Einträgen listet "Termine & Protokolle" alle Termine; ein Klick springt in den jeweiligen Tag
+- Geplante Termine sind als solche gekennzeichnet und zeigen statt eines Protokolls, was ansteht
+
 ### Klient:innen-Profil und Termin-Historie
 - Neuer Tab "Profil": Alter, Geschlecht, Größe, Gewicht und Anliegen, dazu Energiebedarf mit Rechenbasis, Vorerkrankungen, Unverträglichkeiten und Medikation
 - Darunter die Termine - vergangene und der geplante nächste, jeweils mit Notiz

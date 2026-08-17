@@ -49,9 +49,13 @@ export type DemoProfile = {
 };
 
 export type DemoAppointment = {
+  /** Program day the appointment falls on, so it can sit in the timeline. */
+  day: number;
   date: string;
   title: string;
   note: string;
+  /** What was agreed - the record a practitioner has to keep anyway. */
+  protocol?: string[];
   planned?: boolean;
 };
 
@@ -292,8 +296,35 @@ export const demoClients: DemoClient[] = [
       medication: ["L-Thyroxin 50 µg"],
     },
     appointments: [
-      { date: "24.08.2026", title: "Zwischentermin", note: "Auswertung der Analysephase", planned: true },
-      { date: "09.08.2026", title: "Erstgespräch", note: "Anamnese, Ziele, Start 30-Tage-Programm" },
+      {
+        day: 16,
+        date: "24.08.2026",
+        title: "Zwischentermin",
+        note: "Auswertung der Umstellungsphase",
+        planned: true,
+      },
+      {
+        day: 8,
+        date: "16.08.2026",
+        title: "Telefonisches Check-in",
+        note: "Analysephase abgeschlossen",
+        protocol: [
+          "Analysephase abgeschlossen, 7 von 7 Tagen getrackt",
+          "Auffällig: unregelmäßiges Frühstück, Nachmittagstief an vier Tagen",
+          "Vereinbart: fixe Zwischenmahlzeit am Nachmittag, Frühstück nicht auslassen",
+        ],
+      },
+      {
+        day: 1,
+        date: "09.08.2026",
+        title: "Erstgespräch",
+        note: "Anamnese und Start des 30-Tage-Programms",
+        protocol: [
+          "Anamnese: Hashimoto-Thyreoiditis, gut eingestellt unter L-Thyroxin 50 µg",
+          "Ziel: mehr Energie im Alltag, weniger Heißhunger am Nachmittag",
+          "Vereinbart: sieben Tage Analysephase, alles erfassen ohne zu verändern",
+        ],
+      },
     ],
   },
   {
@@ -373,8 +404,24 @@ export const demoClients: DemoClient[] = [
       medication: ["keine"],
     },
     appointments: [
-      { date: "27.08.2026", title: "Zwischentermin", note: "Timing rund um die Einheiten", planned: true },
-      { date: "13.08.2026", title: "Erstgespräch", note: "Trainingsplan gesichtet, Programm gestartet" },
+      {
+        day: 15,
+        date: "27.08.2026",
+        title: "Zwischentermin",
+        note: "Timing rund um die Einheiten festlegen",
+        planned: true,
+      },
+      {
+        day: 1,
+        date: "13.08.2026",
+        title: "Erstgespräch",
+        note: "Trainingsplan gesichtet, Programm gestartet",
+        protocol: [
+          "Trainingsplan gesichtet: vier Einheiten pro Woche, davon zwei am Morgen",
+          "Ziel: Leistungsaufbau ohne unnötige Gewichtszunahme",
+          "Vereinbart: fünf Tage Bestandsaufnahme inklusive Trainingszeiten",
+        ],
+      },
     ],
   },
   {
@@ -453,8 +500,24 @@ export const demoClients: DemoClient[] = [
       medication: ["keine"],
     },
     appointments: [
-      { date: "20.08.2026", title: "Zwischenkontrolle", note: "Symptomtagebuch besprechen", planned: true },
-      { date: "13.08.2026", title: "Erstgespräch", note: "Anamnese, Start der Karenzphase" },
+      {
+        day: 8,
+        date: "20.08.2026",
+        title: "Zwischenkontrolle",
+        note: "Symptomtagebuch besprechen, Provokation planen",
+        planned: true,
+      },
+      {
+        day: 1,
+        date: "13.08.2026",
+        title: "Erstgespräch",
+        note: "Anamnese und Start der Karenzphase",
+        protocol: [
+          "Beschwerdebild: Blähungen und Völlegefühl, meist nachmittags",
+          "Vorbefunde: H2-Atemtest auf Laktose positiv, Eisenmangel 2025 behandelt",
+          "Vereinbart: 14 Tage Karenz, Symptome täglich dokumentieren",
+        ],
+      },
     ],
   },
 ];

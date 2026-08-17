@@ -49,6 +49,7 @@ const DayStrip = ({
                 const tracked = day <= client.currentDay;
                 const hasWarning = client.days[day]?.some((e) => e.tone === "warn");
                 const selected = day === selectedDay;
+                const appointment = client.appointments.some((a) => a.day === day);
 
                 const tone = selected
                   ? "bg-secondary ring-2 ring-secondary ring-offset-1 ring-offset-card"
@@ -69,8 +70,12 @@ const DayStrip = ({
                     aria-label={`Tag ${day}`}
                     aria-pressed={selected}
                     title={`Tag ${day}`}
-                    className={`h-9 flex-1 rounded transition-colors sm:h-6 ${tone}`}
-                  />
+                    className={`relative h-9 flex-1 rounded transition-colors sm:h-6 ${tone}`}
+                  >
+                    {appointment && (
+                      <span className="absolute left-1/2 top-1 h-1 w-1 -translate-x-1/2 rounded-full bg-foreground/60" />
+                    )}
+                  </button>
                 );
               })}
             </div>
@@ -97,6 +102,7 @@ export const HistoryView = ({
 }) => {
   const entries = client.days[selectedDay];
   const isFuture = selectedDay > client.currentDay;
+  const dayAppointment = client.appointments.find((a) => a.day === selectedDay);
 
   return (
     <div className="p-5">
@@ -113,6 +119,47 @@ export const HistoryView = ({
       </div>
 
       <DayStrip client={client} selectedDay={selectedDay} onSelect={onSelectDay} />
+
+      {dayAppointment && (
+        <div
+          className={`mt-4 rounded-xl border px-3 py-3 ${
+            dayAppointment.planned
+              ? "border-secondary/30 bg-secondary/5"
+              : "border-border/60 bg-muted/40"
+          }`}
+        >
+          <div className="flex items-start gap-2.5">
+            <CalendarDays className="mt-0.5 h-3.5 w-3.5 shrink-0 text-secondary" />
+            <div className="min-w-0 flex-1">
+              <p className="text-xs font-medium">
+                {dayAppointment.title}
+                <span className="ml-2 text-[10px] font-light text-muted-foreground">
+                  {dayAppointment.date}
+                </span>
+                {dayAppointment.planned && (
+                  <span className="ml-2 rounded bg-secondary/15 px-1.5 py-0.5 text-[10px] font-medium text-secondary">
+                    geplant
+                  </span>
+                )}
+              </p>
+              {dayAppointment.protocol ? (
+                <ul className="mt-1.5 space-y-1">
+                  {dayAppointment.protocol.map((line) => (
+                    <li key={line} className="flex gap-2 text-[11px] font-light">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-secondary" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-1 text-[11px] font-light text-muted-foreground">
+                  {dayAppointment.note}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="mt-4 space-y-2">
         {entries?.length ? (
@@ -144,6 +191,37 @@ export const HistoryView = ({
               : "An diesem Tag wurde nichts erfasst."}
           </div>
         )}
+      </div>
+
+      <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+        Termine & Protokolle
+      </p>
+      <div className="mt-2 space-y-1.5">
+        {client.appointments.map((a) => (
+          <button
+            key={a.date}
+            type="button"
+            onClick={() => {
+              onSelectDay(a.day);
+              track("appointment", `${client.id}:${a.day}`);
+            }}
+            aria-pressed={a.day === selectedDay}
+            className={`flex w-full items-center gap-2.5 rounded-xl border px-3 py-2 text-left transition-colors ${
+              a.day === selectedDay
+                ? "border-secondary/40 bg-secondary/10"
+                : "border-border/60 hover:bg-muted/60"
+            }`}
+          >
+            <CalendarDays className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-light">{a.title}</span>
+              <span className="block truncate text-[10px] text-muted-foreground">{a.note}</span>
+            </span>
+            <span className="shrink-0 text-[10px] text-muted-foreground">
+              {a.planned ? "geplant" : `Tag ${a.day}`}
+            </span>
+          </button>
+        ))}
       </div>
 
       {showChat && (
