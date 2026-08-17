@@ -60,12 +60,12 @@ const Demo = () => {
           Interaktive Demo
         </p>
         <h1 className="mt-4 max-w-3xl font-display text-3xl font-normal leading-[1.15] tracking-tight text-balance sm:text-4xl">
-          Probieren Sie Nutriful aus, als wäre es Ihre Praxis
+          Öffnen Sie eine Klient:in, als stünde der Termin in fünf Minuten an
         </h1>
         <p className="mt-4 max-w-2xl font-light leading-relaxed text-muted-foreground text-pretty">
-          Drei fiktive Klient:innen, echte Bedienung: Schreiben Sie ihnen, sehen Sie ihren Verlauf,
-          stellen Sie einen Tagesplan zusammen - und schauen Sie sich das Termin-Briefing an, mit dem
-          eine Beratung bei Nutriful beginnt. Nichts davon verlässt Ihren Browser.
+          Lisa, Markus und Anna sind erfunden - alles andere können Sie wirklich bedienen: das
+          Briefing lesen, in einen einzelnen Tag springen, kurz nachfragen, einen Tagesplan
+          zusammenstellen. Ohne Login, ohne Anmeldung.
         </p>
 
         <div className="mt-10 overflow-hidden rounded-3xl border border-border/70 bg-card shadow-sm">
@@ -163,12 +163,12 @@ const Demo = () => {
 
         <div className="mt-12 rounded-3xl border border-border/70 bg-card p-8 text-center sm:p-10">
           <h2 className="font-display text-2xl font-normal tracking-tight text-balance sm:text-3xl">
-            Das hier ist ein Entwurf - Ihrer entscheidet, was daraus wird
+            Das hier ist ein Entwurf. Sie entscheiden, was daraus wird.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl font-light leading-relaxed text-muted-foreground text-pretty">
-            Wir bauen Nutriful gerade mit einer kleinen Gruppe von Diätolog:innen und
-            Ernährungsberater:innen in Österreich. Im Pilot testen Sie kostenlos mit echten
-            Klient:innen und bestimmen mit, was als Nächstes entsteht.
+            Nutriful entsteht gerade mit einer kleinen Gruppe von Diätolog:innen und
+            Ernährungsberater:innen in Österreich. Im Pilot arbeiten Sie kostenlos mit echten
+            Klient:innen - und was Ihnen dabei fehlt, bauen wir als Nächstes.
           </p>
           <Link
             to="/#pilot"
