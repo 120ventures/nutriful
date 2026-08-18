@@ -136,7 +136,7 @@ export const HistoryView = ({
               <p className="text-xs font-medium">
                 {dayAppointment.title}
                 <span className="ml-2 text-[10px] font-light text-muted-foreground">
-                  {dayAppointment.date}
+                  {dayAppointment.date} · {dayAppointment.time}
                 </span>
                 {dayAppointment.planned && (
                   <span className="ml-2 rounded bg-secondary/15 px-1.5 py-0.5 text-[10px] font-medium text-secondary">
@@ -215,6 +215,9 @@ export const HistoryView = ({
             }`}
           >
             <CalendarDays className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+            <span className="w-11 shrink-0 text-[11px] font-medium text-muted-foreground">
+              {a.time}
+            </span>
             <span className="min-w-0 flex-1">
               <span className="block text-xs font-light">{a.title}</span>
               <span className="block truncate text-[10px] text-muted-foreground">{a.note}</span>
@@ -702,7 +705,11 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
 const useToday = () =>
   useMemo(() => {
     const schedule = demoClients
-      .flatMap((c) => c.appointments.filter((a) => a.time).map((a) => ({ client: c, appointment: a })))
+      .flatMap((c) =>
+        c.appointments
+          .filter((a) => a.day === c.currentDay)
+          .map((a) => ({ client: c, appointment: a })),
+      )
       .sort((a, b) => (a.appointment.time ?? "").localeCompare(b.appointment.time ?? ""));
 
     const waiting = demoClients.filter((c) => c.chat[c.chat.length - 1]?.from === "client");
@@ -926,7 +933,10 @@ export const ProfileView = ({ client }: { client: DemoClient }) => {
               </span>
               <span className="block text-[11px] font-light text-muted-foreground">{a.note}</span>
             </span>
-            <span className="shrink-0 text-[10px] text-muted-foreground">{a.date}</span>
+            <span className="shrink-0 text-right text-[10px] text-muted-foreground">
+              {a.date}
+              <span className="block">{a.time}</span>
+            </span>
           </div>
         ))}
       </div>

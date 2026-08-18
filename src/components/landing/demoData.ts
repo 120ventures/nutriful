@@ -54,8 +54,7 @@ export const DEMO_TODAY = "Montag, 17. August";
 export type DemoAppointment = {
   /** Program day the appointment falls on, so it can sit in the timeline. */
   day: number;
-  /** Set when the appointment is on the current day - drives the Heute view. */
-  time?: string;
+  time: string;
   date: string;
   title: string;
   note: string;
@@ -311,6 +310,7 @@ export const demoClients: DemoClient[] = [
       },
       {
         day: 8,
+        time: "16:15",
         date: "16.08.2026",
         title: "Telefonisches Check-in",
         note: "Analysephase abgeschlossen",
@@ -322,6 +322,7 @@ export const demoClients: DemoClient[] = [
       },
       {
         day: 1,
+        time: "10:00",
         date: "09.08.2026",
         title: "Erstgespräch",
         note: "Anamnese und Start des 30-Tage-Programms",
@@ -420,6 +421,7 @@ export const demoClients: DemoClient[] = [
       },
       {
         day: 1,
+        time: "17:30",
         date: "13.08.2026",
         title: "Erstgespräch",
         note: "Trainingsplan gesichtet, Programm gestartet",
@@ -518,6 +520,7 @@ export const demoClients: DemoClient[] = [
       },
       {
         day: 1,
+        time: "08:45",
         date: "13.08.2026",
         title: "Erstgespräch",
         note: "Anamnese und Start der Karenzphase",

@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Uhrzeiten bei den Terminen
+- Alle Termine zeigen jetzt ihre Uhrzeit - im Profil, in der Liste "Termine & Protokolle" und im Protokollkopf
+
 ### Bild im Kopfbereich
 - Der Hero ist zweispaltig: Text links, Foto rechts - auf dem Handy stapelt es, Text zuerst
 - Bildnachweis im Impressum ergänzt (iStock.com/djiledesign)
