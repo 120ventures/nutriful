@@ -10,19 +10,10 @@ import {
   X,
 } from "lucide-react";
 import { track } from "@/lib/demoTracking";
-import {
-  DEMO_TODAY,
-  demoClients,
-  dietFilters,
-  mealSlots,
-  planGoals,
-  quickReplies,
-  type ChatMessage,
-  type DemoClient,
-  type Diet,
-  type MealSlot,
-  type PlanBlock,
-} from "./demoData";
+import { useLang } from "@/i18n";
+import { copy } from "@/i18n/copy";
+import { demoContent } from "./demoContent";
+import type { ChatMessage, DemoClient, Diet, MealSlot, PlanBlock } from "./demoData";
 
 /* ------------------------------------------------------------------ Verlauf */
 
@@ -35,6 +26,7 @@ const DayStrip = ({
   selectedDay: number;
   onSelect: (day: number) => void;
 }) => {
+  const t = copy(useLang()).demo;
   let dayCursor = 0;
 
   return (
@@ -69,9 +61,9 @@ const DayStrip = ({
                       onSelect(day);
                       track("day", `${client.id}:${day}`);
                     }}
-                    aria-label={`Tag ${day}`}
+                    aria-label={t.dayLabel(day)}
                     aria-pressed={selected}
-                    title={`Tag ${day}`}
+                    title={t.dayLabel(day)}
                     className={`relative h-9 flex-1 rounded transition-colors sm:h-6 ${tone}`}
                   >
                     {appointment && (
@@ -102,6 +94,7 @@ export const HistoryView = ({
   onSelectDay: (day: number) => void;
   showChat?: boolean;
 }) => {
+  const t = copy(useLang()).demo;
   const entries = client.days[selectedDay];
   const isFuture = selectedDay > client.currentDay;
   const dayAppointment = client.appointments.find((a) => a.day === selectedDay);
@@ -112,11 +105,11 @@ export const HistoryView = ({
         <div>
           <p className="font-medium">{client.name}</p>
           <p className="text-xs font-light text-muted-foreground">
-            {client.program} · Tag {selectedDay} von {client.totalDays}
+            {client.program} · {t.history.day} {selectedDay} {t.history.of} {client.totalDays}
           </p>
         </div>
         <span className="shrink-0 rounded-full bg-secondary/15 px-3 py-1 text-xs font-medium text-secondary">
-          {client.currentDay}/{client.currentDay} Tage getrackt
+          {client.currentDay}/{client.currentDay} {t.history.tracked}
         </span>
       </div>
 
@@ -140,7 +133,7 @@ export const HistoryView = ({
                 </span>
                 {dayAppointment.planned && (
                   <span className="ml-2 rounded bg-secondary/15 px-1.5 py-0.5 text-[10px] font-medium text-secondary">
-                    geplant
+                    {t.profile.planned}
                   </span>
                 )}
               </p>
@@ -188,15 +181,13 @@ export const HistoryView = ({
           ))
         ) : (
           <div className="rounded-xl border border-dashed border-border px-3 py-6 text-center text-xs font-light text-muted-foreground">
-            {isFuture
-              ? `Tag ${selectedDay} liegt noch vor Ihrer Klient:in - hier erscheinen die Einträge, sobald getrackt wird.`
-              : "An diesem Tag wurde nichts erfasst."}
+            {isFuture ? t.history.future(selectedDay) : t.history.nothing}
           </div>
         )}
       </div>
 
       <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-        Termine & Protokolle
+        {t.history.appointments}
       </p>
       <div className="mt-2 space-y-1.5">
         {client.appointments.map((a) => (
@@ -223,7 +214,7 @@ export const HistoryView = ({
               <span className="block truncate text-[10px] text-muted-foreground">{a.note}</span>
             </span>
             <span className="shrink-0 text-[10px] text-muted-foreground">
-              {a.planned ? "geplant" : `Tag ${a.day}`}
+              {a.planned ? t.profile.planned : t.dayLabel(a.day)}
             </span>
           </button>
         ))}
@@ -232,7 +223,7 @@ export const HistoryView = ({
       {showChat && (
         <div className="mt-4 rounded-xl bg-muted/60 p-3">
           <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Chat
+            {t.history.chat}
           </p>
           {client.chat.map((m) => (
             <ChatBubble key={m.text} message={m} />
@@ -250,6 +241,9 @@ export const HistoryView = ({
 const kcal = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 export const PlanView = ({ client }: { client: DemoClient }) => {
+  const lang = useLang();
+  const t = copy(lang).demo;
+  const { planGoals, dietFilters, mealSlots, mealLabels } = demoContent(lang);
   const [goalId, setGoalId] = useState(planGoals[0].id);
   const [diets, setDiets] = useState<Diet[]>([]);
   const [slot, setSlot] = useState<MealSlot>(mealSlots[0]);
@@ -307,9 +301,11 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
   return (
     <div className="p-5">
       <div>
-        <p className="font-medium">Tagesplan für {client.name}</p>
+        <p className="font-medium">
+          {t.plan.title} {client.name}
+        </p>
         <p className="text-xs font-light text-muted-foreground">
-          Ziel und Mahlzeit wählen, Rezept antippen - der Plan entsteht rechts.
+          {t.plan.lead}
         </p>
       </div>
 
@@ -341,7 +337,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-          Ernährungsform
+          {t.plan.diet}
         </span>
         {dietFilters.map((f) => {
           const active = diets.includes(f.id);
@@ -367,13 +363,13 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
             onClick={() => setDiets([])}
             className="text-[11px] font-medium text-muted-foreground underline hover:text-foreground"
           >
-            zurücksetzen
+            {t.plan.reset}
           </button>
         )}
       </div>
       {diets.includes("halal") && (
         <p className="mt-2 text-[11px] font-light text-muted-foreground">
-          Fleisch- und Geflügelbausteine setzen halal-zertifizierte Ware voraus.
+          {t.plan.halal}
         </p>
       )}
 
@@ -403,15 +399,15 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Zutat oder Nährstoff, z. B. Eisen"
-              aria-label="Nach Zutat oder Nährstoff suchen"
+              placeholder={t.plan.search}
+              aria-label={t.plan.searchLabel}
               className="h-9 w-full rounded-xl border border-border bg-card pl-9 pr-8 text-xs font-light outline-none focus:border-secondary/60"
             />
             {query && (
               <button
                 type="button"
                 onClick={() => setQuery("")}
-                aria-label="Suche leeren"
+                aria-label={t.plan.clearSearch}
                 className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               >
                 <X className="h-3.5 w-3.5" />
@@ -422,9 +418,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
           <div className="mt-2 space-y-1.5">
             {blocks.length === 0 && (
               <p className="rounded-xl border border-dashed border-border px-3 py-4 text-center text-xs font-light text-muted-foreground">
-                {needle
-                  ? `Kein ${slot}-Rezept mit „${query.trim()}“.`
-                  : "Für diese Kombination haben wir hier noch kein Rezept - im Pilot legen Sie eigene an."}
+                {needle ? t.plan.noMatch(mealLabels[slot], query.trim()) : t.plan.noneLeft}
               </p>
             )}
             {blocks.map((b) => {
@@ -473,7 +467,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
 
           {needle && elsewhere.length > 0 && (
             <p className="mt-2 flex flex-wrap items-center gap-1.5 text-[11px] font-light text-muted-foreground">
-              Auch gefunden bei:
+              {t.plan.alsoIn}
               {elsewhere.map((e) => (
                 <button
                   key={e.slot}
@@ -481,7 +475,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                   onClick={() => setSlot(e.slot)}
                   className="font-medium text-foreground underline"
                 >
-                  {e.slot} ({e.count})
+                  {mealLabels[e.slot]} ({e.count})
                 </button>
               ))}
             </p>
@@ -491,11 +485,11 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
         <div>
           <div className="flex items-baseline justify-between gap-2">
             <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-              Plan · Tag 1
+              {t.plan.planTitle}
             </p>
             {plan.length > 0 && (
               <p className="text-[10px] font-medium text-foreground">
-                ~{kcal(dayKcal)} von {kcal(client.profile.energyKcal)} kcal
+                ~{kcal(dayKcal)} {t.plan.of} {kcal(client.profile.energyKcal)} kcal
               </p>
             )}
           </div>
@@ -524,7 +518,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                     className="flex w-full items-center justify-between gap-2 text-left"
                   >
                     <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                      {m}
+                      {mealLabels[m]}
                     </span>
                     <Plus
                       className={`h-3.5 w-3.5 shrink-0 ${
@@ -545,7 +539,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                           <button
                             type="button"
                             onClick={() => removeBlock(b.id)}
-                            aria-label={`${b.text} entfernen`}
+                            aria-label={t.plan.remove(b.text)}
                             className="shrink-0 text-muted-foreground hover:text-foreground"
                           >
                             <X className="h-3.5 w-3.5" />
@@ -560,7 +554,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                     onClick={open}
                     className="mt-1.5 w-full text-left text-xs font-light text-muted-foreground hover:text-foreground"
                   >
-                    {chosen.length ? "Weiteres Rezept hinzufügen" : "Rezept hinzufügen"}
+                    {chosen.length ? t.plan.addMore : t.plan.addFirst}
                   </button>
                 </div>
               );
@@ -570,7 +564,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
           {dayFocus.length > 0 && (
             <div className="mt-2">
               <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-                Schwerpunkte des Tages
+                {t.plan.focus}
               </p>
               <div className="mt-1.5 flex flex-wrap gap-1">
                 {dayFocus.map((h) => (
@@ -586,15 +580,14 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
           )}
 
           <p className="mt-2 text-[10px] font-light text-muted-foreground">
-            Richtwerte je Portion - im Pilot hinterlegen Sie Ihre eigenen Werte.
+            {t.plan.disclaimer}
           </p>
 
           {assigned ? (
             <div className="mt-3 flex items-start gap-2 rounded-xl border border-secondary/30 bg-secondary/10 px-3 py-2.5">
               <Check className="mt-0.5 h-4 w-4 shrink-0 text-secondary" strokeWidth={2.4} />
               <p className="text-xs font-light">
-                Plan an {client.name} gesendet - sie sieht ihn ab morgen in ihrer App und hakt jede
-                Mahlzeit direkt ab.
+                {t.plan.sent(client.name)}
               </p>
             </div>
           ) : (
@@ -607,9 +600,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
               }}
               className="mt-3 w-full rounded-full bg-primary px-4 py-2.5 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              {plan.length === 0
-                ? "Bausteine wählen, um fortzufahren"
-                : `Plan an ${client.name} senden (${plan.length})`}
+              {plan.length === 0 ? t.plan.ctaEmpty : t.plan.cta(client.name, plan.length)}
             </button>
           )}
         </div>
@@ -632,6 +623,9 @@ const ChatBubble = ({ message }: { message: ChatMessage }) =>
   );
 
 export const ChatView = ({ client }: { client: DemoClient }) => {
+  const lang = useLang();
+  const t = copy(lang).demo;
+  const { quickReplies } = demoContent(lang);
   const [messages, setMessages] = useState<ChatMessage[]>(client.chat);
   const [draft, setDraft] = useState("");
   const [typing, setTyping] = useState(false);
@@ -671,10 +665,11 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
   return (
     <div className="flex h-full flex-col p-5">
       <div>
-        <p className="font-medium">Chat mit {client.name}</p>
+        <p className="font-medium">
+          {t.chat.title} {client.name}
+        </p>
         <p className="text-xs font-light text-muted-foreground">
-          Kurze Fragen zwischen den Terminen - mit dem Verlauf direkt daneben statt auf Ihrer
-          privaten Nummer.
+          {t.chat.lead}
         </p>
       </div>
 
@@ -684,7 +679,7 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
         ))}
         {typing && (
           <p className="mt-1.5 inline-block rounded-lg rounded-bl-none bg-card px-3 py-2 text-xs font-light text-muted-foreground">
-            {client.name} tippt ...
+            {client.name} {t.chat.typing}
           </p>
         )}
         <div ref={endRef} />
@@ -713,14 +708,14 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
         <input
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
-          placeholder="Nachricht an Ihre Klient:in ..."
-          aria-label="Nachricht"
+          placeholder={t.chat.placeholder}
+          aria-label={t.chat.label}
           className="h-10 flex-1 rounded-xl border border-border bg-card px-3 text-xs font-light outline-none focus:border-secondary/60"
         />
         <button
           type="submit"
           disabled={!draft.trim()}
-          aria-label="Senden"
+          aria-label={t.chat.send}
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-40"
         >
           <Send className="h-4 w-4" />
@@ -735,7 +730,7 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
 /* -------------------------------------------------------------------- Heute */
 
 /** Everything on this screen is derived from the clients, not written twice. */
-const useToday = () =>
+const useToday = (demoClients: DemoClient[]) =>
   useMemo(() => {
     const schedule = demoClients
       .flatMap((c) =>
@@ -758,25 +753,28 @@ const useToday = () =>
       .filter((x) => x.latest);
 
     return { schedule, waiting, flagged };
-  }, []);
+  }, [demoClients]);
 
 export const TodayView = ({
   onOpenClient,
 }: {
   onOpenClient: (clientId: string, tab: "briefing" | "chat") => void;
 }) => {
-  const { schedule, waiting, flagged } = useToday();
+  const lang = useLang();
+  const t = copy(lang).demo;
+  const { demoClients, DEMO_TODAY } = demoContent(lang);
+  const { schedule, waiting, flagged } = useToday(demoClients);
 
   const stats = [
-    { label: "Termine heute", value: String(schedule.length) },
-    { label: "Aktive Klient:innen", value: String(demoClients.length) },
-    { label: "Offene Fragen", value: String(waiting.length) },
+    { label: t.today.stats.appointments, value: String(schedule.length) },
+    { label: t.today.stats.clients, value: String(demoClients.length) },
+    { label: t.today.stats.open, value: String(waiting.length) },
   ];
 
   return (
     <div className="p-5">
       <div>
-        <p className="font-medium">Heute</p>
+        <p className="font-medium">{t.today.title}</p>
         <p className="text-xs font-light text-muted-foreground">{DEMO_TODAY}</p>
       </div>
 
@@ -790,7 +788,7 @@ export const TodayView = ({
       </div>
 
       <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-        Ihre Termine
+        {t.today.schedule}
       </p>
       <div className="mt-2 space-y-2">
         {schedule.map(({ client, appointment }) => (
@@ -815,7 +813,7 @@ export const TodayView = ({
                 {appointment.note}
               </span>
             </span>
-            <span className="shrink-0 text-[10px] text-muted-foreground">Briefing öffnen</span>
+            <span className="shrink-0 text-[10px] text-muted-foreground">{t.today.openBriefing}</span>
           </button>
         ))}
       </div>
@@ -823,7 +821,7 @@ export const TodayView = ({
       {waiting.length > 0 && (
         <>
           <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Wartet auf Antwort
+            {t.today.waiting}
           </p>
           <div className="mt-2 space-y-2">
             {waiting.map((c) => (
@@ -843,7 +841,7 @@ export const TodayView = ({
                     {c.chat[c.chat.length - 1].text}
                   </span>
                 </span>
-                <span className="shrink-0 text-[10px] text-muted-foreground">Antworten</span>
+                <span className="shrink-0 text-[10px] text-muted-foreground">{t.today.reply}</span>
               </button>
             ))}
           </div>
@@ -851,7 +849,7 @@ export const TodayView = ({
       )}
 
       <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-        Zuletzt aufgefallen
+        {t.today.flagged}
       </p>
       <div className="mt-2 space-y-2">
         {flagged.map(({ client, latest }) => (
@@ -871,14 +869,13 @@ export const TodayView = ({
                 {latest!.entry.text}
               </span>
             </span>
-            <span className="shrink-0 text-[10px] text-muted-foreground">Tag {latest!.day}</span>
+            <span className="shrink-0 text-[10px] text-muted-foreground">{t.dayLabel(latest!.day)}</span>
           </button>
         ))}
       </div>
 
       <p className="mt-5 text-xs font-light text-muted-foreground text-pretty">
-        Der Tag auf einen Blick: wer kommt, wer wartet auf eine Antwort und wo etwas aufgefallen
-        ist - bevor die erste Beratung beginnt.
+        {t.today.footnote}
       </p>
     </div>
   );
@@ -898,49 +895,54 @@ const Row = ({ label, children }: { label: string; children: React.ReactNode }) 
 );
 
 export const ProfileView = ({ client }: { client: DemoClient }) => {
+  const t = copy(useLang()).demo;
   const p = client.profile;
 
   return (
     <div className="p-5">
       <div>
-        <p className="font-medium">Profil · {client.name}</p>
+        <p className="font-medium">
+          {t.profile.title} · {client.name}
+        </p>
         <p className="text-xs font-light text-muted-foreground">
-          Was Sie im Erstgespräch aufgenommen haben - beim Termin sofort zur Hand.
+          {t.profile.lead}
         </p>
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
         <div className="rounded-xl border border-border/60 p-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Stammdaten
+            {t.profile.base}
           </p>
           <div className="mt-2">
-            <Row label="Alter">{p.age} Jahre</Row>
-            <Row label="Geschlecht">{p.sex}</Row>
-            <Row label="Größe">{p.height}</Row>
-            <Row label="Gewicht">{p.weight}</Row>
-            <Row label="Anliegen">{p.goal}</Row>
+            <Row label={t.profile.age}>
+              {p.age} {t.profile.years}
+            </Row>
+            <Row label={t.profile.sex}>{p.sex}</Row>
+            <Row label={t.profile.height}>{p.height}</Row>
+            <Row label={t.profile.weight}>{p.weight}</Row>
+            <Row label={t.profile.goal}>{p.goal}</Row>
           </div>
         </div>
 
         <div className="rounded-xl border border-border/60 p-4">
           <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Ernährungsrelevantes
+            {t.profile.nutrition}
           </p>
           <div className="mt-2">
-            <Row label="Energiebedarf">
-              ca. {kcal(p.energyKcal)} kcal / Tag
+            <Row label={t.profile.energy}>
+              ~{kcal(p.energyKcal)} {t.profile.perDay}
               <span className="mt-0.5 block text-[10px] text-muted-foreground">{p.energyBasis}</span>
             </Row>
-            <Row label="Vorerkrankungen">{p.conditions.join(", ")}</Row>
-            <Row label="Unverträglichkeiten">{p.intolerances.join(", ")}</Row>
-            <Row label="Medikation">{p.medication.join(", ")}</Row>
+            <Row label={t.profile.conditions}>{p.conditions.join(", ")}</Row>
+            <Row label={t.profile.intolerances}>{p.intolerances.join(", ")}</Row>
+            <Row label={t.profile.medication}>{p.medication.join(", ")}</Row>
           </div>
         </div>
       </div>
 
       <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-        Termine
+        {t.profile.appointments}
       </p>
       <div className="mt-2 space-y-2">
         {client.appointments.map((a) => (
@@ -960,7 +962,7 @@ export const ProfileView = ({ client }: { client: DemoClient }) => {
                 {a.title}
                 {a.planned && (
                   <span className="ml-2 rounded bg-secondary/15 px-1.5 py-0.5 text-[10px] font-medium text-secondary">
-                    geplant
+                    {t.profile.planned}
                   </span>
                 )}
               </span>
@@ -1011,20 +1013,24 @@ export const BriefingView = ({
   client: DemoClient;
   onOpenDay?: (day: number) => void;
 }) => {
+  const t = copy(useLang()).demo;
   const { trackedDays, entryCount, flags, phase, openQuestion } = useBriefing(client);
 
   const stats = [
-    { label: "Tage getrackt", value: `${trackedDays}/${client.currentDay}` },
-    { label: "Einträge", value: String(entryCount) },
-    { label: "Auffälligkeiten", value: String(flags.length) },
+    { label: t.briefing.stats.days, value: `${trackedDays}/${client.currentDay}` },
+    { label: t.briefing.stats.entries, value: String(entryCount) },
+    { label: t.briefing.stats.flags, value: String(flags.length) },
   ];
 
   return (
     <div className="p-5">
       <div>
-        <p className="font-medium">Termin-Briefing · {client.name}</p>
+        <p className="font-medium">
+          {t.briefing.title} · {client.name}
+        </p>
         <p className="text-xs font-light text-muted-foreground">
-          {client.program} · Tag {client.currentDay} von {client.totalDays} · Phase {phase.label}
+          {client.program} · {t.history.day} {client.currentDay} {t.history.of} {client.totalDays} ·{" "}
+          {t.briefing.phase} {phase.label}
         </p>
       </div>
 
@@ -1038,7 +1044,7 @@ export const BriefingView = ({
       </div>
 
       <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-        Worauf Sie schauen sollten
+        {t.briefing.watch}
       </p>
       <div className="mt-2 space-y-2">
         {flags.length ? (
@@ -1054,12 +1060,12 @@ export const BriefingView = ({
             >
               <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
               <span className="flex-1 text-xs font-light">{f.entry.text}</span>
-              <span className="shrink-0 text-[10px] text-muted-foreground">Tag {f.day}</span>
+              <span className="shrink-0 text-[10px] text-muted-foreground">{t.dayLabel(f.day)}</span>
             </button>
           ))
         ) : (
           <p className="rounded-xl border border-dashed border-border px-3 py-4 text-center text-xs font-light text-muted-foreground">
-            Keine Auffälligkeiten im aktuellen Verlauf.
+            {t.briefing.none}
           </p>
         )}
       </div>
@@ -1067,7 +1073,7 @@ export const BriefingView = ({
       {openQuestion && (
         <>
           <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
-            Offen aus dem Chat
+            {t.briefing.openChat}
           </p>
           <div className="mt-2 flex items-start gap-2.5 rounded-xl bg-muted/60 px-3 py-2.5">
             <MessageCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-secondary" />
@@ -1077,8 +1083,7 @@ export const BriefingView = ({
       )}
 
       <p className="mt-5 text-xs font-light text-muted-foreground text-pretty">
-        Genau das sehen Sie, wenn Sie die Klient:in vor dem Termin öffnen - ohne Nachrichten, Fotos
-        und Notizen vorher zusammenzusuchen.
+        {t.briefing.footnote}
       </p>
     </div>
   );

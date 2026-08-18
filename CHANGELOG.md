@@ -6,6 +6,12 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Englische Sprachversion
+- Die komplette Seite gibt es jetzt auch auf Englisch unter /en und /en/demo - Startseite und Demo, inklusive aller Beispieldaten
+- Übersetzt sind auch die fiktiven Inhalte: 64 Rezepte mit Zutaten und Nährstoffen, die drei Klient:innen-Profile, Tageseinträge, Chatverläufe und Termin-Protokolle
+- Sprachumschalter im Kopf- und Fußbereich; er bleibt auf derselben Seite, statt auf die Startseite zurückzuwerfen
+- Impressum, Datenschutz und AGB bleiben auf Deutsch - das sind die rechtlich maßgeblichen Fassungen; auf der englischen Seite steht ein Hinweis darauf
+
 ### Mahlzeiten im Plan sind anklickbar
 - Ein Tipp auf "Mittag" im Plan stellt die Rezeptliste links auf Mittag um - der Plan ist damit selbst die Navigation
 - Jede Mahlzeit hat einen sichtbaren Zugang ("Rezept hinzufügen") statt nur "noch nichts gewählt"
