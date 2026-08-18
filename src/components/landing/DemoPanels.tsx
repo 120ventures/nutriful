@@ -10,7 +10,7 @@ import {
   X,
 } from "lucide-react";
 import { track } from "@/lib/demoTracking";
-import { useLang } from "@/i18n";
+import { useLang, type Lang } from "@/i18n";
 import { copy } from "@/i18n/copy";
 import { demoContent } from "./demoContent";
 import type { ChatMessage, DemoClient, Diet, MealSlot, PlanBlock } from "./demoData";
@@ -236,9 +236,10 @@ export const HistoryView = ({
 
 /* --------------------------------------------------------------- Planbuilder */
 
-/** 2000 -> "2.000". Intl's de-AT uses a thin space, which clashes with the
- *  hand-written figures next to it. */
-const kcal = (n: number) => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+/** 2000 -> "2.000" in German, "2,000" in English. Intl's de-AT uses a thin
+ *  space, which clashes with the hand-written figures next to it. */
+const kcal = (n: number, lang: Lang) =>
+  n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, lang === "en" ? "," : ".");
 
 export const PlanView = ({ client }: { client: DemoClient }) => {
   const lang = useLang();
@@ -489,7 +490,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
             </p>
             {plan.length > 0 && (
               <p className="text-[10px] font-medium text-foreground">
-                ~{kcal(dayKcal)} {t.plan.of} {kcal(client.profile.energyKcal)} kcal
+                ~{kcal(dayKcal, lang)} {t.plan.of} {kcal(client.profile.energyKcal, lang)} kcal
               </p>
             )}
           </div>
@@ -895,7 +896,8 @@ const Row = ({ label, children }: { label: string; children: React.ReactNode }) 
 );
 
 export const ProfileView = ({ client }: { client: DemoClient }) => {
-  const t = copy(useLang()).demo;
+  const lang = useLang();
+  const t = copy(lang).demo;
   const p = client.profile;
 
   return (
@@ -931,7 +933,7 @@ export const ProfileView = ({ client }: { client: DemoClient }) => {
           </p>
           <div className="mt-2">
             <Row label={t.profile.energy}>
-              ~{kcal(p.energyKcal)} {t.profile.perDay}
+              ~{kcal(p.energyKcal, lang)} {t.profile.perDay}
               <span className="mt-0.5 block text-[10px] text-muted-foreground">{p.energyBasis}</span>
             </Row>
             <Row label={t.profile.conditions}>{p.conditions.join(", ")}</Row>
