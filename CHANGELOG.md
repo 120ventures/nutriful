@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-08-17
 
+### Mahlzeiten im Plan sind anklickbar
+- Ein Tipp auf "Mittag" im Plan stellt die Rezeptliste links auf Mittag um - der Plan ist damit selbst die Navigation
+- Jede Mahlzeit hat einen sichtbaren Zugang ("Rezept hinzufügen") statt nur "noch nichts gewählt"
+- Die gerade bearbeitete Mahlzeit ist im Plan hervorgehoben
+
 ### Uhrzeiten bei den Terminen
 - Alle Termine zeigen jetzt ihre Uhrzeit - im Profil, in der Liste "Termine & Protokolle" und im Protokollkopf
 

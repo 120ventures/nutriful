@@ -500,38 +500,71 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
             )}
           </div>
           <div className="mt-2 space-y-2">
-            {mealSlots.map((slot) => (
-              <div key={slot} className="rounded-xl bg-muted/50 p-2.5">
-                <p className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                  {slot}
-                </p>
-                {inPlan(slot).length ? (
-                  <div className="mt-1.5 space-y-1.5">
-                    {inPlan(slot).map((b) => (
-                      <div
-                        key={b.id}
-                        className="flex items-center gap-2 rounded-lg bg-card px-2.5 py-1.5"
-                      >
-                        <span className="text-sm">{b.icon}</span>
-                        <span className="flex-1 text-xs font-light">{b.text}</span>
-                        <button
-                          type="button"
-                          onClick={() => removeBlock(b.id)}
-                          aria-label={`${b.text} entfernen`}
-                          className="shrink-0 text-muted-foreground hover:text-foreground"
+            {mealSlots.map((m) => {
+              // Tapping a meal in the plan points the recipe list at that meal,
+              // so the plan itself is the navigation.
+              const open = () => {
+                setSlot(m);
+                setQuery("");
+                track("plan_slot", `plan:${m}`);
+              };
+              const chosen = inPlan(m);
+
+              return (
+                <div
+                  key={m}
+                  className={`rounded-xl p-2.5 transition-colors ${
+                    m === slot ? "bg-secondary/10 ring-1 ring-secondary/30" : "bg-muted/50"
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={open}
+                    aria-pressed={m === slot}
+                    className="flex w-full items-center justify-between gap-2 text-left"
+                  >
+                    <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                      {m}
+                    </span>
+                    <Plus
+                      className={`h-3.5 w-3.5 shrink-0 ${
+                        m === slot ? "text-secondary" : "text-muted-foreground"
+                      }`}
+                    />
+                  </button>
+
+                  {chosen.length > 0 && (
+                    <div className="mt-1.5 space-y-1.5">
+                      {chosen.map((b) => (
+                        <div
+                          key={b.id}
+                          className="flex items-center gap-2 rounded-lg bg-card px-2.5 py-1.5"
                         >
-                          <X className="h-3.5 w-3.5" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="mt-1.5 text-xs font-light text-muted-foreground">
-                    noch nichts gewählt
-                  </p>
-                )}
-              </div>
-            ))}
+                          <span className="text-sm">{b.icon}</span>
+                          <span className="flex-1 text-xs font-light">{b.text}</span>
+                          <button
+                            type="button"
+                            onClick={() => removeBlock(b.id)}
+                            aria-label={`${b.text} entfernen`}
+                            className="shrink-0 text-muted-foreground hover:text-foreground"
+                          >
+                            <X className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={open}
+                    className="mt-1.5 w-full text-left text-xs font-light text-muted-foreground hover:text-foreground"
+                  >
+                    {chosen.length ? "Weiteres Rezept hinzufügen" : "Rezept hinzufügen"}
+                  </button>
+                </div>
+              );
+            })}
           </div>
 
           {dayFocus.length > 0 && (
