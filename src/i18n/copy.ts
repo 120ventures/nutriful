@@ -129,9 +129,9 @@ const de = {
     gapOnePlace: "Ein Ort: Programm, Tracking & Chat",
     appt1: "Termin 1",
     appt2: "Termin 2",
-    bandTitle: "Zwischen zwei Terminen lebt Ihre Klient:in weiter",
+    bandTitle: "Zwischen zwei Terminen geht der Alltag weiter",
     bandText:
-      "Jede Mahlzeit, jede Frage, jeder Ausrutscher passiert im Alltag - nicht in Ihrer Praxis. Nutriful holt genau das zu Ihnen, ohne dass Sie hinterhertelefonieren müssen.",
+      "Nutriful zeigt Ihnen, was dazwischen passiert - so bleibt die Beratung auch im Alltag abgestimmt, ohne dass Sie hinterhertelefonieren müssen.",
     bandImageAlt: "Junge Frau isst lachend eine Mandarinenspalte",
     stepsTitle: "So funktioniert Nutriful in Ihrer Praxis",
     demoSectionTitle: "Klicken Sie sich durch, bevor Sie sich entscheiden",
@@ -296,9 +296,9 @@ const en: typeof de = {
     gapOnePlace: "One place: programme, tracking & chat",
     appt1: "Appointment 1",
     appt2: "Appointment 2",
-    bandTitle: "Between two appointments your client carries on living",
+    bandTitle: "Between two appointments, everyday life goes on",
     bandText:
-      "Every meal, every question, every slip happens in everyday life - not in your practice. Nutriful brings exactly that to you, without you having to chase it.",
+      "Nutriful shows you what happens in between - so the guidance stays aligned in everyday life, without you having to chase it.",
     bandImageAlt: "Young woman laughing while eating a tangerine segment",
     stepsTitle: "How Nutriful works in your practice",
     demoSectionTitle: "Click through it before you decide",

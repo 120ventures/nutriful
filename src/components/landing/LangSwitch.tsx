@@ -13,7 +13,7 @@ const LangSwitch = ({ className = "" }: { className?: string }) => {
     <Link
       to={localePath(stripLocale(pathname), other)}
       hrefLang={other}
-      className={`inline-flex items-center gap-1.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground ${className}`}
+      className={`inline-flex items-center gap-1.5 whitespace-nowrap py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground ${className}`}
     >
       <Languages className="h-4 w-4" />
       {copy(lang).landing.langSwitch}

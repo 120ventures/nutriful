@@ -454,7 +454,7 @@ const Partner = () => {
               {t.legalNote}
             </p>
           )}
-          <div className="mt-4 flex gap-x-5 gap-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5 [&_button]:py-1.5 font-light text-muted-foreground">
+          <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm [&_a]:inline-block [&_a]:py-1.5 [&_button]:py-1.5 font-light text-muted-foreground">
             <Link to="/impressum" className="hover:text-foreground">
               {t.imprint}
             </Link>

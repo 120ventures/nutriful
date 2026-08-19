@@ -11,6 +11,10 @@ Overview of user-facing changes.
 - Neues Header-Foto: Diätologin bei der Video-Beratung am Schreibtisch mit Obst und Gemüse (ersetzt das bisherige Bild rechts neben dem Text)
 - Bildnachweis im Impressum um das neue Foto ergänzt
 
+### Kleinere Korrekturen
+- Text im Bild-Band umformuliert: der Alltag geht zwischen zwei Terminen weiter, Nutriful hält die Beratung auch dazwischen abgestimmt (DE + EN)
+- Footer: Impressum, Datenschutz, Cookie-Einstellungen und Sprachumschalter stehen jetzt sauber auf einer Linie
+
 ---
 
 ## 2026-08-17
