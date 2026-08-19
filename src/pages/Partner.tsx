@@ -230,51 +230,49 @@ const Partner = () => {
       </header>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-5xl items-center gap-10 px-6 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-12">
-        <div>
-        <p className="text-xs font-medium uppercase tracking-[0.22em] text-secondary">
-          {t.eyebrow}
-        </p>
-        <h1 className="mt-5 font-display text-4xl font-normal leading-[1.1] tracking-tight text-balance sm:text-5xl">
-          {t.h1}
-        </h1>
-        <p className="mt-6 text-lg font-light leading-relaxed text-muted-foreground text-pretty">
-          {t.sub}
-        </p>
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <a
-            href="#pilot"
-            onClick={() => phCapture("cta_click", { location: "hero" })}
-            className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-medium tracking-wide text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            {t.ctaPilot} <ArrowRight className="h-4 w-4" />
-          </a>
-          <Link
-            to={localePath("/demo", lang)}
-            onClick={() => phCapture("cta_click", { location: "hero_demo" })}
-            className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium tracking-wide text-foreground ring-1 ring-border transition-colors hover:bg-muted"
-          >
-            <PlayCircle className="h-4 w-4" /> {t.ctaDemo}
-          </Link>
-        </div>
-        <ul className="mt-8 space-y-2 text-sm font-light text-muted-foreground">
-          {heroProof.map((item) => (
-            <li key={item} className="flex items-center gap-2">
-              <Check className="h-4 w-4 shrink-0 text-secondary" strokeWidth={2.4} />
-              {item}
-            </li>
-          ))}
-        </ul>
-        </div>
-
-        <div className="overflow-hidden rounded-3xl">
-          <img
-            src="/hero-header.jpg"
-            alt={t.heroImageAlt}
-            width={1600}
-            height={1067}
-            className="aspect-[4/3] w-full object-cover"
-          />
+      <section className="relative isolate flex min-h-[560px] w-full items-center overflow-hidden sm:h-[85svh] sm:max-h-[860px]">
+        <img
+          src="/hero-beratung.jpg"
+          alt={t.heroImageAlt}
+          className="absolute inset-0 h-full w-full object-cover object-[58%_center] sm:left-auto sm:right-0 sm:w-auto sm:max-w-none"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background from-30% via-background/60 to-transparent" />
+        <div className="relative z-10 mx-auto w-full max-w-5xl px-6 py-16 sm:py-20">
+          <div className="max-w-xl">
+            <p className="text-xs font-medium uppercase tracking-[0.22em] text-secondary">
+              {t.eyebrow}
+            </p>
+            <h1 className="mt-5 font-display text-4xl font-normal leading-[1.1] tracking-tight text-balance sm:text-6xl">
+              {t.h1}
+            </h1>
+            <p className="mt-6 text-lg font-light leading-relaxed text-muted-foreground text-pretty">
+              {t.sub}
+            </p>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <a
+                href="#pilot"
+                onClick={() => phCapture("cta_click", { location: "hero" })}
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3.5 text-sm font-medium tracking-wide text-primary-foreground transition-opacity hover:opacity-90"
+              >
+                {t.ctaPilot} <ArrowRight className="h-4 w-4" />
+              </a>
+              <Link
+                to={localePath("/demo", lang)}
+                onClick={() => phCapture("cta_click", { location: "hero_demo" })}
+                className="inline-flex items-center gap-2 rounded-full bg-background/60 px-6 py-3.5 text-sm font-medium tracking-wide text-foreground ring-1 ring-border backdrop-blur-sm transition-colors hover:bg-muted"
+              >
+                <PlayCircle className="h-4 w-4" /> {t.ctaDemo}
+              </Link>
+            </div>
+            <ul className="mt-8 space-y-2 text-sm font-light text-muted-foreground">
+              {heroProof.map((item) => (
+                <li key={item} className="flex items-center gap-2">
+                  <Check className="h-4 w-4 shrink-0 text-secondary" strokeWidth={2.4} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 

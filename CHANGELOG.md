@@ -4,6 +4,15 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-08-19
+
+### Neuer Hero-Bereich im Vollbild-Stil
+- Die Startseite beginnt jetzt mit einem großflächigen Bild über die volle Breite - Headline, Text und Buttons liegen direkt auf dem Bild (angelehnt an den Oura-Look)
+- Neues Header-Foto: Diätologin bei der Video-Beratung am Schreibtisch mit Obst und Gemüse (ersetzt das bisherige Bild rechts neben dem Text)
+- Bildnachweis im Impressum um das neue Foto ergänzt
+
+---
+
 ## 2026-08-17
 
 ### Englische Sprachversion

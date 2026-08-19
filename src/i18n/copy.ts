@@ -116,7 +116,8 @@ const de = {
     ctaDemo: "Demo ausprobieren",
     navDemo: "Demo",
     navDemoLong: "ansehen",
-    heroImageAlt: "Frau sitzt auf dem Sofa und isst eine Schale Porridge",
+    heroImageAlt:
+      "Diätologin sitzt mit Laptop, Obst und Gemüse am Schreibtisch und führt eine Videoberatung",
     pillarsTitle: "Drei Dinge, die Nutriful für Sie übernimmt",
     painTitle: "Die Beratung ist stark. Die Strecke dazwischen nicht.",
     painLead:
@@ -282,7 +283,8 @@ const en: typeof de = {
     ctaDemo: "Try the demo",
     navDemo: "Demo",
     navDemoLong: "",
-    heroImageAlt: "Woman sitting on a sofa eating a bowl of porridge",
+    heroImageAlt:
+      "Dietitian at her desk with a laptop, fruit and vegetables during a video consultation",
     pillarsTitle: "Three things Nutriful takes off your hands",
     painTitle: "The consultation is strong. The stretch in between is not.",
     painLead:
