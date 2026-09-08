@@ -393,7 +393,7 @@ export const PlanView = ({ client }: { client: DemoClient }) => {
                   m === slot ? "bg-card shadow-sm" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
-                {m}
+                {mealLabels[m]}
               </button>
             ))}
           </div>
