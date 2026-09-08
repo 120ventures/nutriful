@@ -4,6 +4,16 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-09-08
+
+### Neuer Demo-Tab "Abschluss" (Nachbereitung nach dem Termin)
+- Sechster Tab in der Demo: Termin abschließen mit Doku-Entwurf (aus Verlauf und Terminnotizen vorbefüllt, editierbar), Zusammenfassung an die Klient:in, Honorarnote aus dem Termin und optionalem Kurzbericht an Zuweiser:innen
+- Alles wird mit einem Klick versendet ("Termin abschließen") - die Demo zeigt danach, was erledigt wurde
+- Baut direkt auf dem Outreach-Feedback auf: Nachbereitung/Doku als größter Zeitfresser (Kienreich, Hasenhütl), Honorarnote als Table-Stakes (Moser, Benchmark Psychotherapie-Tools), Zuweiser-Schnittstelle als Lock-in (Berger)
+- Für alle drei Beispiel-Klient:innen, auf Deutsch und Englisch
+
+---
+
 ## 2026-08-19
 
 ### Neuer Hero-Bereich im Vollbild-Stil

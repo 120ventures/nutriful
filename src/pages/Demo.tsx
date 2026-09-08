@@ -10,6 +10,7 @@ import {
   PlanView,
   ProfileView,
   TodayView,
+  WrapUpView,
 } from "@/components/landing/DemoPanels";
 import { track } from "@/lib/demoTracking";
 import { demoContent } from "@/components/landing/demoContent";
@@ -18,7 +19,7 @@ import { localePath, useLang } from "@/i18n";
 import { copy } from "@/i18n/copy";
 import LangSwitch from "@/components/landing/LangSwitch";
 
-type TabId = "briefing" | "profil" | "verlauf" | "chat" | "plan";
+type TabId = "briefing" | "profil" | "verlauf" | "chat" | "plan" | "abschluss";
 
 const Demo = () => {
   const lang = useLang();
@@ -30,6 +31,7 @@ const Demo = () => {
     { id: "verlauf", label: t.tabs.verlauf },
     { id: "chat", label: t.tabs.chat },
     { id: "plan", label: t.tabs.plan, short: t.tabs.planShort },
+    { id: "abschluss", label: t.tabs.abschluss },
   ];
   const [clientId, setClientId] = useState(demoClients[0].id);
   const [tab, setTab] = useState<TabId>("briefing");
@@ -217,6 +219,7 @@ const Demo = () => {
                 )}
                 {tab === "chat" && <ChatView key={client.id} client={client} />}
                 {tab === "plan" && <PlanView key={client.id} client={client} />}
+                {tab === "abschluss" && <WrapUpView key={client.id} client={client} />}
               </div>
                 </>
               )}

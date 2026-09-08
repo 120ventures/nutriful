@@ -3,10 +3,13 @@ import {
   AlertTriangle,
   CalendarDays,
   Check,
+  FileText,
   MessageCircle,
   Plus,
+  Receipt,
   Search,
   Send,
+  Stethoscope,
   X,
 } from "lucide-react";
 import { track } from "@/lib/demoTracking";
@@ -1087,6 +1090,193 @@ export const BriefingView = ({
       <p className="mt-5 text-xs font-light text-muted-foreground text-pretty">
         {t.briefing.footnote}
       </p>
+    </div>
+  );
+};
+
+/* --------------------------------------------------------- Termin-Abschluss */
+
+type WrapUpSend = "summary" | "invoice" | "referrer";
+
+export const WrapUpView = ({ client }: { client: DemoClient }) => {
+  const t = copy(useLang()).demo.wrapup;
+  const w = client.wrapUp;
+  // The wrap-up closes the appointment that is on today's schedule.
+  const appointment = client.appointments.find((a) => a.planned) ?? client.appointments[0];
+
+  const [draft, setDraft] = useState(w.docDraft.map((l) => `• ${l}`).join("\n"));
+  const [sends, setSends] = useState<Record<WrapUpSend, boolean>>({
+    summary: true,
+    invoice: true,
+    referrer: Boolean(w.referrer),
+  });
+  const [done, setDone] = useState(false);
+
+  const toggle = (key: WrapUpSend) => {
+    setSends((prev) => ({ ...prev, [key]: !prev[key] }));
+    track("wrapup_toggle", `${client.id}:${key}:${sends[key] ? "off" : "on"}`);
+  };
+
+  const cards: {
+    key: WrapUpSend;
+    icon: typeof FileText;
+    title: string;
+    hint: string;
+    preview: React.ReactNode;
+  }[] = [
+    {
+      key: "summary",
+      icon: FileText,
+      title: t.summaryTitle(client.name),
+      hint: t.summaryHint,
+      preview: <p className="text-[11px] font-light leading-relaxed">{w.summary}</p>,
+    },
+    {
+      key: "invoice",
+      icon: Receipt,
+      title: t.invoiceTitle(w.invoice.number),
+      hint: t.invoiceHint,
+      preview: (
+        <p className="flex items-baseline justify-between gap-3 text-[11px] font-light">
+          <span>
+            {w.invoice.item} · {w.invoice.duration}
+          </span>
+          <span className="shrink-0 font-medium">{w.invoice.amount}</span>
+        </p>
+      ),
+    },
+    ...(w.referrer
+      ? [
+          {
+            key: "referrer" as const,
+            icon: Stethoscope,
+            title: t.referrerTitle,
+            hint: t.referrerHint(w.referrer),
+            preview: null,
+          },
+        ]
+      : []),
+  ];
+
+  return (
+    <div className="p-5">
+      <div>
+        <p className="font-medium">
+          {t.title} · {client.name}
+        </p>
+        <p className="text-xs font-light text-muted-foreground">
+          {appointment.title} · {appointment.date} · {appointment.time}
+        </p>
+      </div>
+
+      {done ? (
+        <div className="mt-4 rounded-xl border border-secondary/30 bg-secondary/10 p-4">
+          <p className="flex items-center gap-2 text-sm font-medium">
+            <Check className="h-4 w-4 text-secondary" strokeWidth={2.4} /> {t.doneTitle}
+          </p>
+          <ul className="mt-2.5 space-y-1.5">
+            {[
+              t.doneDoc,
+              sends.summary ? t.doneSummary(client.name) : null,
+              sends.invoice ? t.doneInvoice(w.invoice.number) : null,
+              sends.referrer && w.referrer ? t.doneReferrer(w.referrer) : null,
+            ]
+              .filter((line): line is string => Boolean(line))
+              .map((line) => (
+                <li key={line} className="flex gap-2 text-xs font-light">
+                  <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-secondary" strokeWidth={2.4} />
+                  <span>{line}</span>
+                </li>
+              ))}
+          </ul>
+          <p className="mt-3 text-xs font-light text-muted-foreground">{t.doneNote}</p>
+          <button
+            type="button"
+            onClick={() => setDone(false)}
+            className="mt-3 text-[11px] font-medium text-muted-foreground underline hover:text-foreground"
+          >
+            {t.again}
+          </button>
+        </div>
+      ) : (
+        <>
+          <p className="mt-5 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            {t.docTitle}
+          </p>
+          <p className="mt-1 text-[11px] font-light text-muted-foreground">{t.docHint}</p>
+          <textarea
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            aria-label={t.docLabel}
+            rows={5}
+            className="mt-2 w-full resize-y rounded-xl border border-border bg-card px-3 py-2.5 text-xs font-light leading-relaxed outline-none focus:border-secondary/60"
+          />
+
+          <p className="mt-4 text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+            {t.sendTitle}
+          </p>
+          <div className="mt-2 space-y-2">
+            {cards.map(({ key, icon: Icon, title, hint, preview }) => {
+              const active = sends[key];
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => toggle(key)}
+                  aria-pressed={active}
+                  aria-label={t.toggle(title)}
+                  className={`w-full rounded-xl border px-3 py-2.5 text-left transition-colors ${
+                    active
+                      ? "border-secondary/40 bg-secondary/5"
+                      : "border-border/60 hover:bg-muted/50"
+                  }`}
+                >
+                  <span className="flex items-start gap-2.5">
+                    <span
+                      className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors ${
+                        active
+                          ? "border-secondary bg-secondary text-white"
+                          : "border-border bg-card"
+                      }`}
+                    >
+                      {active && <Check className="h-3 w-3" strokeWidth={3} />}
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="flex items-center gap-1.5 text-xs font-medium">
+                        <Icon className="h-3.5 w-3.5 shrink-0 text-secondary" /> {title}
+                      </span>
+                      <span className="mt-0.5 block text-[11px] font-light text-muted-foreground">
+                        {hint}
+                      </span>
+                      {active && preview && (
+                        <span className="mt-2 block rounded-lg bg-muted/60 px-2.5 py-2">
+                          {preview}
+                        </span>
+                      )}
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => {
+              setDone(true);
+              track(
+                "wrapup_close",
+                `${client.id}:${(Object.keys(sends) as WrapUpSend[]).filter((k) => sends[k]).join("+") || "doc-only"}`,
+              );
+            }}
+            className="mt-4 w-full rounded-full bg-primary px-4 py-2.5 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            {t.cta}
+          </button>
+        </>
+      )}
+
+      <p className="mt-5 text-xs font-light text-muted-foreground text-pretty">{t.footnote}</p>
     </div>
   );
 };

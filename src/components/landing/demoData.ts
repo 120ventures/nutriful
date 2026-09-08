@@ -31,6 +31,18 @@ export type DemoClient = {
   profile: DemoProfile;
   /** Newest first. "geplant" marks an appointment that has not happened yet. */
   appointments: DemoAppointment[];
+  wrapUp: DemoWrapUp;
+};
+
+/** Everything the wrap-up tab needs to close today's appointment in one step. */
+export type DemoWrapUp = {
+  /** Documentation draft, pre-filled from the record - editable in the demo. */
+  docDraft: string[];
+  /** Plain-language summary the client receives in her app. */
+  summary: string;
+  invoice: { number: string; item: string; duration: string; amount: string };
+  /** Referring doctor, if any - without one the report card does not appear. */
+  referrer?: string;
 };
 
 export type DemoProfile = {
@@ -341,6 +353,23 @@ export const demoClients: DemoClient[] = [
         ],
       },
     ],
+    wrapUp: {
+      docDraft: [
+        "Analysephase ausgewertet: 9 von 9 Tagen getrackt, Frühstück an drei Tagen ausgelassen",
+        "Nachmittagstief mit Heißhunger an vier Tagen, zuletzt Tag 9",
+        "Umstellungsphase besprochen: fixes Frühstück, geplante Zwischenmahlzeit am Nachmittag",
+        "Nächster Termin in zwei Wochen, Tagesplan folgt über Nutriful",
+      ],
+      summary:
+        "Liebe Lisa, danke für das Gespräch heute! Die wichtigsten Punkte: Frühstück nicht auslassen und am Nachmittag eine geplante Zwischenmahlzeit. Ihren neuen Tagesplan sehen Sie ab morgen in der App.",
+      invoice: {
+        number: "2026-041",
+        item: "Ernährungsberatung, Folgetermin",
+        duration: "50 Minuten",
+        amount: "95,00 EUR",
+      },
+      referrer: "Dr. Eva Brunner, Hausärztin",
+    },
   },
   {
     id: "markus",
@@ -440,6 +469,21 @@ export const demoClients: DemoClient[] = [
         ],
       },
     ],
+    wrapUp: {
+      docDraft: [
+        "Bestandsaufnahme abgeschlossen: 5 von 5 Tagen inklusive Trainingszeiten getrackt",
+        "Nüchterntraining an Tag 3 mit Leistungseinbruch, spätes Abendessen an Tag 5 mit schlechtem Schlaf",
+        "Vereinbart: Shake vor Morgeneinheiten, an Trainingstagen Abendessen vor 20 Uhr",
+      ],
+      summary:
+        "Hallo Markus, kurz zusammengefasst: vor Morgeneinheiten ein Shake, an Trainingstagen das Abendessen vor 20 Uhr. Den Plan für die Aufbauphase sehen Sie ab morgen in der App.",
+      invoice: {
+        number: "2026-042",
+        item: "Ernährungsberatung, Folgetermin",
+        duration: "50 Minuten",
+        amount: "95,00 EUR",
+      },
+    },
   },
   {
     id: "anna",
@@ -539,5 +583,21 @@ export const demoClients: DemoClient[] = [
         ],
       },
     ],
+    wrapUp: {
+      docDraft: [
+        "Zwischenkontrolle Tag 5: Symptomtagebuch besprochen, Blähungen an Tag 3 nach dem Mittagessen",
+        "Karenzfehler an Tag 5 (Weizenwrap) dokumentiert, danach keine Beschwerden",
+        "Weiter Karenz wie geplant bis Tag 14, Provokation ab Tag 15 gemeinsam festlegen",
+      ],
+      summary:
+        "Liebe Anna, gut gemacht bisher! Der Weizenwrap war kein Beinbruch - wir bleiben wie besprochen bis Tag 14 in der Karenz. Die Liste mit geeigneten Lebensmitteln finden Sie in der App.",
+      invoice: {
+        number: "2026-043",
+        item: "Diätologische Beratung, Zwischenkontrolle",
+        duration: "45 Minuten",
+        amount: "85,00 EUR",
+      },
+      referrer: "Dr. Paul Steiner, Facharzt für Innere Medizin",
+    },
   },
 ];

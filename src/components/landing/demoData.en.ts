@@ -262,6 +262,23 @@ export const demoClients: DemoClient[] = [
         ],
       },
     ],
+    wrapUp: {
+      docDraft: [
+        "Assessment phase reviewed: 9 of 9 days tracked, breakfast skipped on three days",
+        "Afternoon slump with cravings on four days, most recently day 9",
+        "Transition phase discussed: fixed breakfast, planned afternoon snack",
+        "Next appointment in two weeks, day plan follows via Nutriful",
+      ],
+      summary:
+        "Dear Lisa, thank you for today's session! The key points: do not skip breakfast, and have a planned snack in the afternoon. You will see your new day plan in the app from tomorrow.",
+      invoice: {
+        number: "2026-041",
+        item: "Nutrition counselling, follow-up",
+        duration: "50 minutes",
+        amount: "EUR 95.00",
+      },
+      referrer: "Dr Eva Brunner, general practitioner",
+    },
   },
   {
     id: "markus",
@@ -361,6 +378,21 @@ export const demoClients: DemoClient[] = [
         ],
       },
     ],
+    wrapUp: {
+      docDraft: [
+        "Baseline completed: 5 of 5 days tracked including training times",
+        "Fasted training on day 3 with a performance drop, late dinner on day 5 with poor sleep",
+        "Agreed: shake before morning sessions, dinner before 8 pm on training days",
+      ],
+      summary:
+        "Hi Markus, in short: a shake before morning sessions, and dinner before 8 pm on training days. You will see the plan for the build-up phase in the app from tomorrow.",
+      invoice: {
+        number: "2026-042",
+        item: "Nutrition counselling, follow-up",
+        duration: "50 minutes",
+        amount: "EUR 95.00",
+      },
+    },
   },
   {
     id: "anna",
@@ -460,6 +492,22 @@ export const demoClients: DemoClient[] = [
         ],
       },
     ],
+    wrapUp: {
+      docDraft: [
+        "Interim check day 5: symptom diary reviewed, bloating on day 3 after lunch",
+        "Elimination slip on day 5 (wheat wrap) documented, no symptoms afterwards",
+        "Continue elimination as planned until day 14, agree the reintroduction from day 15",
+      ],
+      summary:
+        "Dear Anna, well done so far! The wheat wrap was no disaster - as discussed, we stay in the elimination phase until day 14. You will find the list of suitable foods in the app.",
+      invoice: {
+        number: "2026-043",
+        item: "Dietetic counselling, interim check",
+        duration: "45 minutes",
+        amount: "EUR 85.00",
+      },
+      referrer: "Dr Paul Steiner, internal medicine specialist",
+    },
   },
 ];
 
