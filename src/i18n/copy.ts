@@ -152,7 +152,7 @@ const de = {
     navDemoLong: "ansehen",
     heroImageAlt:
       "Diätologin sitzt mit Laptop, Obst und Gemüse am Schreibtisch und führt eine Videoberatung",
-    pillarsTitle: "Drei Dinge, die Nutriful für Sie übernimmt",
+    pillarsTitle: "Vier Dinge, die Nutriful für Sie übernimmt",
     painTitle: "Die Beratung ist stark. Die Strecke dazwischen nicht.",
     painLead:
       "Zwischen zwei Terminen passiert das, was über Erfolg oder Abbruch entscheidet - und genau dort ist heute am wenigsten Struktur.",
@@ -359,7 +359,7 @@ const en: typeof de = {
     navDemoLong: "",
     heroImageAlt:
       "Dietitian at her desk with a laptop, fruit and vegetables during a video consultation",
-    pillarsTitle: "Three things Nutriful takes off your hands",
+    pillarsTitle: "Four things Nutriful takes off your hands",
     painTitle: "The consultation is strong. The stretch in between is not.",
     painLead:
       "What decides between success and dropping out happens between two appointments - and that is exactly where there is least structure today.",

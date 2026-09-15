@@ -5,6 +5,7 @@ import {
   LineChart,
   MessageCircle,
   ShieldCheck,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import type { Lang } from "./index";
@@ -16,14 +17,9 @@ type Faq = { q: string; a: string };
 const de = {
   pains: [
     {
-      icon: MessageCircle,
-      title: "Verstreute Daten",
-      text: "Essens-Fotos per WhatsApp, Fragen per E-Mail, Ernährungstagebuch auf Papier - die Woche Ihrer Klient:innen liegt in fünf verschiedenen Kanälen.",
-    },
-    {
       icon: ClipboardList,
       title: "Zusammensuchen vor jedem Termin",
-      text: "Bevor die Beratung beginnt, geht Zeit dafür drauf, Nachrichten, Fotos und Notizen zu einem Bild zusammenzupuzzeln.",
+      text: "Essens-Fotos per WhatsApp, Fragen per E-Mail, Ernährungstagebuch auf Papier - bevor die Beratung beginnt, geht Zeit dafür drauf, alles zu einem Bild zusammenzupuzzeln.",
     },
     {
       icon: CalendarCheck,
@@ -51,6 +47,11 @@ const de = {
       icon: LineChart,
       title: "Fortschritt",
       text: "Mahlzeiten, Fotos und Notizen laufen automatisch in einen Verlauf. Vor dem Termin sehen Sie Auffälligkeiten und offene Fragen auf einen Blick.",
+    },
+    {
+      icon: Sparkles,
+      title: "Pläne",
+      text: "Ernährungspläne und Empfehlungen entstehen in Minuten statt Stunden: Nutriful erstellt einen Entwurf aus Anamnese und Verlauf, Sie passen an, was Ihnen wichtig ist - Ihre Handschrift, Ihre fachlichen Vorgaben.",
     },
   ] as Card[],
   features: [
@@ -127,14 +128,9 @@ const de = {
 const en: typeof de = {
   pains: [
     {
-      icon: MessageCircle,
-      title: "Scattered data",
-      text: "Food photos on WhatsApp, questions by email, a food diary on paper - your client's week sits in five different channels.",
-    },
-    {
       icon: ClipboardList,
       title: "Piecing it together before every appointment",
-      text: "Before the consultation starts, time goes into assembling messages, photos and notes into one picture.",
+      text: "Food photos on WhatsApp, questions by email, a food diary on paper - before the consultation starts, time goes into assembling it all into one picture.",
     },
     {
       icon: CalendarCheck,
@@ -162,6 +158,11 @@ const en: typeof de = {
       icon: LineChart,
       title: "Progress",
       text: "Meals, photos and notes flow into one record automatically. Before the appointment you see what stood out and what is still open.",
+    },
+    {
+      icon: Sparkles,
+      title: "Plans",
+      text: "Nutrition plans and recommendations take minutes instead of hours: Nutriful drafts them from intake and record, you adjust what matters to you - your style, your professional standards.",
     },
   ],
   features: [

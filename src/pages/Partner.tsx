@@ -326,7 +326,7 @@ const Partner = () => {
           <h2 className="mx-auto max-w-3xl text-center font-display text-3xl font-normal tracking-tight text-balance sm:text-4xl">
             {t.pillarsTitle}
           </h2>
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {pillars.map((p) => (
               <div key={p.title} className="rounded-3xl bg-muted/40 p-8">
                 <p.icon className="h-6 w-6 text-secondary" strokeWidth={1.8} />
@@ -349,7 +349,7 @@ const Partner = () => {
           <p className="mt-4 max-w-2xl font-light text-muted-foreground text-pretty">
             {t.painLead}
           </p>
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
             {pains.map((p) => (
               <div key={p.title} className="rounded-3xl border border-border/70 bg-card p-8">
                 <p.icon className="h-6 w-6 text-primary" strokeWidth={1.8} />

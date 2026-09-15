@@ -6,6 +6,14 @@ Overview of user-facing changes.
 
 ## 2026-09-15
 
+### Neue Säule "Pläne"
+- Vierte Karte im Bereich "Vier Dinge, die Nutriful für Sie übernimmt": Ernährungspläne und Empfehlungen entstehen als Entwurf aus Anamnese und Verlauf, die Beraterin passt sie nach eigenen Vorgaben an
+- Raster auf vier Karten umgestellt, auf Deutsch und Englisch
+
+### Pain-Points auf zwei Karten verdichtet
+- "Verstreute Daten" und "Zusammensuchen vor jedem Termin" sind jetzt eine Karte: die verstreuten Kanäle sind der Grund, das Zusammenpuzzeln vor dem Termin die Folge
+- Der Bereich zeigt damit zwei Karten nebeneinander statt drei, auf Deutsch und Englisch
+
 ### Termin direkt buchen auf der Startseite
 - Im Bereich "Pilot-Partner:in werden" ist "Erstgespräch direkt buchen" jetzt der Hauptweg: der rote Button öffnet den Calendly-Kalender für ein 30-minütiges, unverbindliches Kennenlernen
 - Das E-Mail-Formular bleibt als Alternative darunter ("Gerade kein passender Termin dabei?") mit dezentem Button "E-Mail hinterlassen"
