@@ -4,6 +4,16 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-09-15
+
+### Termin direkt buchen auf der Startseite
+- Im Bereich "Pilot-Partner:in werden" ist "Erstgespräch direkt buchen" jetzt der Hauptweg: der rote Button öffnet den Calendly-Kalender für ein 30-minütiges, unverbindliches Kennenlernen
+- Das E-Mail-Formular bleibt als Alternative darunter ("Gerade kein passender Termin dabei?") mit dezentem Button "E-Mail hinterlassen"
+- Auch nach dem Absenden der E-Mail-Adresse wird der Buchungslink angeboten
+- Auf Deutsch und Englisch
+
+---
+
 ## 2026-09-08
 
 ### Neuer Demo-Tab "Abschluss" (Nachbereitung nach dem Termin)

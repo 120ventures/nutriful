@@ -182,7 +182,7 @@ const de = {
     faqTitle: "Häufige Fragen",
     formName: "Ihr Name",
     formEmail: "ihre@praxis.at",
-    formSubmit: "Erstgespräch anfragen",
+    formSubmit: "E-Mail hinterlassen",
     formSubmitting: "Moment ...",
     formConsent:
       "Mit dem Absenden stimmen Sie zu, dass wir Sie zum Pilotprogramm kontaktieren. Ihre Daten werden verschlüsselt übertragen und sicher gespeichert.",
@@ -191,6 +191,12 @@ const de = {
     formDoneTitle: "Danke für Ihr Interesse! 🌱",
     formDoneText:
       "Wir melden uns innerhalb weniger Tage persönlich bei Ihnen, um ein kurzes Erstgespräch zu vereinbaren.",
+    formDoneBook: "Oder Sie wählen gleich einen Termin:",
+    formOr: "oder",
+    formBook: "Erstgespräch direkt buchen",
+    formBookLead: "Der schnellste Weg: Wählen Sie gleich einen Termin für ein kurzes Kennenlernen.",
+    formBookHint: "30 Minuten, online, unverbindlich - Sie wählen den Zeitpunkt, der Ihnen passt.",
+    formEmailLead: "Gerade kein passender Termin dabei? Hinterlassen Sie Ihre E-Mail, wir melden uns persönlich.",
     footerDisclaimer:
       "Nutriful ist ein Werkzeug zur Begleitung von Ernährungsberatung und ersetzt keine medizinische Diagnose oder Behandlung.",
     imprint: "Impressum",
@@ -383,7 +389,7 @@ const en: typeof de = {
     faqTitle: "Frequently asked questions",
     formName: "Your name",
     formEmail: "you@practice.at",
-    formSubmit: "Request a first call",
+    formSubmit: "Leave my email",
     formSubmitting: "One moment ...",
     formConsent:
       "By submitting you agree that we may contact you about the pilot programme. Your data is transmitted encrypted and stored securely.",
@@ -392,6 +398,12 @@ const en: typeof de = {
     formDoneTitle: "Thank you for your interest! 🌱",
     formDoneText:
       "We will get in touch personally within a few days to arrange a short first call.",
+    formDoneBook: "Or pick a time right away:",
+    formOr: "or",
+    formBook: "Book a first call directly",
+    formBookLead: "The fastest way: pick a time right away for a short intro call.",
+    formBookHint: "30 minutes, online, no strings attached - you choose the time that suits you.",
+    formEmailLead: "No suitable slot right now? Leave your email and we will get in touch personally.",
     footerDisclaimer:
       "Nutriful is a tool that supports nutrition counselling and does not replace medical diagnosis or treatment.",
     imprint: "Imprint",

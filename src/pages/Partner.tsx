@@ -25,6 +25,32 @@ import {
   Check,
 } from "lucide-react";
 
+/** Direct booking for a first call - the same link used in the outreach mails. */
+const CALENDLY_URL = "https://calendly.com/andrea-buttinger-120/new-meeting-2";
+
+const BookCallLink = ({
+  location,
+  className = "",
+}: {
+  location: string;
+  className?: string;
+}) => {
+  const t = copy(useLang()).landing;
+  return (
+    <a
+      href={CALENDLY_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => phCapture("calendly_click", { location })}
+      className={`inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 text-base font-medium text-primary-foreground transition-opacity hover:opacity-90 ${className}`}
+    >
+      <CalendarCheck className="h-4 w-4" strokeWidth={2} />
+      {t.formBook}
+      <ArrowRight className="h-4 w-4" />
+    </a>
+  );
+};
+
 
 
 
@@ -138,48 +164,66 @@ const PartnerForm = ({ compact = false }: { compact?: boolean }) => {
         <p className="mt-1 text-sm text-muted-foreground">
           {t.formDoneText}
         </p>
+        <p className="mt-4 text-sm text-muted-foreground">{t.formDoneBook}</p>
+        <BookCallLink location="form_done" className="mt-2" />
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full text-left">
-      <div className={`flex flex-col gap-3 ${compact ? "sm:flex-row" : ""}`}>
-        <Input
-          type="text"
-          placeholder={t.formName}
-          value={name}
-          onChange={(e) => {
-            markStart();
-            setName(e.target.value);
-          }}
-          aria-label="Name"
-          className="h-12 rounded-xl border-border bg-card text-base"
-        />
-        <Input
-          type="email"
-          inputMode="email"
-          placeholder={t.formEmail}
-          value={email}
-          onChange={(e) => {
-            markStart();
-            setEmail(e.target.value);
-          }}
-          aria-label="Email"
-          className="h-12 rounded-xl border-border bg-card text-base"
-        />
-        <Button
-          type="submit"
-          disabled={submitting}
-          className="h-12 shrink-0 rounded-xl px-6 text-base font-medium"
-        >
-          {submitting ? t.formSubmitting : t.formSubmit}
-        </Button>
+    <div className="w-full text-left">
+      <p className="text-sm text-muted-foreground">{t.formBookLead}</p>
+      <BookCallLink location="pilot_form" className="mt-3" />
+      <p className="mt-2 text-xs text-muted-foreground">{t.formBookHint}</p>
+
+      <div className="my-8 flex items-center gap-4" aria-hidden="true">
+        <span className="h-px flex-1 bg-border" />
+        <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+          {t.formOr}
+        </span>
+        <span className="h-px flex-1 bg-border" />
       </div>
-      <p className="mt-2 text-xs text-muted-foreground">
-        {t.formConsent}
-      </p>
-    </form>
+
+      <form onSubmit={handleSubmit}>
+        <p className="mb-3 text-sm text-muted-foreground">{t.formEmailLead}</p>
+        <div className={`flex flex-col gap-3 ${compact ? "sm:flex-row" : ""}`}>
+          <Input
+            type="text"
+            placeholder={t.formName}
+            value={name}
+            onChange={(e) => {
+              markStart();
+              setName(e.target.value);
+            }}
+            aria-label="Name"
+            className="h-11 rounded-xl border-border bg-card text-base"
+          />
+          <Input
+            type="email"
+            inputMode="email"
+            placeholder={t.formEmail}
+            value={email}
+            onChange={(e) => {
+              markStart();
+              setEmail(e.target.value);
+            }}
+            aria-label="Email"
+            className="h-11 rounded-xl border-border bg-card text-base"
+          />
+          <Button
+            type="submit"
+            variant="outline"
+            disabled={submitting}
+            className="h-11 shrink-0 rounded-xl border-border bg-card px-6 text-base font-medium hover:bg-muted"
+          >
+            {submitting ? t.formSubmitting : t.formSubmit}
+          </Button>
+        </div>
+        <p className="mt-2 text-xs text-muted-foreground">
+          {t.formConsent}
+        </p>
+      </form>
+    </div>
   );
 };
 
