@@ -31,6 +31,12 @@ const de = {
       medication: "Medikation",
       appointments: "Termine",
       planned: "geplant",
+      intakeTitle: "Vor dem Erstgespräch erledigt",
+      intakeHint: "Von Ihrer Klient:in in der App ausgefüllt - nichts abzutippen, nichts nachzufordern.",
+      anamnesis: "Anamnesebogen",
+      consent: "Datenschutz-Einverständnis",
+      filledOn: "ausgefüllt am",
+      grantedOn: "erteilt am",
     },
     history: {
       tracked: "Tage getrackt",
@@ -55,6 +61,8 @@ const de = {
     chat: {
       title: "Chat mit",
       lead: "Kurze Fragen zwischen den Terminen - mit dem Verlauf direkt daneben statt auf Ihrer privaten Nummer.",
+      badge: "Antwortzeit: innerhalb von 2 Werktagen",
+      badgeHint: "Legen Sie selbst fest - Ihre Klient:in sieht es oben im Chat.",
       typing: "tippt ...",
       placeholder: "Nachricht an Ihre Klient:in ...",
       label: "Nachricht",
@@ -117,7 +125,7 @@ const de = {
     eyebrow: "Interaktive Demo",
     h1: "Alle Klient:innen im Überblick",
     intro:
-      "Das hier ist eine Demo mit fiktiven Daten: drei Beispiel-Klient:innen zum Ausprobieren, ohne Login und ohne Anmeldung. Sie sehen darin, wie Nutriful Sie bei der Kommunikation zwischen den Terminen, beim Erstellen der Ernährungspläne und beim Verfolgen des Fortschritts Ihrer Klient:innen unterstützt.",
+      "Das hier ist eine Demo mit fiktiven Daten: drei Beispiel-Klient:innen zum Ausprobieren, ohne Login und ohne Anmeldung. Sie sehen darin, wie Nutriful Sie bei der Vorbereitung, der Kommunikation zwischen den Terminen, der Dokumentation und beim Termin-Abschluss unterstützt.",
     home: "Startseite",
     tabs: {
       briefing: "Termin-Briefing",
@@ -137,7 +145,7 @@ const de = {
   landing: {
     eyebrow: "Für Diätolog:innen & Ernährungsberater:innen",
     h1: "Ihre Klient:innen. Ein Ort. Alles im Blick.",
-    sub: "Kommunikation, Ernährungspläne und der Fortschritt Ihrer Klient:innen - alles an einem Ort.",
+    sub: "Dokumentation, Vorbereitung und Kommunikation mit Ihren Klient:innen - alles an einem Ort.",
     ctaPilot: "Pilot-Partner:in werden",
     ctaDemo: "Demo ausprobieren",
     navDemo: "Demo",
@@ -224,6 +232,12 @@ const en: typeof de = {
       medication: "Medication",
       appointments: "Appointments",
       planned: "planned",
+      intakeTitle: "Done before the first consultation",
+      intakeHint: "Completed by your client in the app - nothing to retype, nothing to chase.",
+      anamnesis: "Intake form",
+      consent: "Data-protection consent",
+      filledOn: "completed on",
+      grantedOn: "given on",
     },
     history: {
       tracked: "days tracked",
@@ -248,6 +262,8 @@ const en: typeof de = {
     chat: {
       title: "Chat with",
       lead: "Quick questions between appointments - with the record right beside them instead of on your private number.",
+      badge: "Response time: within 2 working days",
+      badgeHint: "You set this yourself - your client sees it at the top of the chat.",
       typing: "is typing ...",
       placeholder: "Message your client ...",
       label: "Message",
@@ -310,7 +326,7 @@ const en: typeof de = {
     eyebrow: "Interactive demo",
     h1: "All your clients at a glance",
     intro:
-      "This is a demo with fictional data: three example clients to try out, no login and no sign-up. It shows how Nutriful supports you with communication between appointments, building nutrition plans and following your clients' progress.",
+      "This is a demo with fictional data: three example clients to try out, no login and no sign-up. It shows how Nutriful supports you with preparation, communication between appointments, documentation and the appointment wrap-up.",
     home: "Home",
     tabs: {
       briefing: "Appointment briefing",
@@ -330,7 +346,7 @@ const en: typeof de = {
   landing: {
     eyebrow: "For dietitians & nutrition counsellors",
     h1: "Your clients. One place. Everything in view.",
-    sub: "Communication, nutrition plans and your clients' progress - all in one place.",
+    sub: "Documentation, preparation and communication with your clients - all in one place.",
     ctaPilot: "Become a pilot partner",
     ctaDemo: "Try the demo",
     navDemo: "Demo",

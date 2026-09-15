@@ -58,6 +58,8 @@ export type DemoProfile = {
   conditions: string[];
   intolerances: string[];
   medication: string[];
+  /** Filled in by the client in the app before the first consultation. */
+  intake: { anamnesisDate: string; consentDate: string };
 };
 
 /** The demo is anchored to one fixed day so dates and program days line up. */
@@ -318,6 +320,7 @@ export const demoClients: DemoClient[] = [
       conditions: ["Hashimoto-Thyreoiditis, gut eingestellt"],
       intolerances: ["keine bekannt"],
       medication: ["L-Thyroxin 50 µg"],
+      intake: { anamnesisDate: "07.08.2026", consentDate: "07.08.2026" },
     },
     appointments: [
       {
@@ -446,6 +449,7 @@ export const demoClients: DemoClient[] = [
       conditions: ["keine"],
       intolerances: ["keine bekannt"],
       medication: ["keine"],
+      intake: { anamnesisDate: "11.08.2026", consentDate: "11.08.2026" },
     },
     appointments: [
       {
@@ -560,6 +564,7 @@ export const demoClients: DemoClient[] = [
       conditions: ["Verdacht auf Reizdarmsyndrom", "Eisenmangel 2025, behandelt"],
       intolerances: ["Laktose (H2-Atemtest positiv)", "Weizen in Abklärung"],
       medication: ["keine"],
+      intake: { anamnesisDate: "12.08.2026", consentDate: "12.08.2026" },
     },
     appointments: [
       {

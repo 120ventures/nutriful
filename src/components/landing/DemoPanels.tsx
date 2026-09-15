@@ -3,6 +3,8 @@ import {
   AlertTriangle,
   CalendarDays,
   Check,
+  CheckCircle2,
+  Clock,
   FileText,
   MessageCircle,
   Plus,
@@ -677,7 +679,15 @@ export const ChatView = ({ client }: { client: DemoClient }) => {
         </p>
       </div>
 
-      <div className="mt-4 flex-1 space-y-1 overflow-y-auto rounded-xl bg-muted/50 p-3">
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary/10 px-2.5 py-1 text-[11px] font-medium text-secondary">
+          <Clock className="h-3 w-3" />
+          {t.chat.badge}
+        </span>
+        <span className="text-[10px] font-light text-muted-foreground">{t.chat.badgeHint}</span>
+      </div>
+
+      <div className="mt-3 flex-1 space-y-1 overflow-y-auto rounded-xl bg-muted/50 p-3">
         {messages.map((m, i) => (
           <ChatBubble key={`${i}-${m.text}`} message={m} />
         ))}
@@ -912,6 +922,29 @@ export const ProfileView = ({ client }: { client: DemoClient }) => {
         <p className="text-xs font-light text-muted-foreground">
           {t.profile.lead}
         </p>
+      </div>
+
+      <div className="mt-4 rounded-xl border border-secondary/30 bg-secondary/5 p-4">
+        <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+          {t.profile.intakeTitle}
+        </p>
+        <div className="mt-2 flex flex-wrap gap-x-6 gap-y-1.5">
+          <span className="inline-flex items-center gap-1.5 text-xs">
+            <CheckCircle2 className="h-3.5 w-3.5 text-secondary" />
+            <span className="font-medium">{t.profile.anamnesis}</span>
+            <span className="font-light text-muted-foreground">
+              {t.profile.filledOn} {p.intake.anamnesisDate}
+            </span>
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-xs">
+            <CheckCircle2 className="h-3.5 w-3.5 text-secondary" />
+            <span className="font-medium">{t.profile.consent}</span>
+            <span className="font-light text-muted-foreground">
+              {t.profile.grantedOn} {p.intake.consentDate}
+            </span>
+          </span>
+        </div>
+        <p className="mt-1.5 text-[10px] font-light text-muted-foreground">{t.profile.intakeHint}</p>
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-2">

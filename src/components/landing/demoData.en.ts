@@ -227,6 +227,7 @@ export const demoClients: DemoClient[] = [
       conditions: ["Hashimoto's thyroiditis, well controlled"],
       intolerances: ["none known"],
       medication: ["Levothyroxine 50 \u00b5g"],
+      intake: { anamnesisDate: "7 Aug 2026", consentDate: "7 Aug 2026" },
     },
     appointments: [
       {
@@ -355,6 +356,7 @@ export const demoClients: DemoClient[] = [
       conditions: ["none"],
       intolerances: ["none known"],
       medication: ["none"],
+      intake: { anamnesisDate: "11 Aug 2026", consentDate: "11 Aug 2026" },
     },
     appointments: [
       {
@@ -469,6 +471,7 @@ export const demoClients: DemoClient[] = [
       conditions: ["Suspected irritable bowel syndrome", "Iron deficiency 2025, treated"],
       intolerances: ["Lactose (positive H2 breath test)", "Wheat under investigation"],
       medication: ["none"],
+      intake: { anamnesisDate: "12 Aug 2026", consentDate: "12 Aug 2026" },
     },
     appointments: [
       {

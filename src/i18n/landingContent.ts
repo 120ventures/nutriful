@@ -1,6 +1,7 @@
 import {
   CalendarCheck,
   ClipboardList,
+  FileText,
   LineChart,
   MessageCircle,
   ShieldCheck,
@@ -39,12 +40,12 @@ const de = {
     {
       icon: MessageCircle,
       title: "Kommunikation",
-      text: "Rückfragen zwischen den Terminen laufen über Nutriful statt über Ihre private Nummer - mit dem Verlauf der Klient:in direkt daneben, statt aus dem Gedächtnis.",
+      text: "Rückfragen zwischen den Terminen laufen über Nutriful statt über Ihre private Nummer - mit dem Verlauf direkt daneben. Sie legen fest, wann Sie antworten; Ihre Klient:innen sehen diese Antwortzeit, nicht Ihre Erreichbarkeit.",
     },
     {
-      icon: ClipboardList,
-      title: "Ernährungspläne",
-      text: "Pläne aus Bausteinen zusammenstellen - nach Mahlzeit, Zutat und Ernährungsform. Einmal gebaut, bei der nächsten Klient:in wiederverwendbar.",
+      icon: FileText,
+      title: "Dokumentation",
+      text: "Anamnese, Verlauf und Termin-Abschluss entlang des diätologischen Prozesses - aus dem Verlauf vorbefüllt, Sie ergänzen nur noch. Zusammenfassung, Honorarnote und Bericht an Zuweiser:innen entstehen im selben Schritt.",
     },
     {
       icon: LineChart,
@@ -78,7 +79,7 @@ const de = {
     {
       step: "1",
       title: "Klient:in einladen",
-      text: "Sie laden Ihre Klient:in mit einem Link in Nutriful ein - keine Installation auf Ihrer Seite nötig.",
+      text: "Sie laden Ihre Klient:in mit einem Link in Nutriful ein - keine Installation auf Ihrer Seite nötig. Anamnesebogen und Datenschutz-Einverständnis füllt sie vor dem Erstgespräch digital aus.",
     },
     {
       step: "2",
@@ -105,6 +106,10 @@ const de = {
       a: "Einladungslink öffnen, loslegen. Das Programm ist so gebaut, dass Tracken in unter zwei Minuten pro Tag machbar ist - je einfacher, desto höher die Durchhaltequote.",
     },
     {
+      q: "Müssen meine Klient:innen tracken?",
+      a: "Nein. Anamnese, Dokumentation, Termin-Abschluss und Honorarnote funktionieren auch ohne einen einzigen Eintrag der Klient:in. Tracking ist ein Zusatz für die, bei denen es passt - Sie entscheiden das pro Klient:in.",
+    },
+    {
       q: "Wie sicher sind die Daten?",
       a: "Alle Daten werden verschlüsselt übertragen und sicher gespeichert. Löschung ist jederzeit möglich. Details regeln wir transparent in der Pilot-Vereinbarung.",
     },
@@ -116,7 +121,7 @@ const de = {
     { label: "3 Tage Funkstille", rotate: "rotate-2" },
     { label: "„Zählt das als Snack?“", rotate: "-rotate-2" },
   ],
-  demoHighlights: ["Termin-Briefing", "Verlauf pro Tag", "Chat mit Klient:innen", "Plan-Baukasten"],
+  demoHighlights: ["Termin-Briefing", "Verlauf pro Tag", "Chat mit Klient:innen", "Abschluss mit Doku und Honorarnote"],
 };
 
 const en: typeof de = {
@@ -146,12 +151,12 @@ const en: typeof de = {
     {
       icon: MessageCircle,
       title: "Communication",
-      text: "Questions between appointments run through Nutriful instead of your private number - with the client's record right beside them, instead of from memory.",
+      text: "Questions between appointments run through Nutriful instead of your private number - with the client's record right beside them. You set when you reply; your clients see that response time, not your availability.",
     },
     {
-      icon: ClipboardList,
-      title: "Nutrition plans",
-      text: "Build plans from recipes - by meal, ingredient and dietary form. Built once, reusable with the next client.",
+      icon: FileText,
+      title: "Documentation",
+      text: "Intake, record and appointment wrap-up along the dietetic process - pre-filled from the record, you only add what is missing. Summary, invoice and referrer report are created in the same step.",
     },
     {
       icon: LineChart,
@@ -185,7 +190,7 @@ const en: typeof de = {
     {
       step: "1",
       title: "Invite your client",
-      text: "You invite your client into Nutriful with a link - nothing to install on your side.",
+      text: "You invite your client into Nutriful with a link - nothing to install on your side. She completes the intake form and the data-protection consent digitally before the first consultation.",
     },
     {
       step: "2",
@@ -212,6 +217,10 @@ const en: typeof de = {
       a: "Open the invitation link and start. The programme is built so that tracking takes under two minutes a day - the simpler it is, the more people stick with it.",
     },
     {
+      q: "Do my clients have to track?",
+      a: "No. Intake, documentation, appointment wrap-up and invoicing work without a single entry from the client. Tracking is an add-on for those it suits - you decide that per client.",
+    },
+    {
       q: "How secure is the data?",
       a: "All data is transmitted encrypted and stored securely. Deletion is possible at any time. We set out the details transparently in the pilot agreement.",
     },
@@ -223,7 +232,7 @@ const en: typeof de = {
     { label: "3 days of silence", rotate: "rotate-2" },
     { label: '"Does that count as a snack?"', rotate: "-rotate-2" },
   ],
-  demoHighlights: ["Appointment briefing", "Day-by-day record", "Chat with clients", "Plan builder"],
+  demoHighlights: ["Appointment briefing", "Day-by-day record", "Chat with clients", "Wrap-up with notes and invoice"],
 };
 
 export const landingContent = (lang: Lang) => (lang === "en" ? en : de);
