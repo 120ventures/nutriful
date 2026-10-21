@@ -1,34 +1,67 @@
-# Gutiful
+# Nutriful
 
-**The honest anti-IgG kit.** A hybrid intolerance kit for Austria: a valid finger-prick test where one exists (lactose gene test) plus a guided app self-experiment for everything blood can't answer (fructose, sorbitol, histamine, FODMAPs).
+**Die Kommunikationsplattform für die Ernährungsberatung.** Nutriful bringt Kommunikation, Ernährungspläne, Verlauf und Nachbereitung zwischen Diätolog:innen bzw. Ernährungsberater:innen und ihren Klient:innen an einen Ort – statt WhatsApp, E-Mails und Zettel.
 
-> "We test what can be tested, and guide you where no valid test exists."
+Live: [nutriful.at](https://nutriful.at) (Deutsch) · [nutriful.at/en](https://nutriful.at/en) (English)
 
-**Name:** Gutiful = gut + beautiful (and German "gut" = good). Feel gutiful.
-**Domain:** gutiful.at (bought 2026-07-23). Note: gutiful.com is taken by a third party.
+Ein Projekt der 120 Ventures GmbH. Hervorgegangen aus dem Gutiful-Prototyp (August 2026), seit 13.08.2026 als eigenes Projekt.
 
 ## Status
 
-- **Stage:** 120V Stage 0 → preparing Stage 1 sprint
-- **Idea Cradle:** filled, in voting ([Notion](https://app.notion.com/p/3a43da1f14408033871beb0800aa0469), still under working title "Gut-Feel")
-- **Next:** Landing page on gutiful.at (Stage 1 sprint: LP + pre-order test + interviews, Luumi playbook)
+- **Phase:** Pilot-Vorbereitung. Die Website sammelt Pilot-Partner:innen (Erstgespräch via Calendly oder E-Mail-Formular).
+- **Live:** B2B-Landingpage und interaktive Demo mit fiktiven Klient:innen-Daten.
+- **Noch nicht im Repo:** die eigentliche Pilot-App (Praxis- und Klient:innen-Seite). Produktentscheidungen und Flows liegen in Notion und Figma.
 
-## Core facts
+Was sich auf der Website geändert hat, steht im [CHANGELOG.md](CHANGELOG.md).
 
-- 1 in 3 Austrians self-report a food intolerance, only ~21% of the symptomatic ever get a diagnosis
-- H2 breath tests: not covered by ÖGK, up to 240 EUR, ~60-day waits, one appointment per sugar
-- IgG kits (70-190 EUR) are rejected by every allergy society; KONSUMENT rated 0 of 10 recommendable
-- Austria has no DiGA reimbursement until ~2027 → medical rivals (Bayer/Cara Care) locked out
+## Was die Website enthält
 
-## Business model
+| Route | Inhalt |
+|---|---|
+| `/` und `/en` | Landingpage: Pain-Points, vier Säulen (Kommunikation, Pläne, Fortschritt, Abschluss), Demo-Teaser, Pilot-Partner:in werden, FAQ |
+| `/demo` und `/en/demo` | Interaktive Demo: Tagesübersicht, drei fiktive Klient:innen, Termin-Briefing, Verlauf, Chat, Plan-Baukasten (64 Rezepte mit Nährwerten), Profil, Abschluss |
+| `/impressum`, `/datenschutz`, `/agb` | Rechtstexte (nur auf Deutsch, rechtlich maßgeblich) |
 
-- **Kit:** 99-129 EUR one-time (valid test + guided 4-6 week program)
-- **Alltag subscription:** 5.99 EUR/month or 49 EUR/year (Austrian product swaps, recipes, eating-out help, retests)
-- **Never:** ads, IgG tests, supplement upsells
+Alle Daten in der Demo sind erfunden. Es werden keine echten Partner- oder Klient:innen-Daten verwendet.
 
-## Docs
+## Technik
 
-- [Concept](docs/concept.md) - product, positioning, target market
-- [Research base](docs/research.md) - verified facts with sources
-- [Open decisions](docs/open-decisions.md) - unresolved product/design questions
-- [Stage 1 sprint plan](docs/stage1-sprint-plan.md) - the 2-week validation plan
+- **Frontend:** React + TypeScript, Vite, Tailwind CSS, shadcn/ui (Radix), react-router, i18n für DE/EN
+- **Backend:** Supabase (eigenes Nutriful-Projekt). Tabelle für Pilot-Anfragen (Name, E-Mail, Quelle), Migrationen unter `supabase/migrations`
+- **Analytics:** PostHog EU Cloud, nur nach Einwilligung über Cookiebot (Kategorie „Statistik“). Auf localhost deaktiviert.
+- **Hosting:** Netlify. Build `pnpm run build`, veröffentlicht `dist/`, SPA-Redirect auf `index.html` (siehe `netlify.toml`). Jeder Push auf `main` geht live.
+
+## Lokal entwickeln
+
+```bash
+pnpm install
+cp .env.example .env.local   # Supabase-URL und -Key, optional PostHog und Cookiebot
+pnpm dev
+```
+
+Ohne PostHog-Key gibt es weder Analytics noch Cookie-Banner. Ohne Supabase-Werte funktioniert alles außer dem Anfrageformular.
+
+## Prüfen
+
+```bash
+pnpm typecheck
+pnpm lint
+pnpm test:unit     # Vitest
+pnpm test:e2e      # Playwright
+pnpm smoke         # kurzer Playwright-Smoke-Test gegen den Build
+```
+
+## Ordner
+
+- `src/pages` – Partner (Landingpage), Demo, Legal, NotFound
+- `src/components`, `src/i18n`, `src/lib`, `src/integrations` – UI, Übersetzungen, Demo-Daten, Supabase-Client
+- `supabase/` – Migrationen, Seed, Edge Functions
+- `tests/` – unit, e2e, smoke
+- `docs/` – Projektregeln (Formatierung, Sicherheit, Cookie-Consent) und Boilerplate-Hinweise
+- `docs/archive/gutiful/` – Unterlagen des Gutiful-Prototyps, aus dem Nutriful entstanden ist (historisch, nicht mehr gültig)
+
+## Links
+
+- Produktentscheidungen und Pilot-Pitch: Notion (Nutriful Venture-Wiki)
+- Screens und Flows: Figma
+- Business-Plan: Google Sheets
