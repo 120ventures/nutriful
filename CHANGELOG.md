@@ -4,6 +4,40 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-10-29
+
+### Eigener Text an der orangen Linie
+- Der Abschnitt mit der Schlangenlinie hat einen eigenen Titel und Text, nicht mehr denselben wie der fliederfarbene Abschnitt darüber
+
+## 2026-10-28
+
+### Neues Landing-Design zum Ansehen
+- Die Figma-Seite Nutriful Web gibt es lokal unter `/design`
+- Die Charakter-Sticker (Granatapfel, Apfel, Blätter, Aubergine, Bohne, Erdbeere) sowie Stern und Punkt nutzen die mitgegebenen Grafiken, damit sie nicht mehr verzerrt sind
+- Schriften sind jetzt Londrina Solid und DM Sans
+- Nach dem Foto folgt der neue Abschnitt „Die Beratung ist stark“: orange Schlangenlinie von Termin 1 zu Termin 2, darunter „Mit Nutriful“ auf grüner Linie
+- Die beiden Linien zeichnen sich beim Hineinrollen, und die Schritte erscheinen jeweils dort, wo die Linie ankommt
+- Auf dem Handy steht die Strecke senkrecht: Termin 1 oben, Termin 2 unten
+- Im Prototyp lassen sich jetzt auch Nachrichten und Einstellungen öffnen
+- Schrift auf der neuen Seite ist mindestens 16px, Beschriftungen nicht kleiner als 14px
+- Anmeldung fragt nach Name und E-Mail, daneben lässt sich direkt ein Gespräch buchen
+- Oben rechts lässt sich zwischen Deutsch und Englisch wechseln (`/design` und `/en/design`)
+- Die Navigation bleibt beim Scrollen oben stehen
+- Das Favicon ist der lächelnde Apfel auf Orange
+- Die Navigation ist weiß und bleibt oben
+- „Mit Nutriful“ hat mehr Abstand oben und unten
+- Die Klick-Demo liegt auf einer eigenen Seite und füllt das Fenster
+- Die Anmeldung nennt nur noch den Pilot in Österreich, dazu den Hinweis zum Absenden
+- Der Apfel startet kleiner und höher, sitzt am Ende weniger tief in der Schale, und die mobile Navigation ist mittig
+- Die Apfel-Animation ist etwas lebhafter: der Apfel federt in die Schale, die Schale setzt auf, und die Sterne springen heraus
+- Die Markierungen an der orangenen Linie sitzen auf den Bögen der Strecke
+- Anmeldung ist mittig, mit weniger Abstand zwischen Überschrift und Text
+- FAQ ist aus der Navigation, auf dem Handy liegen Seiten und Sprache im Menü
+- Die Session-Linien auf dem Handy zeichnen sich beim Scrollen, die Etiketten kommen mit der Linie
+- Name und E-Mail stehen untereinander
+
+---
+
 ## 2026-09-15
 
 ### Neue Säule "Pläne"
