@@ -1,7 +1,8 @@
 import { FormEvent, useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
-import { localePath, useLang } from "@/i18n"
+import { Link, useLocation } from "react-router-dom"
+import { localePath, stripLocale, useLang } from "@/i18n"
 import { newDesignCopy } from "@/i18n/newDesignCopy"
+import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink"
 import "@/styles/new-design.css"
 import mascotPomegranate from "@/assets/new-design/7f884.svg"
 import mascotApple from "@/assets/new-design/0b611.svg"
@@ -15,6 +16,8 @@ import stickerLeaves from "@/assets/new-design/leaves.png"
 import stickerEggplant from "@/assets/new-design/eggplant.png"
 import stickerBean from "@/assets/new-design/bean.png"
 import stickerStrawberry from "@/assets/new-design/strawberry.png"
+import photoRaspberries from "@/assets/new-design/raspberries.jpg"
+import photoOranges from "@/assets/new-design/oranges.jpg"
 import giantFruit from "@/assets/new-design/a0cbc.svg"
 import bowl from "@/assets/new-design/a22ac.svg"
 import smilingFruit from "@/assets/new-design/54dc1.svg"
@@ -79,13 +82,6 @@ const featureCards = [
   { icon: "75987.svg", color: "violet" },
   { icon: "5b815.svg", color: "lime" },
   { icon: "b39af.svg", color: "orange" },
-]
-
-const benefitCards = [
-  { icon: "3536c.svg" },
-  { icon: "1b988.svg" },
-  { icon: "2b855.svg" },
-  { icon: "626b0.svg" },
 ]
 
 function Logo({ light = false, href = "#top" }: { light?: boolean; href?: string }) {
@@ -747,20 +743,24 @@ function DemoApplication({
   )
 }
 
-function SiteHeader({
+export function SiteHeader({
   lang,
   page = "home",
+  path,
 }: {
   lang: ReturnType<typeof useLang>
-  page?: "home" | "demo"
+  page?: "home" | "demo" | "legal"
+  path?: string
 }) {
   const t = newDesignCopy(lang)
   const home = localePath("/design", lang)
-  const demo = localePath("/design/demo", lang)
+  const here = path ?? (page === "demo" ? "/design/demo" : "/design")
   const onHome = page === "home"
   const [open, setOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
   const howHref = onHome ? "#how" : `${home}#how`
+  const whyHref = onHome ? "#why" : `${home}#why`
+  const faqHref = onHome ? "#faq" : `${home}#faq`
   const signupHref = onHome ? "#pilot" : `${home}#pilot`
 
   useEffect(() => {
@@ -783,23 +783,22 @@ function SiteHeader({
 
   const pageLinks = (inPanel: boolean) => (
     <nav aria-label={t.navLabel}>
+      <a href={whyHref} onClick={inPanel ? close : undefined}>
+        {t.navWhy}
+      </a>
       <a href={howHref} onClick={inPanel ? close : undefined}>
         {t.navHow}
       </a>
-      <Link
-        to={demo}
-        aria-current={onHome ? undefined : "page"}
-        onClick={inPanel ? close : undefined}
-      >
-        {t.navDemo}
-      </Link>
+      <a href={faqHref} onClick={inPanel ? close : undefined}>
+        {t.navFaq}
+      </a>
     </nav>
   )
 
   const languages = (inPanel: boolean) => (
     <div className="lang-picker" role="group" aria-label={t.langLabel}>
       <Link
-        to={localePath(onHome ? "/design" : "/design/demo", "de")}
+        to={localePath(here, "de")}
         hrefLang="de"
         lang="de"
         aria-current={lang === "de" ? "page" : undefined}
@@ -808,7 +807,7 @@ function SiteHeader({
         DE
       </Link>
       <Link
-        to={localePath(onHome ? "/design" : "/design/demo", "en")}
+        to={localePath(here, "en")}
         hrefLang="en"
         lang="en"
         aria-current={lang === "en" ? "page" : undefined}
@@ -847,6 +846,31 @@ function SiteHeader({
         {languages(true)}
       </div>
     </header>
+  )
+}
+
+export function DesignFooter() {
+  const lang = useLang()
+  const t = newDesignCopy(lang)
+  const { pathname } = useLocation()
+  const other = lang === "de" ? "en" : "de"
+
+  return (
+    <footer>
+      <div>
+        <Logo light />
+        <p>{t.footerNote}</p>
+      </div>
+      <nav>
+        <Link to={localePath("/design/impressum", lang)}>{t.imprint}</Link>
+        <Link to={localePath("/design/datenschutz", lang)}>{t.privacy}</Link>
+        <ConsentSettingsLink className="footer-cookies" />
+        <Link to={localePath(stripLocale(pathname), other)}>
+          {lang === "de" ? "English" : "Deutsch"}
+        </Link>
+      </nav>
+      <Mascot index={3} sticker />
+    </footer>
   )
 }
 
@@ -1137,9 +1161,9 @@ export default function NewDesign() {
               {t.heroLine2} <span>{t.heroAccent}</span>
             </h1>
             <p className="hero-story-subtitle">{t.heroText}</p>
-            <Link className="button button-dark hero-story-cta" to={localePath("/design/demo", lang)}>
+            <a className="button button-dark hero-story-cta" href="#pilot">
               {t.heroCta}
-            </Link>
+            </a>
           </div>
 
           <div className="fruit-stage" aria-hidden="true">
@@ -1177,7 +1201,7 @@ export default function NewDesign() {
         </a>
       </aside>
 
-      <section className="section features" id="features">
+      <section className="section features" id="why">
         <div className="section-heading">
           <p className="eyebrow">{t.featuresEyebrow}</p>
           <h2>
@@ -1316,14 +1340,33 @@ export default function NewDesign() {
           </h2>
           <Mascot index={5} className="heading-mascot" sticker />
         </div>
-        <div className="benefit-grid mobile-card-scroller">
-          {benefitCards.map((benefit, index) => (
-            <article key={benefit.icon}>
-              <img src={icons[benefit.icon]} alt="" />
-              <h3>{t.benefits[index].title}</h3>
-              <p>{t.benefits[index].text}</p>
-            </article>
-          ))}
+        <div className="benefit-bento">
+          <article className="bento-card bento-peach">
+            <img className="bento-icon" src={icons["3536c.svg"]} alt="" />
+            <h3>{t.benefits[0].title}</h3>
+            <p>{t.benefits[0].text}</p>
+          </article>
+          <article className="bento-card bento-mint bento-mint-top">
+            <img className="bento-icon" src={icons["1b988.svg"]} alt="" />
+            <h3>{t.benefits[1].title}</h3>
+            <p>{t.benefits[1].text}</p>
+          </article>
+          <article className="bento-card bento-mint bento-mint-lower">
+            <img className="bento-icon" src={icons["2b855.svg"]} alt="" />
+            <h3>{t.benefits[2].title}</h3>
+            <p>{t.benefits[2].text}</p>
+          </article>
+          <figure className="bento-photo bento-photo-orange">
+            <img src={photoOranges} alt={t.benefitPhotoOrange} />
+          </figure>
+          <figure className="bento-photo bento-photo-raspberry">
+            <img src={photoRaspberries} alt={t.benefitPhotoRaspberry} />
+          </figure>
+          <article className="bento-card bento-sand">
+            <img className="bento-icon" src={icons["626b0.svg"]} alt="" />
+            <h3>{t.benefits[3].title}</h3>
+            <p>{t.benefits[3].text}</p>
+          </article>
         </div>
       </section>
 
@@ -1394,21 +1437,7 @@ export default function NewDesign() {
         </div>
       </section>
 
-      <footer>
-        <div>
-          <Logo light />
-          <p>{t.footerNote}</p>
-        </div>
-        <nav>
-          <a href="#top">{t.imprint}</a>
-          <a href="#top">{t.privacy}</a>
-          <a href="#top">{t.cookies}</a>
-          <Link to={localePath("/design", lang === "de" ? "en" : "de")}>
-            {lang === "de" ? "English" : "Deutsch"}
-          </Link>
-        </nav>
-        <Mascot index={3} sticker />
-      </footer>
+      <DesignFooter />
     </main>
     </div>
   )

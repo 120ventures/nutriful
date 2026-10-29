@@ -1,6 +1,7 @@
 import type { Lang } from "@/i18n"
 
 const de = {
+  navWhy: "Warum wir",
   navHow: "So funktioniert’s",
   navDemo: "Demo",
   navFaq: "FAQ",
@@ -12,7 +13,7 @@ const de = {
   heroAccent: "Alles im Blick.",
   heroText:
     "Dokumentation, Vorbereitung und Kommunikation mit Ihren Klient:innen – alles an einem Ort.",
-  heroCta: "Demo ausprobieren",
+  heroCta: "Anmelden",
   scroll: "Scrollen",
   stripBadge: "Neu",
   stripText: "Für Pilot-Praxen mit Einladung:",
@@ -27,7 +28,7 @@ const de = {
     },
     {
       title: "Dokumentation",
-      text: "Anamnese, Termin-Protokoll und Abschluss in einer festen Struktur, aus der Anamnese vorbefüllt. Zusammenfassung und Arztbrief entstehen wörtlich aus Ihren Protokollen – nichts wird umformuliert.",
+      text: "Anamnese, Termin-Protokoll und Abschluss in einer festen Struktur, aus der Anamnese vorbefüllt.",
     },
     {
       title: "Erinnerungen",
@@ -104,6 +105,8 @@ const de = {
       text: "Verschlüsselte Übertragung, sichere Speicherung, Löschung jederzeit – Vertrauen ist die Basis Ihrer Klientenbeziehung, auch digital.",
     },
   ],
+  benefitPhotoRaspberry: "Himbeeren",
+  benefitPhotoOrange: "Orangenscheiben",
   pilotTitle: "Wir bauen Nutriful gemeinsam mit Pilotpraxen.",
   pilotText:
     "Nutriful entsteht gerade in Österreich – gemeinsam mit einer kleinen Gruppe von Diätolog:innen und Ernährungsberater:innen, die es mit echten Klient:innen testen und laufend mitgestalten. Ehrlicher Austausch, und ein direkter Draht zu uns.",
@@ -145,9 +148,11 @@ const de = {
   imprint: "Impressum",
   privacy: "Datenschutz",
   cookies: "Cookie-Einstellungen",
+  backHome: "Zur Startseite",
 }
 
 const en: typeof de = {
+  navWhy: "Why choose us",
   navHow: "How it works",
   navDemo: "Demo",
   navFaq: "FAQ",
@@ -159,7 +164,7 @@ const en: typeof de = {
   heroAccent: "Everything in view.",
   heroText:
     "Documentation, preparation and communication with your clients – all in one place.",
-  heroCta: "Try the demo",
+  heroCta: "Sign up",
   scroll: "Scroll",
   stripBadge: "New",
   stripText: "For invited pilot practices:",
@@ -174,7 +179,7 @@ const en: typeof de = {
     },
     {
       title: "Documentation",
-      text: "Intake, session notes and close-out follow one structure, prefilled from the intake. Summaries and letters are taken word for word from your notes – nothing is rewritten.",
+      text: "Intake, session notes and close-out follow one structure, prefilled from the intake.",
     },
     {
       title: "Reminders",
@@ -251,6 +256,8 @@ const en: typeof de = {
       text: "Encrypted transfer, secure storage, deletion at any time – trust is the basis of your client relationship, digitally too.",
     },
   ],
+  benefitPhotoRaspberry: "Raspberries",
+  benefitPhotoOrange: "Orange slices",
   pilotTitle: "We are building Nutriful with pilot practices.",
   pilotText:
     "Nutriful is taking shape in Austria – together with a small group of dietitians and nutrition counsellors who test it with real clients and shape it as we go. Honest exchange, and a direct line to us.",
@@ -292,6 +299,7 @@ const en: typeof de = {
   imprint: "Imprint",
   privacy: "Privacy",
   cookies: "Cookie settings",
+  backHome: "Back to the start",
 }
 
 export const newDesignCopy = (lang: Lang) => (lang === "en" ? en : de)
