@@ -6,6 +6,18 @@ Overview of user-facing changes.
 
 ## 2026-10-29
 
+### Alltag als Kartenmosaik
+- Die mittlere Karte ist in zwei Karten geteilt, der Apfel-Sticker ist weg, Granatapfel und Blätter sitzen in den Ecken
+- Die Karten im Alltag-Abschnitt sind grau und färben sich beim Darüberfahren rosa, violett, lindgrün oder orange; die Fotos zoomen heran, die Infokarten haben Symbole
+- Impressum und Datenschutz der neuen Seite haben das neue Erscheinungsbild und denselben Text wie auf der bisherigen Website
+- Die Karten im Alltag-Abschnitt haben dieselbe Titelgröße wie die Karten darüber
+- Die Navigation verlinkt auf Warum wir, So funktioniert’s und FAQ; Warum wir führt zu den vier Karten
+- Die Symbole auf den Alltag-Karten drehen sich leicht, wenn man darüberfährt
+- Der Hero-Knopf heißt Anmelden und führt zur Anmeldung
+- Die Demo ist vorerst ausgeblendet
+- Im Kasten Dokumentation ist der Satz zur wörtlichen Zusammenfassung entfernt
+- „Was das in Ihrem Alltag bedeutet“ zeigt farbige Karten neben Fotos von Himbeeren und Orangen
+
 ### Eigener Text an der orangen Linie
 - Der Abschnitt mit der Schlangenlinie hat einen eigenen Titel und Text, nicht mehr denselben wie der fliederfarbene Abschnitt darüber
 
