@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Partner from "./pages/Partner";
+import NewDesign, { DesignDemo } from "./pages/NewDesign";
 import Legal from "./pages/Legal";
 import Demo from "./pages/Demo";
 import HtmlLang from "./i18n/HtmlLang";
@@ -20,6 +21,10 @@ const App = () => (
         <HtmlLang />
         <Routes>
           <Route path="/" element={<Partner />} />
+          <Route path="/design" element={<NewDesign />} />
+          <Route path="/design/demo" element={<DesignDemo />} />
+          <Route path="/en/design" element={<NewDesign />} />
+          <Route path="/en/design/demo" element={<DesignDemo />} />
           <Route path="/demo" element={<Demo />} />
           {/* English lives under /en. Legal pages stay German - they are the
               authoritative Austrian originals. */}
