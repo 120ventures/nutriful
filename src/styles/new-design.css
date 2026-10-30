@@ -988,7 +988,8 @@ footer > div p { max-width: 490px; font-family: 'DM Sans:Light'; font-size: 1rem
   }
 
   .hero-story-title {
-    top: 14%;
+    top: 12px;
+    padding-top: 0;
     left: 50%;
     width: calc(100% - 36px);
     transform: translateX(-50%);
@@ -1838,7 +1839,7 @@ footer > div p { max-width: 490px; font-family: 'DM Sans:Light'; font-size: 1rem
     overflow-y: hidden;
     overscroll-behavior-x: contain;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
+    touch-action: manipulation;
     scroll-snap-type: x mandatory;
     scroll-padding-left: 22px;
     scrollbar-width: none;
@@ -1855,7 +1856,6 @@ footer > div p { max-width: 490px; font-family: 'DM Sans:Light'; font-size: 1rem
   .benefit-grid article {
     flex: 0 0 min(82vw, 420px);
     scroll-snap-align: start;
-    scroll-snap-stop: always;
   }
 
   .feature-card {

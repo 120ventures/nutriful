@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-10-30
 
+### Handy: Hero und Karten
+- Der Hero-Text sitzt auf dem Handy höher; die Frucht-Animation bleibt an derselben Stelle
+- Die Karten lassen sich seitlich mit dem Finger wischen, ohne bei jeder Karte stehen zu bleiben
+
 ### Neue Seite ist live
 - Die neue Startseite ist unter nutriful.at und /en zu sehen
 - Impressum und Datenschutz nutzen dasselbe neue Erscheinungsbild

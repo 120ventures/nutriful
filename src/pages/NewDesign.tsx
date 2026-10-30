@@ -1015,8 +1015,8 @@ export default function NewDesign() {
       let startScroll = 0
 
       const pointerDown = (event: PointerEvent) => {
+        if (event.pointerType !== "mouse" || event.button !== 0) return
         if (scroller.scrollWidth <= scroller.clientWidth) return
-        if (event.pointerType === "mouse" && event.button !== 0) return
         dragging = true
         startX = event.clientX
         startScroll = scroller.scrollLeft
