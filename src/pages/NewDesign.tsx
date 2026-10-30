@@ -756,8 +756,8 @@ export function SiteHeader({
   path?: string
 }) {
   const t = newDesignCopy(lang)
-  const home = localePath("/design", lang)
-  const here = path ?? (page === "demo" ? "/design/demo" : "/design")
+  const home = localePath("/", lang)
+  const here = path ?? (page === "demo" ? "/design/demo" : "/")
   const onHome = page === "home"
   const [open, setOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
@@ -865,8 +865,8 @@ export function DesignFooter() {
         <p>{t.footerNote}</p>
       </div>
       <nav>
-        <Link to={localePath("/design/impressum", lang)}>{t.imprint}</Link>
-        <Link to={localePath("/design/datenschutz", lang)}>{t.privacy}</Link>
+        <Link to={localePath("/impressum", lang)}>{t.imprint}</Link>
+        <Link to={localePath("/datenschutz", lang)}>{t.privacy}</Link>
         <ConsentSettingsLink className="footer-cookies" />
         <Link to={localePath(stripLocale(pathname), other)}>
           {lang === "de" ? "English" : "Deutsch"}

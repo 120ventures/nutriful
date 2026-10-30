@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-10-30
 
+### Neue Seite ist live
+- Die neue Startseite ist unter nutriful.at und /en zu sehen
+- Impressum und Datenschutz nutzen dasselbe neue Erscheinungsbild
+
 ### Englische Rechtstexte und Anmeldung
 - Impressum und Datenschutz der neuen Seite erscheinen auf Englisch, wenn Englisch gewählt ist
 - Die Anmeldung speichert Name und E-Mail wie auf der bisherigen Website

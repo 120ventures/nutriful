@@ -67,11 +67,11 @@ export default function NewDesignLegal({ doc }: { doc: Exclude<LegalDocId, "agb"
   const t = newDesignCopy(lang)
   const page = lang === "en" ? legalDocsEn[doc] : legalDocs[doc]
   const on = lang === "en" ? " on " : " auf "
-  const home = localePath("/design", lang)
+  const home = localePath("/", lang)
 
   return (
     <div className="new-design">
-      <SiteHeader lang={lang} page="legal" path={`/design/${doc}`} />
+      <SiteHeader lang={lang} page="legal" path={`/${doc}`} />
       <main className="legal-page">
         <Link className="legal-back" to={home}>
           ← {t.backHome}
