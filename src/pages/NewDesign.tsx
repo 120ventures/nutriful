@@ -306,7 +306,7 @@ function DemoCalendar() {
           ))}
           <div className="calendar-event event-blue">09:00 Markus T.</div>
           <div className="calendar-event event-green">
-            <b>10:00–11:00</b>
+            <b>10:00 bis 11:00</b>
             <br />
             Lisa M.<small>Erstgespräch</small>
           </div>
@@ -433,7 +433,7 @@ function DemoMessages() {
       name: "Lisa M.",
       badge: "1 neu",
       time: "Heute, 09:12",
-      text: "Hier der neue Befund von meiner Hausärztin – passt das so als Foto?",
+      text: "Hier der neue Befund von meiner Hausärztin, passt das so als Foto?",
       unread: true,
     },
     {
@@ -679,7 +679,7 @@ function DemoSettings() {
         </div>
         <p className="settings-note">
           Ihre Daten liegen in der EU (Irland). Nutriful hat sinnvolle
-          Standardwerte – Sie müssen hier nichts ändern, um zu starten.
+          Standardwerte, Sie müssen hier nichts ändern, um zu starten.
         </p>
       </section>
     </>

@@ -89,17 +89,17 @@ export const legalDocsEn: Record<Exclude<LegalDocId, "agb">, LegalDoc> = {
       {
         h: "3. Purposes and legal bases",
         list: [
-          "Contact about the pilot programme and arranging an introductory call — on the basis of your consent (Art. 6 (1) (a) GDPR), which you may withdraw at any time.",
-          "Operating, securing and improving the website — legitimate interest (Art. 6 (1) (f) GDPR).",
+          "Contact about the pilot programme and arranging an introductory call, on the basis of your consent (Art. 6 (1) (a) GDPR), which you may withdraw at any time.",
+          "Operating, securing and improving the website, legitimate interest (Art. 6 (1) (f) GDPR).",
         ],
       },
       {
         h: "4. Services we use (processors)",
         list: [
-          "Supabase (Supabase Inc.) — database and backend used to store your contact request.",
-          "Netlify — hosting of the website.",
-          "PostHog (PostHog Inc., EU hosting in Frankfurt am Main) — anonymous product and usage analysis (reach, click behaviour) to improve the website. Loaded only after your explicit consent; without consent, no analytics cookies are set. The data is processed within the EU.",
-          "Cookiebot (Usercentrics A/S, Denmark) — consent management. Cookiebot displays the cookie notice, records your decision and stores an anonymous identifier together with your truncated IP address. This processing is required so we can demonstrate consent, and it takes place within the EU.",
+          "Supabase (Supabase Inc.), database and backend used to store your contact request.",
+          "Netlify, hosting of the website.",
+          "PostHog (PostHog Inc., EU hosting in Frankfurt am Main), anonymous product and usage analysis (reach, click behaviour) to improve the website. Loaded only after your explicit consent; without consent, no analytics cookies are set. The data is processed within the EU.",
+          "Cookiebot (Usercentrics A/S, Denmark), consent management. Cookiebot displays the cookie notice, records your decision and stores an anonymous identifier together with your truncated IP address. This processing is required so we can demonstrate consent, and it takes place within the EU.",
         ],
         p: [
           "Data-processing agreements under Art. 28 GDPR are, or will be, in place with all providers. Where data is transferred to third countries, appropriate safeguards are used (for example EU standard contractual clauses).",
@@ -120,7 +120,7 @@ export const legalDocsEn: Record<Exclude<LegalDocId, "agb">, LegalDoc> = {
       {
         h: "7. Your rights",
         p: [
-          "You have the right of access, rectification, erasure, restriction of processing, data portability and objection. You may withdraw consent at any time with effect for the future — contact office@120.ventures.",
+          "You have the right of access, rectification, erasure, restriction of processing, data portability and objection. You may withdraw consent at any time with effect for the future, contact office@120.ventures.",
           "You also have the right to lodge a complaint with the Austrian Data Protection Authority (dsb.gv.at).",
         ],
       },

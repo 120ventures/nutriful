@@ -90,17 +90,17 @@ export const legalDocs: Record<LegalDocId, LegalDoc> = {
       {
         h: "3. Zwecke & Rechtsgrundlagen",
         list: [
-          "Kontaktaufnahme zum Pilotprogramm und Vereinbarung eines Erstgesprächs - auf Grundlage deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), jederzeit widerrufbar.",
-          "Betrieb, Sicherheit und Verbesserung der Website - berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).",
+          "Kontaktaufnahme zum Pilotprogramm und Vereinbarung eines Erstgesprächs, auf Grundlage deiner Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), jederzeit widerrufbar.",
+          "Betrieb, Sicherheit und Verbesserung der Website, berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).",
         ],
       },
       {
         h: "4. Eingesetzte Dienste (Auftragsverarbeiter)",
         list: [
-          "Supabase (Supabase Inc.) - Datenbank und Backend zur Speicherung deiner Kontaktanfrage.",
-          "Netlify - Hosting der Website.",
-          "PostHog (PostHog Inc., EU-Hosting in Frankfurt am Main) - anonyme Produkt- und Nutzungsanalyse (Reichweite, Klickverhalten), um die Website zu verbessern. Wird nur nach deiner ausdrücklichen Einwilligung geladen; ohne Einwilligung werden keine Analyse-Cookies gesetzt. Die Daten werden innerhalb der EU verarbeitet.",
-          "Cookiebot (Usercentrics A/S, Dänemark) - Einwilligungsverwaltung. Cookiebot zeigt den Cookie-Hinweis, dokumentiert deine Entscheidung und speichert dazu eine anonyme Kennung sowie deine gekürzte IP-Adresse. Diese Verarbeitung ist zur Erfüllung unserer Nachweispflicht erforderlich und findet innerhalb der EU statt.",
+          "Supabase (Supabase Inc.), Datenbank und Backend zur Speicherung deiner Kontaktanfrage.",
+          "Netlify, Hosting der Website.",
+          "PostHog (PostHog Inc., EU-Hosting in Frankfurt am Main), anonyme Produkt- und Nutzungsanalyse (Reichweite, Klickverhalten), um die Website zu verbessern. Wird nur nach deiner ausdrücklichen Einwilligung geladen; ohne Einwilligung werden keine Analyse-Cookies gesetzt. Die Daten werden innerhalb der EU verarbeitet.",
+          "Cookiebot (Usercentrics A/S, Dänemark), Einwilligungsverwaltung. Cookiebot zeigt den Cookie-Hinweis, dokumentiert deine Entscheidung und speichert dazu eine anonyme Kennung sowie deine gekürzte IP-Adresse. Diese Verarbeitung ist zur Erfüllung unserer Nachweispflicht erforderlich und findet innerhalb der EU statt.",
         ],
         p: [
           "Mit allen Dienstleistern bestehen bzw. werden Auftragsverarbeitungsverträge gemäß Art. 28 DSGVO geschlossen. Bei Übermittlung in Drittländer werden geeignete Garantien (z. B. EU-Standardvertragsklauseln) eingesetzt.",
@@ -121,7 +121,7 @@ export const legalDocs: Record<LegalDocId, LegalDoc> = {
       {
         h: "7. Deine Rechte",
         p: [
-          "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch. Erteilte Einwilligungen kannst du jederzeit mit Wirkung für die Zukunft widerrufen - wende dich dazu an office@120.ventures.",
+          "Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch. Erteilte Einwilligungen kannst du jederzeit mit Wirkung für die Zukunft widerrufen, wende dich dazu an office@120.ventures.",
           "Du hast außerdem das Recht auf Beschwerde bei der Österreichischen Datenschutzbehörde (dsb.gv.at).",
         ],
       },
@@ -146,7 +146,7 @@ export const legalDocs: Record<LegalDocId, LegalDoc> = {
         ],
       },
       {
-        h: "2. Aktuelle Testphase - kein Verkauf",
+        h: "2. Aktuelle Testphase, kein Verkauf",
         p: [
           "Nutriful befindet sich in einer frühen Testphase. Über die Website kannst du unverbindlich ein Erstgespräch zum Pilotprogramm für Diätolog:innen und Ernährungsberater:innen anfragen.",
           "Es findet derzeit kein Verkauf statt: Es werden keine kostenpflichtigen Produkte angeboten und es kommt kein Kaufvertrag zustande. Angezeigte Preise dienen ausschließlich der Information über ein geplantes künftiges Angebot.",

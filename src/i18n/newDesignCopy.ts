@@ -13,7 +13,7 @@ const de = {
   heroLine2: "Ein Ort.",
   heroAccent: "Alles im Blick.",
   heroText:
-    "Dokumentation, Vorbereitung und Kommunikation mit Ihren Klient:innen – alles an einem Ort.",
+    "Dokumentation, Vorbereitung und Kommunikation mit Ihren Klient:innen, alles an einem Ort.",
   heroCta: "Anmelden",
   scroll: "Scrollen",
   stripBadge: "Neu",
@@ -45,20 +45,20 @@ const de = {
   problemEyebrow: "Der Alltag dazwischen",
   problemTitle: "Die Beratung ist stark. Die Strecke dazwischen nicht.",
   problemText:
-    "Zwischen zwei Terminen passiert das, was über Erfolg oder Abbruch entscheidet – und genau dort ist heute am wenigsten Struktur.",
+    "Zwischen zwei Terminen passiert das, was über Erfolg oder Abbruch entscheidet, und genau dort ist heute am wenigsten Struktur.",
   problemPoints: [
     {
       title: "Zusammensuchen vor jedem Termin",
-      text: "Essens-Fotos per WhatsApp, Fragen per E-Mail, Ernährungstagebuch auf Papier – bevor die Beratung beginnt, geht Zeit dafür drauf, alles zu einem Bild zusammenzupuzzeln.",
+      text: "Essens-Fotos per WhatsApp, Fragen per E-Mail, Ernährungstagebuch auf Papier, bevor die Beratung beginnt, geht Zeit dafür drauf, alles zu einem Bild zusammenzupuzzeln.",
     },
     {
       title: "Abbrüche zwischen den Terminen",
-      text: "Ernährungsumstellungen scheitern selten am Plan – sondern an den drei Wochen Alltag zwischen zwei Terminen, in denen niemand hinschaut.",
+      text: "Ernährungsumstellungen scheitern selten am Plan, sondern an den drei Wochen Alltag zwischen zwei Terminen, in denen niemand hinschaut.",
     },
   ],
   journeyTitle: "So sieht die Strecke heute aus.",
   journeyText:
-    "WhatsApp spätabends, ein Foto per E-Mail, das Tagebuch auf Papier – und dazwischen tagelang nichts.",
+    "WhatsApp spätabends, ein Foto per E-Mail, das Tagebuch auf Papier, und dazwischen tagelang nichts.",
   journeyPillTogether: "Ein Ort: Programm, Tracking & Chat",
   withNutriful: "Mit Nutriful",
   session: "Termin",
@@ -69,21 +69,21 @@ const de = {
   steps: [
     {
       title: "Klient:in einladen",
-      text: "Sie laden Ihre Klient:in mit einem Link in Nutriful ein – keine Installation auf Ihrer Seite nötig. Anamnesebogen und Datenschutz-Einverständnis füllt Ihre Klient:in vor dem Erstgespräch digital aus.",
+      text: "Sie laden Ihre Klient:in mit einem Link in Nutriful ein, keine Installation auf Ihrer Seite nötig. Anamnesebogen und Datenschutz-Einverständnis füllt Ihre Klient:in vor dem Erstgespräch digital aus.",
     },
     {
       title: "Klient:in trackt im Alltag",
-      text: "Mahlzeiten, Fotos und Notizen werden im Programm erfasst – motivierend aufbereitet, damit drangeblieben wird.",
+      text: "Mahlzeiten, Fotos und Notizen werden im Programm erfasst, motivierend aufbereitet, damit drangeblieben wird.",
     },
     {
       title: "Sie sehen alles gebündelt",
-      text: "Verlauf, Auffälligkeiten und offene Fragen an einem Ort – Ihre Beratung startet vorbereitet statt mit Detektivarbeit.",
+      text: "Verlauf, Auffälligkeiten und offene Fragen an einem Ort, Ihre Beratung startet vorbereitet statt mit Detektivarbeit.",
     },
   ],
   demoEyebrow: "Interaktive Demo",
   demoTitle1: "Klicken Sie sich durch,",
   demoTitle2: "bevor Sie sich entscheiden.",
-  demoText: "Echte Praxisansichten – ohne Login, ohne Anmeldung.",
+  demoText: "Echte Praxisansichten, ohne Login, ohne Anmeldung.",
   demoCaption: "Praxisansichten mit fiktiven Daten für die interaktive Vorschau.",
   benefitsEyebrow: "Weniger Verwaltung, mehr Beratung",
   benefitsTitle1: "Was das in Ihrem",
@@ -91,7 +91,7 @@ const de = {
   benefits: [
     {
       title: "Schluss mit Zettelwirtschaft",
-      text: "Ernährungstagebuch auf Papier, Fotos per WhatsApp, Notizen im Kalender – in Nutriful läuft alles in einem Verlauf zusammen. Einheitlich erfasst, ohne Abtippen und ohne dass unterwegs etwas verloren geht.",
+      text: "Ernährungstagebuch auf Papier, Fotos per WhatsApp, Notizen im Kalender, in Nutriful läuft alles in einem Verlauf zusammen. Einheitlich erfasst, ohne Abtippen und ohne dass unterwegs etwas verloren geht.",
     },
     {
       title: "Vorbereitung, die schon erledigt ist",
@@ -99,18 +99,18 @@ const de = {
     },
     {
       title: "Jede Klient:in gleich dokumentiert",
-      text: "Alle Programme folgen derselben Struktur – Sie vergleichen Verläufe, ohne sich in jede Klient:in neu hineinzudenken, und die Dokumentation ist ohne Nacharbeit vollständig.",
+      text: "Alle Programme folgen derselben Struktur, Sie vergleichen Verläufe, ohne sich in jede Klient:in neu hineinzudenken, und die Dokumentation ist ohne Nacharbeit vollständig.",
     },
     {
       title: "Sichere Daten",
-      text: "Verschlüsselte Übertragung, sichere Speicherung, Löschung jederzeit – Vertrauen ist die Basis Ihrer Klientenbeziehung, auch digital.",
+      text: "Verschlüsselte Übertragung, sichere Speicherung, Löschung jederzeit, Vertrauen ist die Basis Ihrer Klientenbeziehung, auch digital.",
     },
   ],
   benefitPhotoRaspberry: "Himbeeren",
   benefitPhotoOrange: "Orangenscheiben",
   pilotTitle: "Wir bauen Nutriful gemeinsam mit Pilotpraxen.",
   pilotText:
-    "Nutriful entsteht gerade in Österreich – gemeinsam mit einer kleinen Gruppe von Diätolog:innen und Ernährungsberater:innen, die es mit echten Klient:innen testen und laufend mitgestalten. Ehrlicher Austausch, und ein direkter Draht zu uns.",
+    "Nutriful entsteht gerade in Österreich, gemeinsam mit einer kleinen Gruppe von Diätolog:innen und Ernährungsberater:innen, die es mit echten Klient:innen testen und laufend mitgestalten. Ehrlicher Austausch, und ein direkter Draht zu uns.",
   nameLabel: "Name",
   namePlaceholder: "Maria Muster",
   emailLabel: "E-Mail",
@@ -127,19 +127,19 @@ const de = {
   faqs: [
     [
       "Ersetzt Nutriful meine Beratung?",
-      "Nein – Nutriful ist Ihr Werkzeug, kein Ersatz. Die fachliche Führung, die Interpretation und die Beziehung zur Klient:in bleiben bei Ihnen. Nutriful übernimmt die Strecke zwischen den Terminen.",
+      "Nein, Nutriful ist Ihr Werkzeug, kein Ersatz. Die fachliche Führung, die Interpretation und die Beziehung zur Klient:in bleiben bei Ihnen. Nutriful übernimmt die Strecke zwischen den Terminen.",
     ],
     [
       "Kann ich noch Pilot-Partner:in werden?",
-      "Die Pilotgruppe ist komplett: Praxen aus Österreich, Deutschland und der Schweiz entwickeln Nutriful gerade mit uns. Der offizielle Start folgt nach dem Pilot – hinterlassen Sie Ihren Namen und Ihre E-Mail, dann melden wir uns.",
+      "Die Pilotgruppe ist komplett: Praxen aus Österreich, Deutschland und der Schweiz entwickeln Nutriful gerade mit uns. Der offizielle Start folgt nach dem Pilot, hinterlassen Sie Ihren Namen und Ihre E-Mail, dann melden wir uns.",
     ],
     [
       "Was müssen meine Klient:innen tun?",
-      "Einladungslink öffnen, loslegen. Das Programm ist so gebaut, dass Tracken in unter zwei Minuten pro Tag machbar ist – je einfacher, desto höher die Durchhaltequote.",
+      "Einladungslink öffnen, loslegen. Das Programm ist so gebaut, dass Tracken in unter zwei Minuten pro Tag machbar ist, je einfacher, desto höher die Durchhaltequote.",
     ],
     [
       "Müssen meine Klient:innen tracken?",
-      "Nein. Anamnese, Dokumentation, Termin-Abschluss und Honorarnote funktionieren auch ohne einen einzigen Eintrag der Klient:in. Tracking ist ein Zusatz für die, bei denen es passt – Sie entscheiden das pro Klient:in.",
+      "Nein. Anamnese, Dokumentation, Termin-Abschluss und Honorarnote funktionieren auch ohne einen einzigen Eintrag der Klient:in. Tracking ist ein Zusatz für die, bei denen es passt, Sie entscheiden das pro Klient:in.",
     ],
     [
       "Wie sicher sind die Daten?",
@@ -167,7 +167,7 @@ const en: typeof de = {
   heroLine2: "One place.",
   heroAccent: "Everything in view.",
   heroText:
-    "Documentation, preparation and communication with your clients – all in one place.",
+    "Documentation, preparation and communication with your clients, all in one place.",
   heroCta: "Sign up",
   scroll: "Scroll",
   stripBadge: "New",
@@ -199,11 +199,11 @@ const en: typeof de = {
   problemEyebrow: "The days in between",
   problemTitle: "The counselling is strong. The stretch between sessions is not.",
   problemText:
-    "What decides whether someone stays or drops out happens between two appointments – and that is where there is the least structure today.",
+    "What decides whether someone stays or drops out happens between two appointments, and that is where there is the least structure today.",
   problemPoints: [
     {
       title: "Piecing it together before every session",
-      text: "Meal photos on WhatsApp, questions by email, a paper food diary – before counselling starts, time goes into assembling one picture.",
+      text: "Meal photos on WhatsApp, questions by email, a paper food diary, before counselling starts, time goes into assembling one picture.",
     },
     {
       title: "Drop-offs between appointments",
@@ -212,7 +212,7 @@ const en: typeof de = {
   ],
   journeyTitle: "This is what the stretch looks like today.",
   journeyText:
-    "A late WhatsApp, a photo by email, a paper diary – and days of nothing in between.",
+    "A late WhatsApp, a photo by email, a paper diary, and days of nothing in between.",
   journeyPillTogether: "One place: programme, tracking & chat",
   withNutriful: "With Nutriful",
   session: "Session",
@@ -223,7 +223,7 @@ const en: typeof de = {
   steps: [
     {
       title: "Invite a client",
-      text: "You invite your client with a link – nothing to install on your side. They fill in the intake form and privacy consent digitally before the first session.",
+      text: "You invite your client with a link, nothing to install on your side. They fill in the intake form and privacy consent digitally before the first session.",
     },
     {
       title: "Your client tracks daily life",
@@ -231,13 +231,13 @@ const en: typeof de = {
     },
     {
       title: "You see it all in one place",
-      text: "History, what stands out and open questions in one place – your session starts prepared, not with detective work.",
+      text: "History, what stands out and open questions in one place, your session starts prepared, not with detective work.",
     },
   ],
   demoEyebrow: "Interactive demo",
   demoTitle1: "Click through",
   demoTitle2: "before you decide.",
-  demoText: "Real practice views – no login, no sign-up.",
+  demoText: "Real practice views, no login, no sign-up.",
   demoCaption: "Practice views with fictional data for the interactive preview.",
   benefitsEyebrow: "Less admin, more counselling",
   benefitsTitle1: "What that means",
@@ -245,7 +245,7 @@ const en: typeof de = {
   benefits: [
     {
       title: "No more paper chase",
-      text: "A paper food diary, photos on WhatsApp, notes in the calendar – in Nutriful it comes together in one history. Captured the same way, with nothing to retype and nothing lost along the way.",
+      text: "A paper food diary, photos on WhatsApp, notes in the calendar, in Nutriful it comes together in one history. Captured the same way, with nothing to retype and nothing lost along the way.",
     },
     {
       title: "Preparation that is already done",
@@ -253,18 +253,18 @@ const en: typeof de = {
     },
     {
       title: "Every client documented the same way",
-      text: "Every programme follows the same structure – you compare progress without relearning each client, and the record is complete without extra write-up.",
+      text: "Every programme follows the same structure, you compare progress without relearning each client, and the record is complete without extra write-up.",
     },
     {
       title: "Data kept safe",
-      text: "Encrypted transfer, secure storage, deletion at any time – trust is the basis of your client relationship, digitally too.",
+      text: "Encrypted transfer, secure storage, deletion at any time, trust is the basis of your client relationship, digitally too.",
     },
   ],
   benefitPhotoRaspberry: "Raspberries",
   benefitPhotoOrange: "Orange slices",
   pilotTitle: "We are building Nutriful with pilot practices.",
   pilotText:
-    "Nutriful is taking shape in Austria – together with a small group of dietitians and nutrition counsellors who test it with real clients and shape it as we go. Honest exchange, and a direct line to us.",
+    "Nutriful is taking shape in Austria, together with a small group of dietitians and nutrition counsellors who test it with real clients and shape it as we go. Honest exchange, and a direct line to us.",
   nameLabel: "Name",
   namePlaceholder: "Maria Muster",
   emailLabel: "Email",
@@ -281,19 +281,19 @@ const en: typeof de = {
   faqs: [
     [
       "Does Nutriful replace my counselling?",
-      "No – Nutriful is your tool, not a replacement. The clinical lead, the interpretation and the relationship with your client stay with you. Nutriful covers the stretch between appointments.",
+      "No, Nutriful is your tool, not a replacement. The clinical lead, the interpretation and the relationship with your client stay with you. Nutriful covers the stretch between appointments.",
     ],
     [
       "Can I still join as a pilot partner?",
-      "The pilot group is full: practices in Austria, Germany and Switzerland are building Nutriful with us. The public launch follows the pilot – leave your name and email and we will be in touch.",
+      "The pilot group is full: practices in Austria, Germany and Switzerland are building Nutriful with us. The public launch follows the pilot, leave your name and email and we will be in touch.",
     ],
     [
       "What do my clients have to do?",
-      "Open the invite link and start. The programme is built so tracking takes under two minutes a day – the easier it is, the more people stay with it.",
+      "Open the invite link and start. The programme is built so tracking takes under two minutes a day, the easier it is, the more people stay with it.",
     ],
     [
       "Do my clients have to track?",
-      "No. Intake, documentation, closing a session and the invoice all work without a single entry from the client. Tracking is an extra for the people it suits – you decide that per client.",
+      "No. Intake, documentation, closing a session and the invoice all work without a single entry from the client. Tracking is an extra for the people it suits, you decide that per client.",
     ],
     [
       "How safe is the data?",
