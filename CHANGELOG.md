@@ -4,7 +4,16 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-10-30
+
+### Englische Rechtstexte und Anmeldung
+- Impressum und Datenschutz der neuen Seite erscheinen auf Englisch, wenn Englisch gewählt ist
+- Die Anmeldung speichert Name und E-Mail wie auf der bisherigen Website
+
 ## 2026-10-29
+
+### Bildnachweise im Impressum
+- Im Impressum der neuen Seite sind Name und Seite der Fotos verlinkt; die bisherige Foto-Liste ist dort entfernt
 
 ### Alltag als Kartenmosaik
 - Die mittlere Karte ist in zwei Karten geteilt, der Apfel-Sticker ist weg, Granatapfel und Blätter sitzen in den Ecken

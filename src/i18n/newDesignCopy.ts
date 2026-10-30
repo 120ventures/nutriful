@@ -115,6 +115,8 @@ const de = {
   emailLabel: "E-Mail",
   emailPlaceholder: "ihre@praxis.at",
   submit: "E-Mail hinterlassen",
+  formInvalid: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+  formError: "Da ist etwas schiefgelaufen. Bitte versuchen Sie es gleich nochmal.",
   book: "Gespräch direkt buchen",
   thanks: "Danke! Wir melden uns zum offiziellen Start bei Ihnen.",
   consent:
@@ -266,6 +268,8 @@ const en: typeof de = {
   emailLabel: "Email",
   emailPlaceholder: "you@practice.at",
   submit: "Leave your email",
+  formInvalid: "Please enter a valid email address.",
+  formError: "Something went wrong. Please try again in a moment.",
   book: "Book a call",
   thanks: "Thank you. We will be in touch when we launch.",
   consent:

@@ -1,8 +1,11 @@
 import { FormEvent, useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
+import { toast } from "sonner"
 import { localePath, stripLocale, useLang } from "@/i18n"
 import { newDesignCopy } from "@/i18n/newDesignCopy"
 import ConsentSettingsLink from "@/components/landing/ConsentSettingsLink"
+import { insertSignup } from "@/lib/signups"
+import { phCapture } from "@/lib/posthog"
 import "@/styles/new-design.css"
 import mascotPomegranate from "@/assets/new-design/7f884.svg"
 import mascotApple from "@/assets/new-design/0b611.svg"
@@ -878,6 +881,8 @@ export default function NewDesign() {
   const lang = useLang()
   const t = newDesignCopy(lang)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const formStarted = useRef(false)
   const heroRef = useRef<HTMLElement>(null)
   const journeyMessyRef = useRef<HTMLDivElement>(null)
   const journeyStraightRef = useRef<HTMLDivElement>(null)
@@ -1142,8 +1147,36 @@ export default function NewDesign() {
     }
   }, [])
 
-  function submitForm(event: FormEvent<HTMLFormElement>) {
+  function markFormStart() {
+    if (formStarted.current) return
+    formStarted.current = true
+    phCapture("form_start", { source: "new-design" })
+  }
+
+  async function submitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const name = String(data.get("name") ?? "").trim()
+    const email = String(data.get("email") ?? "").trim()
+    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      toast.error(t.formInvalid)
+      return
+    }
+    setSubmitting(true)
+    const { error } = await insertSignup({
+      email: email.toLowerCase(),
+      name: name || null,
+      source: "new-design",
+      consent: true,
+      onboarding: { type: "partner" },
+      user_agent: typeof navigator !== "undefined" ? navigator.userAgent : null,
+    })
+    setSubmitting(false)
+    if (error && error.code !== "23505") {
+      toast.error(t.formError)
+      return
+    }
+    phCapture("partner_signup", { source: "new-design" })
     setSubmitted(true)
   }
 
@@ -1379,7 +1412,7 @@ export default function NewDesign() {
           {submitted ? (
             <div className="success-message">{t.thanks}</div>
           ) : (
-            <form className="pilot-signup-form" onSubmit={submitForm}>
+            <form className="pilot-signup-form" onSubmit={submitForm} onFocus={markFormStart}>
               <label className="pilot-field">
                 <span>{t.nameLabel}</span>
                 <input
@@ -1400,7 +1433,7 @@ export default function NewDesign() {
                   autoComplete="email"
                 />
               </label>
-              <button className="button button-dark pilot-submit" type="submit">
+              <button className="button button-dark pilot-submit" type="submit" disabled={submitting}>
                 {t.submit} <span>→</span>
               </button>
             </form>
