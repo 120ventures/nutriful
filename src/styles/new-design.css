@@ -86,6 +86,7 @@ h2 { font-size: clamp(2.35rem, 4.4vw, 4.2rem); line-height: 1; letter-spacing: -
 .hero-lead { font-family: 'DM Sans:Light'; font-size: 1.2rem; max-width: 530px; }
 .hero-actions { display: flex; align-items: center; gap: 28px; margin: 34px 0; }
 .button { border: 0; display: inline-flex; align-items: center; justify-content: center; gap: 25px; border-radius: 99px; padding: 15px 22px; font-family: 'DM Sans:Medium', sans-serif; font-size: 1rem; font-weight: 500; letter-spacing: 0; cursor: pointer; }
+.button:disabled { opacity: .6; cursor: default; }
 .button span { font-size: 1.1rem; }
 .button-dark { background: var(--green); color: white; }
 .button-dark:hover { background: var(--ink); }
@@ -307,6 +308,7 @@ footer > div p { max-width: 490px; font-family: 'DM Sans:Light'; font-size: 1rem
 .legal-page ul { list-style: none; margin: 12px 0 0; padding: 0; }
 .legal-page li { position: relative; margin-top: 8px; padding-left: 18px; }
 .legal-page li::before { content: ''; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+.legal-page a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .legal-cookies { margin-top: 48px; }
 
 @media (max-width: 980px) {
